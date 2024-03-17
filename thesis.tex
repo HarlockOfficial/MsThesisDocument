@@ -1,0 +1,248 @@
+\documentclass{unicam_thesis}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{spverbatim}
+\usepackage[Sonny]{fncychap}          %Sonny, Lenny, Conny, Bjornstrup
+\usepackage{epigraph}
+\usepackage{acro}
+\usepackage[nonumberlist]{glossaries}
+%\usepackage[tracking]{microtype}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{varioref}
+\usepackage{comment}
+%\usepackage{fontspec}
+\setlength{\marginparwidth}{2cm} % REmove later with todonotes
+\usepackage{todonotes} % TODO Notes
+
+%%%% FONTS %%%%
+% Palatino for text
+%\usepackage[sc,osf]{mathpazo}   % With old-style figures and real smallcaps.
+%\linespread{1.025}              % Palatino leads a little more leading
+%\usepackage{beton}
+%\DeclareFontSeriesDefault[rm]{bf}{sbc}
+%\setmainfont{Corbel}
+\usepackage{concmath}
+\usepackage{libertine}
+\usepackage{xcolor}
+
+\lstset{
+    basicstyle=\ttfamily,
+    escapeinside={§}{§}, % define the escape characters
+}
+% Euler for math and numbers
+%\usepackage[euler-digits,small]{eulervm}
+%\AtBeginDocument{\renewcommand{\hbar}{\hslash}}
+
+%\renewcommand\thesection{\arabic{section}}
+
+
+% alternatively use beton for text and concmath for math
+% beton needs microtype disabled and needs additional commands for bold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% definition environment
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}[section]
+
+%allows numbering of paragraphs
+%\renewcommand{\theparagraph}{\S\arabic{paragraph}} 
+%\setcounter{secnumdepth}{4} 
+
+%\rowcolors{2}{gray!25}{} %table colours
+
+%\setlength\marginparwidth{2cm} %used to make todos readable, remove on publication
+
+
+%%% narsese listings %%%
+% \definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+% \definecolor{greencomments}{rgb}{0,0.5,0}
+% \definecolor{redstrings}{rgb}{0.9,0,0}
+
+% \lstdefinelanguage{narsese}{
+%     otherkeywords = {},
+%     morekeywords = {}, % blue keywords here
+%     morekeywords = [2]{Answer},  % red keywords here
+%     morecomment = [s][\color{blue}]{\%}{\%},
+%     sensitive=false,
+% }
+
+% \lstset{
+%   language=narsese,
+%   showspaces=false,
+%   showtabs=false,
+%   breaklines=true,
+%   showstringspaces=false,
+%   breakatwhitespace=true,
+%   escapeinside={(*@}{@*)},
+%   commentstyle=\color{greencomments},
+%   keywordstyle=\color{bluekeywords},
+%   keywordstyle = [2]{\color{red}},
+%   stringstyle=\color{redstrings},
+%   basicstyle=\ttfamily,
+%   %numbers=left,
+%   frame=single
+% }
+
+
+% %%% acronyms %%%
+\acsetup{first-style=short}
+\DeclareAcronym{VM}{
+   short = VM,
+   long  = Virtual Machine,
+   tag = abbrev
+ }
+% %%% glossaries %%%
+% \makeglossaries
+
+% \newglossaryentry{World}
+% {
+%     name=World,
+%     description={A \textbf{world} $W$ is a interactive system consisting of a set of variables $V$, dynamics functions $F$, an initial state $S_0$, domains $D$ of possible clusters of particular constraints on their values, and a set of relations between the variables $R$: $W = \langle V, F, S_0, D, R \rangle$. The variables $V = \{ v_1, v_2, ..., v_{\|V\|}\}$ represent anything that may change or hold a particular value in the world. The dynamics functions act as the laws of nature in the world and as a whole can be seen as an automatically executed function that periodically or continually evolves the world's current state into the next: $S_{t + \delta} = F(S_t)$. In practice it is useful to the decompose the dynamics into a set of transition functions: $F = \{f_1, f_2, ..., f_n\}$ where $f_i: S^- \rightarrow S^-$ and $S^-$ is a partial state. The domains $d_v \in D$ specify which values each variable $v$ can take, and for physical domains these are usually subsets of real numbers. The relations are Boolean functions over variables that hold true in any state the world will ever find itself in. If the world is a closed system with no outside interference, the domains and relations are implicitly fully determined by the dynamics functions and the initial state. In an open system where changes can be caused externally, instead, the explicit definition of domains and invariant relations can restrict the range of possible interactions \citep{whytask}}
+% }
+
+% \newglossaryentry{Environment}
+% {
+%     name=Environment,
+%     description={An \textbf{environment} is a view of a \textbf{world}. The body of an agent is considered to be part of it. \citep{whytask}}
+% }
+
+% \newglossaryentry{State}
+% {
+%     name=State,
+%     description={A \textbf{state} can be \textit{concrete} or \textit{partial}. A \textit{concrete} state $S$ is a value assignment to all of the variables in a \textbf{task-environment}: $S = \bigcup_{v \in V}\{\langle v, x_v \mid x_v \in d_v \rangle\}$ A \textit{partial} state $S^-$ only assigns values to a subset of the variables. When considering real variables partial states can be represented using error bounds: $S^- = \bigcup_{v \in V^-} \{\langle v, x_l, x_u \mid x_l < x_u \land (x_l, x_u) \subseteq d_v \rangle \}$; this way a partial state covers a set of concrete states. A state is valid if and only if all invariant relations hold: $\text{valid}(S) \iff \forall_{r \in R} r(S) $. In practice the presence of noise and the partial observability of variables makes the use of partial states more practical than concrete states, therefore by state is always meant a partial state unless otherwise noted \citep{whytask}}
+% }
+
+% \newglossaryentry{Agent}
+% {
+%     name=Agent,
+%     description={An \textbf{agent} is an embodied system consisting of a controller (the mind) and a body. The body is the agent's interface to the \textbf{world} which allows the perception of the external \textbf{environment}, through the flow of data from the body's sensors to the controller, and the execution of atomic actions, by means of the commands sent from the controller to the body's actuators. The body contains two lists of variables that the controller can read and write to: $B = \langle V_S, V_A \rangle$. Since the body is a physical entity, its sensors and actuators are physical objects in the world as well and are treated as such \citep{whytask}}
+% }
+
+% \newglossaryentry{Goal State}
+% {
+%     name=Goal,
+%     description={A \textbf{goal} state is a desirable, possibly partial, \textbf{state} that the agent should reach \citep{whytask}}
+% }
+
+% \newglossaryentry{Failure State}
+% {
+%     name=Failure,
+%     description={A \textbf{failure} state is an undesirable, possibly partial, \textbf{state} that the agent should avoid \citep{whytask}}
+% }
+
+% \newglossaryentry{Problem}
+% {
+%     name=Problem,
+%     description={A \textbf{problem} can be \textit{atomic} or \textit{compound}. An atomic problem is specified by an initial \textbf{state}, \textbf{goal} states and \textbf{failure} states. A compound problem can be created by composition of atomic problems using operators such as conjunction, disjunction and negation. A problem for which a solution is known to exist is called a closed problem \citep{whytask}}
+% }
+
+% \newglossaryentry{Solution}
+% {
+%     name=Solution,
+%     description={A \textbf{solution} is a sequence of atomic actions that results in a path through the \textbf{state} space that reaches all of the \textbf{goal} states and none of the \textbf{failure} states \citep{whytask}}
+% }
+
+% \newglossaryentry{Task}
+% {
+%     name=Task,
+%     description={A \textbf{task} is a problem assigned to an \textbf{agent}, $T = \langle \mathcal{S}_0, \mathcal{G}_{top}, \mathcal{G}_{sub}, G^-, B, t_{go}, t_{stop}, I \rangle$, where $S_0$ is the set of permissible initial states, $\mathcal{G}_{top}$ is the task's set of top-level goals, $\mathcal{G}_{sub}$ is the set of given sub-goals, $G^-$ is its set of constraints, $B$ is a controller's body, and $t$ refers to the permissible start and stop times of the task. An \textit{assigned} task will have all its variables bound and reference an agency that is to perform it (accepted assignments having their own timestamp $t_{assign}$). This assignment includes the manner in which the task is communicated to the agent, for example if the agent is given a description of the task a priori, receives additional hints or if it only gets incremental reinforcement signals as certain \textbf{states} are reached. A task is performed successfully when the \textbf{world}'s history contains a path of states that solved the problem \citep{whytask}}
+% }
+
+% \newglossaryentry{Task-Environment}
+% {
+%     name=Task-Environment,
+%     description={By \textbf{task-environment} is meant the tuple of a \textbf{task} and the \textbf{environment} in which it is to be performed. The separation of a task from its environment is not always clear and somewhat arbitrary, therefore the term task-environment is used to encompass all the relevant aspects of both \citep{whytask, EvaluatingUnd}}
+% }
+
+% \newglossaryentry{Phenomenon}
+% {
+%     name=Phenomenon,
+%     description={A \textbf{phenomenon} (process, state of affairs, occurrence) $\Phi$, where $W$ is the \textbf{world} and $\Phi \subset W$, is composed of a set of elements $\{\phi_1, \phi_2, ..., \phi_n \in \Phi \}$ of various kinds including relations $\mathfrak{R}_\Phi$ that couple elements of $\Phi$ with each other and with those of other phenomena. The elements that a phenomenon is made up of can be any sub-division of $\Phi$, including sub-structures, causal relations, whole-part relations and so on. The relations $\mathfrak{R}_\Phi \subseteq 2^W \times 2^W$ that extend to other phenomena identify the phenomenon's \textit{context}. The set of relations can be partitioned in \textit{inward facing} relations $\mathfrak{R}_\Phi^{in}=\mathfrak{R}_\Phi \cap (2^\Phi \times 2^\Phi)$ and \textit{outward facing} relations $\mathfrak{R}_\Phi^{out}=\mathfrak{R}_\Phi \setminus \mathfrak{R}_\Phi^{in}$ \citep{AboutUnd}}
+% }
+
+% \newglossaryentry{Problem space}{    
+%     name=Problem space,
+%     description={The problem space is the set of all valid states of the task}
+%     }
+
+% \newglossaryentry{Solution space}{    
+%     name=Solution space,
+%     description={The solution space is the subset of the problem space defined by the task's goals and constraints, made up of all the solution states reachable from any initial state of the task}
+%     }
+
+
+%%%% notation %%%%%
+% \usepackage{nomencl}
+% \makenomenclature
+% \nomenclature[01]{$X$}{Random variable}
+% \nomenclature[02]{$x$}{Value of a random variable}
+% \nomenclature[03]{$\mathbf{X}$}{Vector}
+% \nomenclature[04]{$P(Y\mid X = x)$}{Conditional distribution}
+% \nomenclature[05]{$P(Y\mid \text{do}(X = x))$}{Intervention distribution}
+% \nomenclature[06]{$P(Y\mid Z = \hat{z}, X = \hat{x}, \text{do}(X = x))$}{Counterfactual distribution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TESI DATI FRONTESPIZIO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{EEG - Motor Imagery}
+
+\universityb{Reykjav\'ik University}%
+\schoolb{Department of \\ Computer Science}%
+
+\university{University of Camerino}%
+\school{School of Science \\ and Technology}%
+\course{Master of Science in Computer Science}%
+
+\matricola{122435}%
+
+\author{Francesco Moschella}%
+\advisor{Prof. Dr. Michele Loreti}%
+\advisortwo{Prof. Dr. Hannes Viljamson H\"ogni}%
+\coadvisor{Prof. Dr. Michela Quadrini}%
+\coadvisortwo{Dr. Nicola Del Giudice}%
+
+\academicyear{2024/2025}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FINE DATI FRONTESPIZIO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\graphicspath{{Screenshot/},{Immagini/},{API/},{Source/}}
+\bibliography{biblio.bib}
+
+\begin{document}
+
+
+\maketitle
+
+
+
+
+
+\tableofcontents
+% \lstlistoflistings
+% \listoffigures
+% \listoftables
+% \printacronyms[include=abbrev, name={Acronyms}, heading=chapter*, display=all]
+% \glsaddall
+\include{Sections/abstract}
+\include{Sections/introduction}
+\include{Sections/state_of_the_art}
+\include{Sections/preliminary_work}
+\include{Sections/methodology}
+\include{Sections/results}
+\include{Sections/conclusions}
+\appendix
+\include{Appendix/appendix}
+\printbibliography
+\printindex
+\include{Sections/acknowledgements}
+\end{document}
