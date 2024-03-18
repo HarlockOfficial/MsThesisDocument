@@ -1,2 +1,40 @@
 \chapter{State of the Art}\label{ch:state_of_the_art}
-\cite{sse}
+To gain a better understanding and to be able to compare the different approaches to the problem of classifying the motor imagery tasks, we will first present the state of the art in this field. 
+We will start by presenting the most common approaches to the problem, and then we will present the most relevant works that will be used as a reference for the development of this project.
+For this section, the main source of information is the review paper~\cite{altaheri2023deep} and the references therein.
+
+\section{Common Approaches}
+The most common approaches to the problem of classifying motor imagery tasks are based on machine learning algorithms, and they can be divided into two main categories: feature-based and deep learning-based approaches.
+
+\subsection{Feature-based Approaches}
+Feature-based approaches are based on the extraction of features from the EEG signals, and then the classification is performed using machine learning algorithms.
+The most common features used in these approaches are the power spectral density (PSD) and the common spatial patterns (CSP).
+The PSD is a measure of the power of the signal at different frequencies, and it is calculated using the Fourier transform.
+The CSP is a method for finding spatial filters that maximize the variance of the signal for one class while minimizing it for the other class.
+The most common machine learning algorithms used in these approaches are support vector machines (SVM) and linear discriminant analysis (LDA).
+
+\subsection{Deep Learning-based Approaches}
+Deep learning-based approaches are based on the use of deep learning algorithms for the classification of the EEG signals.
+The most common deep learning algorithms used in these approaches are convolutional neural networks (CNN), recurrent neural networks (RNN) and multi-layer perceptrons (MLP).
+The main advantage of these approaches is that they can automatically learn the features from the raw EEG signals, without the need for manual feature extraction.
+
+\section{Relevant Works}
+Some of the most relevant works in the field of motor imagery classification used the BCI competition datasets.
+The BCI competition is a series of workshops that have been held in NeurIPS\footnote{NeurIPS confernece official website \url{https://nips.cc/}} between 2001 and 2008.
+Other relevant works used the PhysioNet EEG Motor Movement/Imagery Dataset\footnote{PhysioNet EEG Motor Movement/Imagery Dataset official website \url{https://physionet.org/content/eegmmidb/1.0.0/}}.
+The reference review paper also mentions other relevant datasets that have been used in the field, such as the MISCP~\cite{kaya2018large} with 10 MI classes.
+The works on which we will base our project are the following:
+\begin{itemize}
+    \item The work of~\cite{amin2019multilevel} used the BCI competition dataset IVa, and it achieved an accuracy of 74.5\% using a combination of CSP and SVM.
+    \item In~\cite{10409134}, the authors realised an embedded MI-BMI and used the PhysioNet EEG Motor Movement/Imagery Dataset, achieving an accuracy of 82.5\% using a deep learning-based approach.
+    \item While we did not find any work that used the MISCP dataset, we think that it is a relevant dataset to consider, as it has 10 MI classes, and it is larger than the BCI competition datasets.
+\end{itemize}
+
+\section{Discussion}
+The most common approaches to the problem of classifying motor imagery tasks are based on machine learning algorithms, and they can be divided into two main categories: feature-based and deep learning-based approaches.
+The most common features used in feature-based approaches are the power spectral density (PSD) and the common spatial patterns (CSP), and the most common machine learning algorithms used in these approaches are support vector machines (SVM) and linear discriminant analysis (LDA).
+The most common deep learning algorithms used in deep learning-based approaches are convolutional neural networks (CNN), recurrent neural networks (RNN) and multi-layer perceptrons (MLP).
+Some of the most relevant works in the field of motor imagery classification used the BCI competition datasets and the PhysioNet EEG Motor Movement/Imagery Dataset.
+The work of~\cite{amin2019multilevel} used the BCI competition dataset IVa, and it achieved an accuracy of 74.5\% using a combination of CSP and SVM.
+In~\cite{10409134}, the authors realised an embedded MI-BMI and used the PhysioNet EEG Motor Movement/Imagery Dataset, achieving an accuracy of 82.5\% using a deep learning-based approach.
+While we did not find any work that used the MISCP dataset, we think that it is a relevant dataset to consider, as it has 10 MI classes, and it is larger than the BCI competition datasets.

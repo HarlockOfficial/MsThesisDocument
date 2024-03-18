@@ -1,1 +1,55 @@
 \chapter{Preliminary Work}\label{ch:preliminary_work}
+\section{Design}\label{sec:design}
+To proceed with the implementation of the system, a design phase is necessary. 
+This phase is crucial to the success of the project, as it will provide a clear understanding of the system's architecture and the technologies that will be used. 
+This section will present the design of the system, including the architecture, the technologies, and the main challenges that will be faced during the implementation.
+
+\subsection{System Architecture}
+The system will be composed of two main components: the single-player game and the neural network that classifies the player's movement intentions.
+The game will be developed using the Unity game engine, and the neural network will be implemented using either the TensorFlow or the SciKit-Learn library.
+During the development of this project, several networks might be created, and the best one will be chosen to be integrated into the game.
+The main reason for this is related to the investigation of the best neural network architecture for the classification of the player's movement intentions.
+If the custom architecture does not perform well, the project will use a state of the art model, or the most suitable model found during the investigation.
+
+The created networks will be hybrid models, combining convolutional and/or recurrent layers with other types of layers, such as graph convolutional layers and fully connected layers.
+The input of the network will be the EEG recordings from the PhysioNet dataset, and the output will be the classification of the player's movement intentions.
+The network will be trained using the EEG recordings and the corresponding labels from the dataset.
+The trained network will be integrated into the game, and the player's EEG recordings will be used as input to the network to classify the player's movement intentions.
+
+The EEG recordings will be preprocessed before being used as input to the network.
+The preprocessing will include the removal of noise and the normalization of the data, other preprocessing techniques, following or diverging from the literature, might be used to improve the network's performances.
+Both the training, validation and testing data will be preprocessed using the same techniques to ensure that the network is not biased towards the training data.
+The noise removal will be done using a bandpass filter, and the EEG related libraries, such as MNE-Python and Braindecode, will be used to normalise and further preprocess the data.
+
+\subsection{Technologies}
+The game will be developed using the Unity game engine, and the neural network will be implemented using either the TensorFlow or the SciKit-Learn library.
+The Unity game engine was chosen because it is a powerful and flexible tool for the development of games and simulations.
+It provides a wide range of features, such as physics, rendering, and audio, and it supports the development of games for multiple platforms, including mobile, desktop, and consoles.
+The game will be developed using the C\# programming language, which is the primary language used in Unity.
+
+The TensorFlow and SciKit libraries were chosen because they are powerful and flexible tools for the development of neural networks.
+They provide a wide range of features, such as optimisation algorithms, and support for various types of layers, such as convolutional, recurrent, and graph convolutional layers.
+
+The EEG related libraries, MNE-Python and Braindecode, were chosen because they provide a wide range of features for the preprocessing and analysis of EEG recordings, also, they are integrated with neural networks libraries, such as TensorFlow and SciKit-Learn, they can be integrated with other libraries, such as NumPy, Pandas and Matplotlib, to further preprocess and analyse the EEG recordings, and lastly, there are other libraries that are seamlessly integrated with the chosen ones, such as moabb, which provides a wide range of EEG datasets.
+
+\subsection{Challenges}
+The system will face several challenges during the implementation.
+The main challenges are related to the development of the game and the implementation of the neural network.
+The development of the game will require the creation of a realistic and immersive environment, where the user can understand with ease the game's mechanics and the controls.
+The game will also need to be optimised to perform the user's thought actions in real-time, and the game's mechanics will need to be designed to be compatible with the user's thought actions.
+
+The implementation of the neural network will require the creation of a custom architecture that can classify the player's movement intentions with high accuracy.
+The network will need to be trained using the EEG recordings and the corresponding labels from the dataset, and the training process will need to be optimised to achieve the best possible performance.
+Also, the network will have to use as low amount of data as possible, to avoid unwanted latencies and provide a high interactivity with the game.
+The network will have to be optimised for real-time classification of the player's movement intentions, and the network's architecture will need to be designed to be compatible with the EEG recordings.
+
+The integration of the neural network into the game will require the creation of a pipeline that can preprocess the live EEG recordings and use them as input to the network.
+Both, the game and the neural network will need to be optimised to work together and provide a seamless experience for the user.
+
+\subsection{Summary}
+This section presented the design of the system, including the architecture, the technologies, and the main challenges that will be faced during the implementation.
+The system will be composed of two main components: the single-player game and the neural network that classifies the player's movement intentions.
+The game will be developed using the Unity game engine, and the neural network will be implemented using either the TensorFlow or the SciKit-Learn library.
+The game will be optimised to perform the user's thought actions in real-time, and the game's mechanics will be designed to be compatible with the user's thought actions.
+The network will be trained using the EEG recordings and the corresponding labels from the dataset, and the trained network will be integrated into the game to classify the player's movement intentions.
+The EEG recordings will be preprocessed before being used as input to the network, and the game and the neural network will be optimised to work together and provide a seamless experience for the user.
