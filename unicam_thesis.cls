@@ -8,11 +8,11 @@
 % -----------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{unicam_thesis}[2010/06/30 - LaTeX class for composing thesis at 
-                  University of Camerino - School of Science ant Technologies]
+                  University of Camerino - School of Science and Technologies]
 % -----------------------------------------------------------------------------
 
 \newcommand{\@ptoption}{1pt}
-\newcommand{\@tipo}{oneside}
+\newcommand{\@tipo}{twoside}
 %\DeclareOption{10pt}{\renewcommand{\@ptoption}{0pt}}
 %\DeclareOption{11pt}{\renewcommand{\@ptoption}{1pt}}
 %\DeclareOption{12pt}{\renewcommand{\@ptoption}{2pt}}
@@ -52,8 +52,8 @@
 \RequirePackage{amssymb}%
 \RequirePackage{amsmath}%
 \RequirePackage{amsthm}%
-\RequirePackage[pdftex,bookmarks=true,colorlinks=true, allcolors=black ]{hyperref}%
-\RequirePackage{subcaption}%
+\RequirePackage[pdftex,bookmarks=true,colorlinks=true,linkcolor=black]{hyperref}%
+\RequirePackage{subfig}%
 \RequirePackage{xspace}%
 \RequirePackage{array}%
 \RequirePackage{times}%
@@ -63,23 +63,19 @@
 
 \setlength{\headheight}{15pt}
 \renewcommand{\sectionmark}[1]{\markright{#1}{}} \fancyhf{}
-\fancyhead[LO]{\nouppercase{\leftmark}}
-\fancyhead[RO]{\nouppercase{\rightmark}}
-\fancyfoot[CO]{\thepage}
+\fancyhead[LE]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[RO]{\textit{\nouppercase{\rightmark}}}
+\fancyfoot[LE,RO]{\thepage}
 
-%\fancypagestyle{plain}{ %
-%  \fancyhf{} %
-%  \renewcommand{\headrulewidth}{0pt}%
-%  \renewcommand{\footrulewidth}{0pt}%
-%}
+\fancypagestyle{plain}{ %
+  \fancyhf{} %
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
 
 % \RequirePackage{helvet}
 \renewcommand{\familydefault}{\rmdefault}
 \renewcommand{\rmdefault}{cmr}
-
-% titoli in italiano
-\renewcommand\figurename{Figura} \renewcommand\tablename{Tabella}
-\renewcommand\contentsname{Indice}
 
 \makeindex %
 \date{} %
@@ -89,8 +85,7 @@
 \RequirePackage[english]{varioref}
 \RequirePackage[english]{babel}
 \RequirePackage[babel]{csquotes}
-\RequirePackage[natbib=true, style=numeric,
-citestyle=numeric, sorting=none]{biblatex}
+\RequirePackage[style=numeric, backend=biber]{biblatex}
 \RequirePackage{colortbl}
 
 \RequirePackage[final]{listings}
@@ -129,10 +124,10 @@ citestyle=numeric, sorting=none]{biblatex}
 }
 
 \addto\captionsitalian{
-\renewcommand{\lstlistingname}{Codice}}
+\renewcommand{\lstlistingname}{Code}}
 
 \addto\captionsitalian{
-\renewcommand{\lstlistlistingname}{Elenco dei codici}}
+\renewcommand{\lstlistlistingname}{Codes Index}}
 
 % ---------------------------------------------------------------------------
 % --- Numbering
@@ -169,10 +164,10 @@ citestyle=numeric, sorting=none]{biblatex}
 \def\universityb#1{\gdef\@theuniversityb{#1}}
 \def\schoolb#1{\gdef\@theschoolb{#1}}
 \def\courseb#1{\gdef\@thecourseb{#1}}
-\def\advisor#1{\gdef\@theadvisor{#1}}
-\def\advisortwo#1{\gdef\@theadvisortwo{#1}}
-\def\coadvisor#1{\gdef\@thecoadvisor{#1}}
-\def\coadvisortwo#1{\gdef\@thecoadvisortwo{#1}}
+\def\firstadvisor#1{\gdef\@thefirstadvisor{#1}}
+\def\secondadvisor#1{\gdef\@thesecondadvisor{#1}}
+\def\firstcoadvisor#1{\gdef\@thefirstcoadvisor{#1}}
+\def\secondcoadvisor#1{\gdef\@thesecondcoadvisor{#1}}
 \def\academicyear#1{\gdef\@theacademicyear{#1}}
 \def\matricola#1{\gdef\@thematricola{#1}}
 
@@ -205,7 +200,7 @@ citestyle=numeric, sorting=none]{biblatex}
 
 \begin{minipage}[b]{.45\textwidth}
     \centering
-     \includegraphics[width=35mm]{Figures/FrontPage/RU_logo_fsize.png}\par%
+     \includegraphics[width=35mm]{Figures/FrontPage/ru-logo}\par%
      \vspace{0.15cm}%
      {\rmfamily \large \bfseries \@theuniversityb \par}%
      \vspace{0.15cm}%
@@ -228,26 +223,24 @@ citestyle=numeric, sorting=none]{biblatex}
 \end{minipage}%
 \begin{center}
 \vspace{1cm}
- {\rmfamily \huge \@thecourse \par}%
- \vspace*{\stretch{5}}%
-  {\rmfamily \Huge \bfseries \@thetitle \par}%
- \vspace*{\stretch{7}}%
-  {Candidate \hfill Supervisors \par}%
-  {\bfseries \large \@theauthor \hfill \@theadvisor \par}%
-  {\bfseries \hfill \bfseries \@theadvisortwo \par}%
-  {Student ID \hfill Co-Supervisors \par}%
-  {\bfseries \large \@thematricola \hfill \@thecoadvisor \par}%
-  {\bfseries \large \hfill \@thecoadvisortwo \par}%
-  \vspace*{\stretch{3}}%
-  %{ \hfill Co-supervisor \par}%
-  %{ \bfseries  \hfill \large \@thecoadvisor \par}%
+{\rmfamily \huge \@thecourse \par}%
+\vspace*{\stretch{5}}%
+ {\rmfamily \Huge \bfseries \@thetitle \par}%
+\vspace*{\stretch{7}}%
+ {Candidate \hfill Supervisors \par}%
+ {\bfseries \large \@theauthor \hfill \@thefirstadvisor \par}%
+ {\bfseries \hfill \bfseries \@thesecondadvisor \par}%
+ {Student ID \hfill Co-Supervisors \par}%
+ {\bfseries \large \@thematricola \hfill \@thefirstcoadvisor \par}%
+ {\bfseries \large \hfill \@thesecondcoadvisor \par}%
+ \vspace*{\stretch{3}}%
 \end{center}
 \begin{center}
   \vspace*{\stretch{7}}%
-  \hrule%
+ \hrule%
   \vspace{0.15cm}%
   {\large A.Y. \@theacademicyear}%
- \end{center}
+\end{center}
 
 
 \newpage
@@ -263,35 +256,6 @@ citestyle=numeric, sorting=none]{biblatex}
 % ---------------------------------------------------------------------------
 \pagestyle{fancy}
 
-%\fancyhead{}
-%\fancyhead[RO,LE]{\thepage}
-%\fancyhead[LO,RE]{\small\nouppercase\leftmark}
-%\fancyfoot[F]{}
-
-%\renewcommand{\plainheadrulewidth}{1pt}
-%\renewcommand{\headrulewidth}{1pt}
-
-
-% \renewcommand{\headrulewidth}{0.4pt}
-% \renewcommand{\footrulewidth}{0.4pt}
-
-% \lhead{\@thedate}
-% \chead{}
-% \rhead{\@tas3 Consortium}
-% \lfoot{\@tas3 ICT-216287}
-% \cfoot{}
-% \rfoot{\thepage/\pageref{LastPage}}
-
-% % make space for the rule
-% \fancypagestyle{plain}{%
-%   \lhead{\@thedate}
-%   \chead{}
-%   \rhead{\@tas3 Consortium}
-%   \lfoot{\@tas3 ICT-216287}
-%   \cfoot{}
-%   \rfoot{\thepage/\pageref{LastPage}}
-% }
-
 % ---------------------------------------------------------------------------
 % --- MISC COMMANDS
 % ---------------------------------------------------------------------------
@@ -305,95 +269,24 @@ citestyle=numeric, sorting=none]{biblatex}
 
 \newcommand{\abstract}[1]{
 \newpage
-\thispagestyle{empty}
 \noindent
-\begin{center}
-    {\Huge  \textbf{Abstract} }
-\end{center}
+\fbox{\parbox{.98\linewidth}{
+\vspace{-5mm}
+\section*{Abstract}
 \par
-#1 
-}
+#1
+}}\\[1cm]}
+
 \newcommand{\keywords}[1]{
-\\[12pt] \textbf{\textit{Keywords}}: \textit{#1}
+\noindent\fbox{\parbox{.98\linewidth}{
+\vspace{-5mm}
+\section*{Keyword List }
+\par
+#1
+}}
 }
 
 \setlength{\baselineskip}{17pt}
-
- 
-
-
-
-%\addtolength{\leftskip}{10mm}
-
-%\titleformat{\chapter}[display]
-%  {\bfseries\LARGE}
-%  {\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter}
-%  {1ex}{\titlerule\vspace{3ex}\filright}
-
-% \titleformat{name=\chapter,numberless=false}[display]
-%   {\large}
-%   {\vspace{-12mm}}
-%   {1ex}{\mychaptertitlefont \thechapter \hspace{4mm}}
-
-% \titleformat{name=\chapter,numberless=true}[display]
-%   {\large}
-%   {\vspace{-12mm}}
-%   {1ex}{\mychaptertitlefont}
-
-
-%\titlespacing{\chapter}{0mm}{*0}{*1}
-
-%\titleformat{\chapter}[leftmargin]
-%  {\bfseries\LARGE}
-%  {\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter}
-%  {1ex}{\titlerule\vspace{3ex}\filright}
-
-%\titleformat{\section}
-%    {\bfseries\Large\upshape}
-%    {\thesection.}{.2em}{}
-
-%\titlespacing{\section}{-12mm}{*2}{*2}
-
-%\titleformat{\subsection}
-%    {\vspace{.8ex}\bfseries\large}
-%    {\thesubsection}{.5em}{}
-% per ripristinare il numero di subsection sostituire la riga qui sopre
-% con quella qui sotto...
-%    {\thesubsection.}{.5em}{}
-
-%\titlespacing{\subsection}{-6mm}{*2}{*2}
-
-%\titleformat{\subsubsection}[runin]
-%    {\vspace{.8ex}\bfseries\normalsize\slshape}
-%    {\quadratino}{.5em}{}[.]
-
-%\titlespacing{\subsubsection}{0mm}{*1}{*1}
-
-%\newcommand{\rilegatura}{2mm}
-%\addtolength\oddsidemargin{\rilegatura}
-%\addtolength\evensidemargin{-\rilegatura}
-
-% \titlecontents{part}[0pt] {\addvspace{4mm} 
-%   \sc
-%   \Large}{\thecontentslabel\quad}{}{\titlerule*[5pt]{}\contentspage}
-
-% \titlecontents{chapter}[0pt] {\addvspace{4mm} 
-% %  \bfseries
-%   \large}{\thecontentslabel\quad}{}{\titlerule*[5pt]{.}\contentspage}
-
-% \titlecontents{section}[4mm] {\addvspace{2pt} 
-% %  \bfseries
-%   }{\thecontentslabel\quad}{}{\titlerule*[5pt]{.}\contentspage}
-
-% \titlecontents{subsection}[9mm] {\addvspace{2pt}}
-%   {\thecontentslabel\quad}{}{\titlerule*[5pt]{.}\contentspage}
-
-% \titlecontents{figure}[0pt] {\addvspace{4mm}}{Figure
-%   \thecontentslabel :\enspace}{}{\titlerule*[5pt]{.}\contentspage}
-
-% \titlecontents{table}[0pt] {\addvspace{4mm}}{Table
-%   \thecontentslabel :\enspace}{}{\titlerule*[5pt]{.}\contentspage}
-
 
 \newcommand{\historyitem}[3]{
 #1 & #2 & #3 \\ \hline
