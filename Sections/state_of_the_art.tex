@@ -1,40 +1,37 @@
 \chapter{State of the Art}\label{ch:state_of_the_art}
-To gain a better understanding and to be able to compare the different approaches to the problem of classifying the motor imagery tasks, we will first present the state of the art in this field. 
-We will start by presenting the most common approaches to the problem, and then we will present the most relevant works that will be used as a reference for the development of this project.
-For this section, the main source of information is the review paper~\cite{altaheri2023deep} and the references therein.
+In this chapter, we will present the main concepts and projects that inspired the development of this thesis. 
+We will start by presenting rehabilitation approaches and technologies and the importance of the gamification of rehabilitation. 
+We will also present the main concepts of the Brain-Computer Interface (BCI) and the most relevant projects that use BCI and more specifically Motor Imagery for rehabilitation and devices control. 
+Lastly, we will present concepts of usability and game feel that are important for the development of a usable and engaging application.
 
-\section{Common Approaches}
-The most common approaches to the problem of classifying motor imagery tasks are based on machine learning algorithms, and they can be divided into two main categories: feature-based and deep learning-based approaches.
+\section{Rehabilitation Approaches and Technologies}
+Rehabilitation is a process that aims to restore the physical, sensory, and mental abilities of individuals who have lost them due to injury, illness, or other health conditions.
+There are several approaches to rehabilitation, and the choice of the most appropriate one depends on the patient's condition and the goals to be achieved.
+The main approaches to rehabilitation are physical therapy, occupational therapy, and speech therapy.
+Physical therapy aims to restore the patient's physical abilities, such as strength, flexibility, and coordination.
+Occupational therapy aims to help the patient to perform daily activities, such as eating, dressing, and bathing.
+Speech therapy aims to help the patient to improve their communication skills, such as speaking, listening, and understanding language.
+There are also other approaches to rehabilitation, such as music therapy, art therapy, and animal-assisted therapy, which can be used to complement the traditional approaches.
+Works like \cite{202306.0333, 5567156, 10.4108/icst.pervasivehealth.2014.255277, trombetta}, aim to further aid the rehabilitation process using AR and VR applications, exergames, and serious games.
+In \cite{BOUKHENNOUFA2022103197}, we can also find a review of state of the art solutions that involve werable sensors and machine learning techniques.
+In the last decades, the use of Brain Computer Interfaces (BCI) has been gaining popularity in the field of rehabilitation, as they allow the control of devices and applications using only the brain signals.
+The work from Bai et al. \cite{bai_immediate_2020} analyzes short and long term effects of BCI-based rehabilitation systems and concludes that these interfaces are safe for patients with strokes and effective at improving upper extremity motor function.
 
-\subsection{Feature-based Approaches}
-Feature-based approaches are based on the extraction of features from the EEG signals, and then the classification is performed using machine learning algorithms.
-The most common features used in these approaches are the power spectral density (PSD) and the common spatial patterns (CSP).
-The PSD is a measure of the power of the signal at different frequencies, and it is calculated using the Fourier transform.
-The CSP is a method for finding spatial filters that maximize the variance of the signal for one class while minimizing it for the other class.
-The most common machine learning algorithms used in these approaches are support vector machines (SVM) and linear discriminant analysis (LDA).
+\section{Brain-Computer Interfaces (BCI)}
+In \cite{robinson2021emerging}, the authors review the current state of the art for BCI technologies used to control robots and for motor rehabilitation.
+In their work, they present the main types of BCI, such as invasive, and non-invasive, and the most common signal acquisition methods, such as Electroencephalography (EEG) and Magnetoencephalography (MEG).
+In \cite{altaheri_deep_2023}, Altaheri et al. present the EEG Motor Imagery as one of the ``most common BCI paradigms that have been used extensively in smart healthcare applications such as poststroke rehabilitation and mobile assistive robots''.
+In this work, the authors also review existing applications, like \cite{tang2020motor} that presents an EEG MI system used to control a wheelchair, publicly available datasets for EEG Motor Imagery, such as the ones from the BCI Competition IV and the ones provided by PhysioNet\cite{goldberger2000physiobank, schalk2004bci2000}, and present the most common deep learning algorithms used for EEG Motor Imagery classification, such as Convolutional Neural Networks (CNN) \cite{lawhern2018eegnet}, Long Short-Term Memory (LSTM) and Transformer Based solutions \cite{sharma_deep_2023}.
 
-\subsection{Deep Learning-based Approaches}
-Deep learning-based approaches are based on the use of deep learning algorithms for the classification of the EEG signals.
-The most common deep learning algorithms used in these approaches are convolutional neural networks (CNN), recurrent neural networks (RNN) and multi-layer perceptrons (MLP).
-The main advantage of these approaches is that they can automatically learn the features from the raw EEG signals, without the need for manual feature extraction.
+\section{Usability and Game Feel}
+Usability is a key factor in the development of applications, as it can influence the user's experience and satisfaction.
+In \cite{swink2008game}, the author presents the main concepts of game feel in video games, such as responsiveness, smoothness, and consistency, and how they can be used to improve the user experience.
+The thesis from Nguyen \cite{nguyen2012human}, shows that there is a weak correlation between Human Computer Interaction and Game Design, and suggests the use of heuristics and character automation to improve the overall user experience.
+In \cite{doi:10.1080/10447318.2019.1612213}, the authors present a review of the main videogames developed for consumer grade EEG devices, and mention that only few research works have focused on the usability and qualitative aspects of these games.
 
-\section{Relevant Works}
-Some of the most relevant works in the field of motor imagery classification used the BCI competition datasets.
-The BCI competition is a series of workshops that have been held in NeurIPS\footnote{NeurIPS confernece official website \url{https://nips.cc/}} between 2001 and 2008.
-Other relevant works used the PhysioNet EEG Motor Movement/Imagery Dataset\footnote{PhysioNet EEG Motor Movement/Imagery Dataset official website \url{https://physionet.org/content/eegmmidb/1.0.0/}}.
-The reference review paper also mentions other relevant datasets that have been used in the field, such as the MISCP~\cite{kaya2018large} with 10 MI classes.
-The works on which we will base our project are the following:
-\begin{itemize}
-    \item The work of~\cite{amin2019multilevel} used the BCI competition dataset IVa, and it achieved an accuracy of 74.5\% using a combination of CSP and SVM.
-    \item In~\cite{10409134}, the authors realised an embedded MI-BMI and used the PhysioNet EEG Motor Movement/Imagery Dataset, achieving an accuracy of 82.5\% using a deep learning-based approach.
-    \item While we did not find any work that used the MISCP dataset, we think that it is a relevant dataset to consider, as it has 10 MI classes, and it is larger than the BCI competition datasets.
-\end{itemize}
-
-\section{Discussion}
-The most common approaches to the problem of classifying motor imagery tasks are based on machine learning algorithms, and they can be divided into two main categories: feature-based and deep learning-based approaches.
-The most common features used in feature-based approaches are the power spectral density (PSD) and the common spatial patterns (CSP), and the most common machine learning algorithms used in these approaches are support vector machines (SVM) and linear discriminant analysis (LDA).
-The most common deep learning algorithms used in deep learning-based approaches are convolutional neural networks (CNN), recurrent neural networks (RNN) and multi-layer perceptrons (MLP).
-Some of the most relevant works in the field of motor imagery classification used the BCI competition datasets and the PhysioNet EEG Motor Movement/Imagery Dataset.
-The work of~\cite{amin2019multilevel} used the BCI competition dataset IVa, and it achieved an accuracy of 74.5\% using a combination of CSP and SVM.
-In~\cite{10409134}, the authors realised an embedded MI-BMI and used the PhysioNet EEG Motor Movement/Imagery Dataset, achieving an accuracy of 82.5\% using a deep learning-based approach.
-While we did not find any work that used the MISCP dataset, we think that it is a relevant dataset to consider, as it has 10 MI classes, and it is larger than the BCI competition datasets.
+\section{Main Differences}
+Using these works and documents as a reference, we can see that there is a gap in the literature regarding the development of a BCI-based rehabilitation application that is both usable and engaging.
+Most of the works focus on the technical aspects of the BCI, such as signal acquisition and processing, and the development of the rehabilitation exercises, but do not focus on the usability and game feel of the application.
+In this thesis, we aim to fill this gap by developing a BCI-based application that is both usable and engaging, and by evaluating the user experience of the application using a mixed-methods approach.
+Our project will use the BCI Motor Imagery paradigm to control the application, will not specifically focus on rehabilitation exercises, but will provide a set of mini-games curated to provide a good level of usability and a fun experience.
+The games will be controlled by the intention of movements of hands and feet, and the user will be able to play them using only their brain signals.
