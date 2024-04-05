@@ -1,7 +1,7 @@
 \chapter{State of the Art}\label{ch:state_of_the_art}
-In this chapter, we will present the main concepts and projects that inspired the development of this thesis. 
+In this chapter, we will present the main concepts and projects used and followed during the development of this thesis. 
 We will start by presenting rehabilitation approaches and technologies and the importance of the gamification of rehabilitation. 
-We will also present the main concepts of the Brain-Computer Interface (BCI) and the most relevant projects that use BCI and more specifically Motor Imagery for rehabilitation and devices control. 
+We will also present the main concepts of the Brain-Computer Interface (BCI) and the most relevant projects that use BCI and more specifically Motor Imagery for rehabilitation and devices control.
 Lastly, we will present concepts of usability and game feel that are important for the development of a usable and engaging application.
 
 \section{Rehabilitation Approaches and Technologies}
@@ -16,22 +16,30 @@ Works like \cite{202306.0333, 5567156, 10.4108/icst.pervasivehealth.2014.255277,
 In \cite{BOUKHENNOUFA2022103197}, we can also find a review of state of the art solutions that involve werable sensors and machine learning techniques.
 In the last decades, the use of Brain Computer Interfaces (BCI) has been gaining popularity in the field of rehabilitation, as they allow the control of devices and applications using only the brain signals.
 The work from Bai et al. \cite{bai_immediate_2020} analyzes short and long term effects of BCI-based rehabilitation systems and concludes that these interfaces are safe for patients with strokes and effective at improving upper extremity motor function.
+The review \cite{alfieri_gamification_2022} shows that gamification provides improved rehabilitation results compared to conventional therapy or home-based exercises, and can improve the motivation and engagement of patients in rehabilitation exercises.
 
 \section{Brain-Computer Interfaces (BCI)}
+Brain Computer Interfaces are links between the brain and electronic devices, such as computers, smartphones, and robots.
+These interfaces allow the control of devices and applications using only the brain signals.
 In \cite{robinson2021emerging}, the authors review the current state of the art for BCI technologies used to control robots and for motor rehabilitation.
-In their work, they present the main types of BCI, such as invasive, and non-invasive, and the most common signal acquisition methods, such as Electroencephalography (EEG) and Magnetoencephalography (MEG).
+In their work, they present the main types of BCI, such as invasive, and non-invasive, and the most common non-invasive signal acquisition methods, such as Electroencephalography (EEG)~\cite{niedermeyer2005electroencephalography} and Magnetoencephalography (MEG)~\cite{singh2014magnetoencephalography}.
 In \cite{altaheri_deep_2023}, Altaheri et al. present the EEG Motor Imagery as one of the ``most common BCI paradigms that have been used extensively in smart healthcare applications such as poststroke rehabilitation and mobile assistive robots''.
 In this work, the authors also review existing applications, like \cite{tang2020motor} that presents an EEG MI system used to control a wheelchair, publicly available datasets for EEG Motor Imagery, such as the ones from the BCI Competition IV and the ones provided by PhysioNet\cite{goldberger2000physiobank, schalk2004bci2000}, and present the most common deep learning algorithms used for EEG Motor Imagery classification, such as Convolutional Neural Networks (CNN) \cite{lawhern2018eegnet}, Long Short-Term Memory (LSTM) and Transformer Based solutions \cite{sharma_deep_2023}.
+\todo{Perhaps I should mention that the paper cited for CNN  was in the review and the one cited for LSTM/Transformer was not in the review.}
+In the filed of controlling devices using EEG, also other works were identified, such as \cite{10471624}, where the author present a werable device that is used to control a wheelchair, and \cite{10453986}, where the author presents a system that uses electromyography (EMG)~\cite{mills2005basics} to control artificial limbs.
 
 \section{Usability and Game Feel}
 Usability is a key factor in the development of applications, as it can influence the user's experience and satisfaction.
-In \cite{swink2008game}, the author presents the main concepts of game feel in video games, such as responsiveness, smoothness, and consistency, and how they can be used to improve the user experience.
+Is commonly defined as the ease of use and learnability of an application, but cannot be measured directly, as it depends on the user's perception and experience.
+In \cite{swink2008game}, the author presents the main concepts of game feel in video games, such as responsiveness, smoothness, and consistency, and how they can be used to improve the user experience and the game flow.
 The thesis from Nguyen \cite{nguyen2012human}, shows that there is a weak correlation between Human Computer Interaction and Game Design, and suggests the use of heuristics and character automation to improve the overall user experience.
-In \cite{doi:10.1080/10447318.2019.1612213}, the authors present a review of the main videogames developed for consumer grade EEG devices, and mention that only few research works have focused on the usability and qualitative aspects of these games.
+In \cite{doi:10.1080/10447318.2019.1612213}, the authors present a review of the main videogames developed for consumer grade EEG devices.
+The authors mention that many works only had simplified controls and used attention and meditation signals, also, only few research works were focused on the usability and qualitative aspects of the user interaction with the games.
 
 \section{Main Differences}
-Using these works and documents as a reference, we can see that there is a gap in the literature regarding the development of a BCI-based rehabilitation application that is both usable and engaging.
-Most of the works focus on the technical aspects of the BCI, such as signal acquisition and processing, and the development of the rehabilitation exercises, but do not focus on the usability and game feel of the application.
+Using these works and documents as a reference, we can see that there is a gap in the literature regarding the development of a BCI-based application that is both usable and engaging.
+Most of the works focus on the technical aspects of the BCI, such as signal acquisition and processing, and the development of the rehabilitation exercises, but do not focus on the usability and user experience of the application.
 In this thesis, we aim to fill this gap by developing a BCI-based application that is both usable and engaging, and by evaluating the user experience of the application using a mixed-methods approach.
-Our project will use the BCI Motor Imagery paradigm to control the application, will not specifically focus on rehabilitation exercises, but will provide a set of mini-games curated to provide a good level of usability and a fun experience.
-The games will be controlled by the intention of movements of hands and feet, and the user will be able to play them using only their brain signals.
+Our project will use the BCI Motor Imagery paradigm to control an application, we will not specifically focus on rehabilitation exercises, but we will develop simple videogames aiming to provide a good level of usability and a fun and immersive experience to the final user.
+The games will be controlled by the immagination of movements of hands and feet, and the user will be able to play them using only their brain signals.
+Lastly, to test the games and the networks developed during this thesis, we will develop a tool to generate artificial data, that will be fundamental in the early testing stages.
