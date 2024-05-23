@@ -1,46 +1,51 @@
 \chapter{Introduction}\label{ch:introduction}
-Electroencephalography (EEG) is a non-invasive technique that measures the electrical activity of the brain.
-It is used in a variety of applications, including medical diagnosis, neurofeedback, and brain-computer interfaces (BCIs).
-BCIs are systems that allow users to interact with computers using only their brain activity.
-This can be useful for people with severe motor disabilities, as it allows them to control devices and communicate with others.
-There are three classical BCI paradigms: event-related potentials (ERPs), steady-state visual evoked potentials (SSVEPs), and motor imagery (MI).
-The project focuses on MI, which is a technique where users imagine moving a part of their body, eg. their hand or foot, to control external devices.
-This technique has been used in a variety of applications, including controlling robotic arms~\cite{ang2009clinical}, electronic wheelchairs~\cite{palumbo2021motor}, and writing text~\cite{zhang2018converting}.
+In today's rapidly advancing technological landscape, enhancing the quality of life (QoL) for individuals with reduced mobility or physical disabilities remains a critical challenge. 
+Individuals who are missing limbs or have other physical impairments often face significant barriers in performing everyday tasks that many take for granted. 
+Controlling devices independently can be particularly challenging for these individuals, making them reliant on caregivers or assistive technologies. 
+The quest to empower these individuals through innovative solutions has led to significant research in Human-Computer Interaction (HCI).
+HCI focuses on creating effective interfaces between users and computers, aiming to enhance the usability and accessibility of digital devices. 
+Various HCI applications have demonstrated considerable promise in aiding individuals with disabilities. 
+For example, speech recognition systems allow users to control computers using their voice, while eye-tracking technologies enable control through eye movements. 
+However, these methods often have limitations, such as requiring specific environmental conditions or extensive training periods, and may not be suitable for all users.
 
-In this project, our aim is to develop a BCI system that can classify MI tasks using real time EEG data to control the user's virtual avatar.
+As HCI technologies continue to evolve, the field has seen a growing interest in Brain-Computer Interfaces (BCIs), which offer a direct communication pathway between the brain and external devices. 
+BCIs have the potential to revolutionize the way individuals with severe disabilities interact with their environment by bypassing traditional physical limitations and using brain signals to control devices.
+Among the various BCI techniques, Electroencephalography (EEG)-based BCIs are particularly promising. 
+EEG is a non-invasive method that records electrical activity of the brain through electrodes placed on the scalp. 
+It provides a relatively accessible and affordable means of capturing brain signals for BCI applications. 
+Several EEG-based BCI paradigms have been developed, including Steady-State Visual Evoked Potential (SSVEP), P300, and Motor Imagery (MI).
 
-State of the art solutions for MI classification use deep learning models, based on convolutional neural networks (CNNs) and recurrent neural networks (RNNs)~\cite{li2022motor}.
-These models are trained on large datasets of EEG recordings, and can achieve high classification accuracy.
-But don't take into account features that are specific to the user, such as the location of the electrodes on the scalp.
-This can lead to poor performance when the model is used with new users, or when the electrodes are moved.
-To address this issue, in this project we will also try applying Graph Convolutional Networks (GCNs) to the EEG data.
-GCNs are a type of neural network that can take into account the spatial structure of the data, and have been used in a variety of applications, including computer vision and traffic prediction~\cite{zhang2019graph}.
+Motor Imagery (MI) involves the mental simulation of movement without any actual physical execution, such as imagining moving a limb. 
+MI-based BCIs leverage this mental process to generate distinct EEG patterns that can be used to control external devices. 
+MI is particularly appealing because it taps into the natural motor processes of the brain, making it intuitive and potentially more effective for users with motor impairments. 
+Additionally, MI does not require external stimuli like SSVEP or P300, which can be advantageous in various practical applications.
+MI-based BCI systems have been applied in a range of areas, from assisting the users in playing simple video games to operating real-world devices like robotic wheelchairs and prosthetic limbs.
+These applications not only enhance entertainment and engagement but also provide significant functional benefits, improving independence and QoL for users.
+Unfortunately, the translation of such systems to practical applications often involves challenges related to real-time processing and control.
 
-The project will initially use the EEG Motor Imagery Dataset from PhysioNet~\cite{goldberger2000physiobank, schalk2004bci2000}.
-This dataset contains EEG recordings from 109 subjects performing MI tasks.
-The recordings were made using a 64-channel EEG system, and the dataset includes the location of the electrodes on the scalp.
-This will allow comparing the performance of CNNs and GCNs on the same dataset, and to investigate the impact of the spatial structure of the data on the classification accuracy.
-Also, the dataset recordings are labeled with the MI task performed by the subjects: rest, imagining the movement of left hand, right hand, both feet, and both hands.
-The network will be trained to categorise these imagined gestures which will be used to control the virtual avatar.
+Given the potential of MI-based BCIs, a critical question arises: ``Is it possible to perform EEG-Motor Imagery classification in real-time?'' 
+This question addresses the feasibility of using MI-BCI systems in practical, real-world scenarios where timely and accurate response is crucial.
 
-The project will be implemented using Python~\cite{10.5555/1593511}, a popular high-level programming language, with PyTorch~\cite{NEURIPS2019_9015} or Tensorflow~\cite{tensorflow2015-whitepaper}, widely used deep learning libraries.
-Also, MNE-Python~\cite{larson_2024_10519948, 10.3389/fnins.2013.00267}, an open-source package for exploring, visualizing, and analyzing human neurophysiological data, and Braindecode~\cite{HBM:HBM23730}, an open-source Python toolbox for decoding raw electrophysiological brain data with deep learning models, will be used.
-Lastly, the possibility of including Spektral, a Python library for building graph neural networks~\cite{grattarola2020graph}, will be evaluated.
+The primary objectives of this research are to investigate the real-time classification of EEG signals during motor imagery tasks and to develop a robust system capable of controlling external devices based on these classifications. 
 
-The project will be evaluated using a variety of metrics, including classification accuracy, precision, recall, and F1 score.
-The performance of the CNN and GCN models will be compared, and the impact of the spatial structure of the data on the classification accuracy will be investigated.
-The project will also be evaluated using a real-time BCI system, where the user's EEG live recordings will be used to control a virtual avatar.
-
-The project will be structured as follows:
+The hypotheses guiding this research include:
 \begin{itemize}
-    \item \textbf{Literature Review}: A review of the current state of the art in BCI systems, and the use of deep learning models for MI classification.
-    \item \textbf{Data Preprocessing}: Preprocessing the EEG data, including filtering, artifact removal, and feature extraction.
-    \item \textbf{Model Training}: Training state-of-the-art and custom GCN-based models on the preprocessed EEG data to evaluate their performance.
-    \item \textbf{Real-time Single-Player Avatar Control}: Implementing a real-time BCI system, where the user's EEG signals are classified in real time, and used to control a virtual avatar.
-    \item \textbf{Conclusion}: A summary of the project, and an evaluation of the performance and results of the CNN and GCN models.
+    \item[\textbf{H1:}] It is feasible to accurately classify motor imagery tasks in quasi-real-time using EEG signals.
+    \item[\textbf{H2:}] A quasi-real-time MI-BCI system can be effectively integrated with external devices for practical applications.
 \end{itemize}
 
-The project will be supervised by Profs. Loreti Michele, Vilhj\'almsson Hannes H\"ogni, Quadrini Michela and Del Giudice Nicola, and will be carried out at the University of Camerino, Italy.
-\\\\
+The first hypothesis addresses the technical feasibility of real-time EEG signal processing for MI classification, whitout this assumption the second hypothesis would not be possible to verify.
+The second hypothesis focuses on the practical integration of the MI-BCI system with external devices, which is essential for real-world applications.
 
-Following in this document, the literature review is presented in Section~\ref{ch:related_works}, the design of the project is presented in Section~\ref{sec:design}, and an high level draft of the schedule is presented in Section~\ref{ch:schedule}.
+This thesis proposes a quasi-real-time EEG-MI categorization system that can connect with a range of assistive devices.
+The approach attempts to use advanced signal processing and deep learning techniques to achieve high accuracy and low latency in EEG signal categorization; the specific implementation will be covered in following chapters.
+This thesis seeks to progress MI-based BCIs and, in the process, improve the quality of life (QoL) for people with physical limitations by answering the research issue and accomplishing the specified goals.
+
+
+The remainder of this thesis is organized as follows, in Chapter \ref{ch:related_works}, we discuss the background and related work in the fields of BCI, EEG signal processing, and MI-based applications.
+In Chapter \ref{ch:preliminary_work}, we describe the methods used for EEG data acquisition, signal processing, and classification.
+In Chapter \ref{ch:methodology}, we detail the development of the real-time MI-BCI system.
+In Chapter \ref{ch:results}, we present the experimental setup, results, and analysis of the system's performance.
+In Chapter \ref{ch:discussion}, we discuss the implications of the findings, potential applications, and limitations of the research.
+In Chapter \ref{ch:schedule}, we outline the timeline for the completion of the research and the remaining tasks.
+In Chapter \ref{ch:conclusions}, we summarize the contributions of the thesis and outline directions for future research.
