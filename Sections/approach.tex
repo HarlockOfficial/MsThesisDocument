@@ -1,5 +1,6 @@
 \chapter{Approach}\label{ch:approach}
 % generic intro to chapter
+\todo{In the end, pass on the chapter and change model images with something more colorful}
 In this chapter, we will discuss the approach we took to solve the problem of classifying the different types of motor imagery EEG signals.
 We will discuss the data collection process, the data augmentation techniques used, the classification model, and the virtual environment used to test the model. 
 Finally, we will discuss the framework that was developed to automate the process of data augmentation, signal classification and application in the virtual environment.
@@ -10,17 +11,80 @@ In the initial development steps, we used the Physionet EEG Motor Imagery datase
 Using the MOABB library \cite{Aristimunha_Mother_of_all_2023, chevallier2024largest, jayaram2018moabb}, we extracted the EEG data from the datasets and preprocessed them to remove noise and artifacts.
 The preprocessing steps included resampling the datasets to 128Hz, filtering the data with a band-pass filter between 0.5Hz and 40Hz, selecting the highest quantity of EEG channels that was common between the two datasets, and segmenting the data into 0.5 seconds windows for each motor imagery subject and task.
 Is important to notice, that after some tests, we decided to continue working only with the Physionet dataset, because it has a larger number of subjects and the added value of the Weibo dataset was not significant enough in terms of network accuracy to justify the extra complexity and train time of working with two datasets.
+\begin{table}[!htbp]
+    \centering
+    \scalebox{.8}[1]{
+    \begin{tabular}{|c|c|c|c||c|}
+        \hline
+        \textbf{Dataset Name} & \textbf{Number of Subjects} & \textbf{Number of Tasks} & \textbf{Number of Channels} & \textbf{Was Used}\\
+        \hline
+        \hline
+        Physionet & 109 & 4 & 64 & Yes\\
+        \hline
+        Weibo & 10 & 6 & 60 & No\\
+        \hline
+    \end{tabular}
+    }
+    \caption{Datasets used during the project}
+    \label{tab:datasamples}
+\end{table}
 
 \section{Data Augmentation}
 Data augmentation is a technique used to artificially increase the size of the training dataset by applying transformations to the original data.
 This is done to prevent overfitting and to improve the generalization of the model.
 In this project, we used data augmentation techniques such as stochastic noise injection and generative adversarial networks (GANs) to augment the EEG data.
-% Fix ``randomly'' repetition
-The stochastic noise injection technique randomly picks values from a Gaussian distribution and adds them to a randomly selected dataset sample, while the GANs technique generates new data samples by training a GAN model on the original data.
+The stochastic noise injection technique randomly picks values from a Gaussian distribution and adds them to a impartially selected dataset sample, while the GANs technique generates new data samples by training a GAN model on the original data.
 The GAN generator, using a tensor filled with random number taken from a uniform distribution, creates new data samples that are similar to the original data.
 For interoperability between the GAN model and the noise injection technique, we wrapped the noise injection functions in a callable Python class.
 This way we can mimick the GAN model's behavior and use the two solutions interchangeably.
+\begin{figure}[!htbp]
+    \centering
+    \begin{tikzpicture}[
+        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
+        ]
+        \node[squarednode] (noise) {Noise};
+        \node[squarednode] (generator) [right=of noise] {Generator};
+        \node[squarednode] (fake_data) [right=of generator] {Fake Data};
+        \node (none) [above=of fake_data] {~};
+        \node[squarednode] (real_data) [above=of none] {Real Data};
+        \node[squarednode] (discriminator) [right=of none] {Discriminator};
+        \node[squarednode, dashed] (loss) [right=of discriminator] {Loss};
 
+        \draw[->] (noise) -- (generator);
+        \draw[->] (generator) -- (fake_data);
+        \draw[->] (real_data) -- (discriminator);
+        \draw[->] (fake_data) -- (discriminator);
+        \draw[dashed, ->] (discriminator) -- (loss);
+        \draw[dashed, ->] (loss) to[out=-90, in=-90] (generator);
+        \draw[dashed, ->] (loss) to[out=90, in=90] (discriminator);
+    \end{tikzpicture}
+    \caption{GAN Model}
+    \label{fig:gan}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{tikzpicture}[
+        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
+        ]
+        \node[squarednode] (dataset) {Dataset};
+        \node[squarednode] (sample) [right=of dataset] {Sample};
+        \node (none) [below=of dataset] {~};
+        \node (none2) [below=of sample] {~};
+        \node[squarednode] (noise) [below=of none2] {Noise};
+        \node (none3) [left=of noise] {~};
+        \node[squarednode] (plus) [right=of none2] {+};
+        \node[squarednode] (output) [right=of plus] {Output};
+
+        \draw[->] (dataset) -- node [above] {extract} (sample) ;
+        \draw[->] (none3) -- node [above] {generate} (noise) ;
+        \draw[->] (sample) -- node [right] {add} (plus) ;
+        \draw[->] (noise) -- (plus) ;
+        \draw[->] (plus) -- (output) ;
+    \end{tikzpicture}
+    \caption{Noise Injection Model}
+    \label{fig:noise_injection}
+\end{figure}
 
 \section{Classification Model}
 Classification is the process of predicting the class label of a given input data sample.
@@ -30,6 +94,32 @@ Along with the LSTM model, we trained as baseline methods, a set of Machine Lear
 All the models were trained using the Physionet dataset. 
 Two different training strategies were used, one where the model was trained on the original dataset, divided by label, and another where the model was trained on the dataset divided by label and subject.
 The second strategy was used to perform cross subject validation, and therefore to test the model's generalization capabilities.
+\begin{figure}[!htbp]
+    \centering
+    \begin{tikzpicture}[
+        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
+        ]
+        \node[squarednode] (input_data) {Input Data};
+        \node[squarednode] (rearrange) [below=of input_data] {Rearrange Data};
+        \node[squarednode] (input_layer) [right=of input_data] {Input Layer};
+        \node[squarednode] (lstm) [below=of input_layer] {LSTM};
+        \node[squarednode] (lstm2) [right=of input_layer] {LSTM};
+        \node[squarednode] (output_layer) [right=of lstm] {LSTM Output Filter};
+        \node[squarednode] (output) [right=of lstm2] {Output};
+        \node[squarednode] (softmax) [right=of output_layer] {Softmax};
+
+        \draw[->] (input_data) -- (rearrange);
+        \draw[->] (rearrange) -- (input_layer);
+        \draw[->] (input_layer) -- (lstm);
+        \draw[->] (lstm) -- (lstm2);
+        \draw[->] (lstm2) -- (output_layer);
+        \draw[->] (output_layer) -- (output);
+        \draw[->] (output) -- (softmax);
+
+    \end{tikzpicture}
+    \caption{LSTM Model}
+    \label{fig:lstm}
+\end{figure}
 
 \section{Virtual Environment}
 Virtual environments are computer-generated simulations and scenarios that can be used to test and evaluate models in a controlled environment.
@@ -41,6 +131,19 @@ It is important to notice, that for simplicity and interoperability, the virtual
 The websocket was developed using the FastAPI library, and it was used to send the classification results from the classification model to the virtual environment.
 We selected a websocket as communication method because it is fast and easy to implement, and it allows the two environments to communicate in real-time or with minimal latency, which is important for the user experience in controlling a device in the real world.
 Also, thanks to this solution, the virtual environment can be easily replaced with a real device, like a wheelchair, and the classification model can be used to control it in real-time.
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/Approach/infinite_runner}
+    \caption{Infinite Runner Virtual Environment}
+    \label{fig:infinite_runner}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/Approach/maze}
+    \caption{Maze Virtual Environment}
+    \label{fig:maze}
+\end{figure}
 
 \section{The Framework}
 To automate the process of data augmentation, model classification and game testing, we developed a framework that could be used to streamline the testing process.
@@ -51,3 +154,23 @@ The framework was also designed to be easy to use, so that researchers and devel
 The framework consists of three main components: the data augmentation module, the classification module, and the communication module.
 The data augmentation module is responsible for generating new data samples using the data augmentation techniques, the classification module is responsible for classifying the data samples using the classification model, and the communication module is responsible for sending the classification results to other devices.
 Currently, it is possible to specify the paths to the data augmentation and classification models, and the websocket address, in this way the framework can be easily adapted to different models and environments.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{tikzpicture}[
+        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
+        ]
+        \node[squarednode] (keyboard) {Keyboard Input};
+        \node[squarednode] (data_augmentation) [below=of keyboard] {Data Augmentation};
+        \node[squarednode] (classification) [right=of keyboard] {Classification};
+        \node[squarednode] (websocket) [below=of classification] {Websocket};
+        \node[squarednode] (virtual_environment) [right=of classification] {Virtual Environment};
+
+        \draw[->] (keyboard) -- (data_augmentation);
+        \draw[->] (data_augmentation) -- (classification);
+        \draw[dashed, ->] (classification) -- (websocket);
+        \draw[dashed, ->] (websocket) -- (virtual_environment);
+    \end{tikzpicture}
+\caption{High-level model of the framework}
+\label{fig:framework}
+\end{figure}
