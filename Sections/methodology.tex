@@ -11,7 +11,10 @@ The data collection process is used to gather the data necessary to train the ma
 The data collection process is divided into two steps: the data collection and the data preprocessing.
 The data collection step is used to gather the data necessary to train the machine learning model.
 The data preprocessing step is used to clean the data and prepare it for training.
-% TODO expand from here, enter in technicalities
+For this step, we used publicly available EEG motor imagery datasets, such as the BCI Competition IV dataset 2a and the PhysioNet EEG Motor Movement/Imagery Dataset.
+These datasets contain EEG recordings of subjects performing motor imagery tasks, such as imagining moving their left or right hand, or their feet.
+The datasets contains the preprocessed 64-channel EEG recordings of the subjects, as well as the corresponding labels indicating the class to which the data point belongs.
+It is important to notice that we perform some ulterior preprocessing steps, such as filtering between and windowing, to clean, split the data and prepare it for training.
 
 \section{Data Augmentation}
 Data augmentation is a technique used to increase the size of the training dataset.
@@ -20,26 +23,28 @@ Data augmentation is used to generate new data points by applying transformation
 Data augmentation is used to improve the generalization of the machine learning model.
 Data augmentation is used to reduce overfitting.
 In this project, we decided to use data augmentation to generate new data points to test the performance and generalization capabilities of the machine learning model.
-% TODO expand from here, enter in technicalities
+We applied multiple data augmentation techniques, such as random sampling of the data points, random noise addition, and generation of data using GANs.
+After testing the quality of the generated data, we decided to use the noise addition technique and the GANs to generate new data points.
 
 \section{Classification Model}
 The classification model is a machine learning or deep learning model used to classify the data points.
-The classification model is used to predict the class to which the input data point belongs.
-The classification model is used to assign a label to the input data point.
+The classification model is used to predict the class or label to which the input data point belongs.
 In this project, we decided to train a set of machine learning and deep learning models to classify the data points.
-Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models.
-While the proposed LSTM method has been used as the main model.
-% TODO expand from here, enter in technicalities
+Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models, the proposed LSTM method has been used as the main model.
+We also tried developing an attention based model, but the hardware requirements were too high for the available resources.
+The models were trained using the available datasets, and validated using the test set.
+Also, the models where evaluated using the generated data points to test their generalization capabilities.
 
 \section{Virtual Environment}
 The virtual environment is a computer-generated environment that simulates the real world or a specific scenario.
 The virtual environment is used to test the performance and usability of the machine learning model, and to evaluate the user experience.
-In this project, we developed two virtual environments: an infinite runner game where the user can jump or move to left or right, and a maze where the user can freely move their character.
+In this project, we developed two virtual environments: an infinite runner game where the user can jump over obstacles or move to left or right, and a maze where the user can freely move their character to collect coins.
 The virtual environments were developed using the Unity game engine.
-% TODO expand from here, enter in technicalities
+The virtual environments were designed to be simple and easy to use, and to provide a fun and engaging experience for the user.
+The virtual environments were also designed to be controller agnostic, requiring a WebSocket connection to receive the input commands.
 
 \section{The Framework}
 The framework was developed to integrate all the components of the system and to provide a user-friendly interface.
 It works as a pipeline that connects the data augmentation or collection from the headset, classification model, and virtual environment.
 The framework is plug-and-play, meaning that it can be easily extended to support new data augmentation or generation methods, classification models, virtual environments or real devices.
-% TODO expand from here, enter in technicalities
+The framework is also designed to be easy to use, only requiring the paths to the models and the WebSocket address to send messages.
