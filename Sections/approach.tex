@@ -9,8 +9,12 @@ Finally, we will discuss the developed framework for automating the process of d
 To develop a classification model, we need a set of labelled EEG motor imagery data.
 Initially, we used the Physionet EEG Motor Imagery dataset \cite{goldberger2000physiobank}, which contains EEG data from 109 subjects performing 4 motor imagery tasks, and the Weibo Motor Imagery \cite{yi2014evaluation} dataset, which contains EEG data from 10 subjects performing 6 motor imagery tasks.
 Using the MOABB library \cite{Aristimunha_Mother_of_all_2023, chevallier2024largest, jayaram2018moabb}, we extracted the EEG data from the datasets and preprocessed them to remove noise and artefacts.
-\todo{This sentence is too long, try to rephrase it to make it more readable -Nicola}The preprocessing steps included resampling the datasets to 128Hz, filtering the data with a band-pass filter between 0.5Hz and 40Hz, selecting the highest quantity of EEG channels that were common between the two datasets, and segmenting the data into 0.5 seconds windows for each motor imagery subject and task.
-It is important to notice, that after some tests, we decided to continue working only with the Physionet dataset because it has a larger number of subjects.
+To complete the preprocessing step, the data underwent a series of transformations.
+First, the data was resampled to 128Hz, to allow for easier processing and to reduce the computational load.
+Next, the data was filtered using a band-pass filter between 0.5Hz and 40Hz, to remove noise and artefacts.
+The recordings were then segmented into 0.5 seconds windows for each motor imagery subject and task.
+Finally, we selected the highest quantity of EEG channels that were common between the two datasets, to ensure that the model could be trained on a consistent set of features.
+After some tests, we decided to continue working only with the Physionet dataset because it has a larger number of subjects.
 Moreover, the added value of the Weibo dataset was not significant enough in terms of network accuracy to justify the extra complexity and training time of working with two datasets.
 \begin{table}[!htbp]
     \centering
@@ -63,24 +67,25 @@ This way we can mimick the GAN model's behavior and use the two solutions interc
     \label{fig:gan}
 \end{figure}
 
-\todo{Try to make the arches label more readable - Nicola}
 \begin{figure}[!htbp]
     \centering
     \begin{tikzpicture}[
         squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
         ]
         \node[squarednode] (dataset) {Dataset};
-        \node[squarednode] (sample) [right=of dataset] {Sample};
+        \node (none3) [right=of dataset] {~};
+        \node[squarednode] (sample) [right=of none3] {Sample};
         \node (none) [below=of dataset] {~};
         \node (none2) [below=of sample] {~};
-        \node[squarednode] (noise) [below=of none2] {Noise};
-        \node (none3) [left=of noise] {~};
+        \node (none4) [below=of none] {~};
+        \node (none3) [right=of none4] {~};
+        \node[squarednode] (noise) [right=of none3] {Noise};
         \node[squarednode] (plus) [right=of none2] {+};
         \node[squarednode] (output) [right=of plus] {Output};
 
         \draw[->] (dataset) -- node [above] {extract} (sample) ;
-        \draw[->] (none3) -- node [above] {generate} (noise) ;
-        \draw[->] (sample) -- node [right] {add} (plus) ;
+        \draw[->] (none4) -- node [above] {generate} (noise) ;
+        \draw[->] (sample) -- node [right] {~~add} (plus) ;
         \draw[->] (noise) -- (plus) ;
         \draw[->] (plus) -- (output) ;
     \end{tikzpicture}
@@ -90,8 +95,8 @@ This way we can mimick the GAN model's behavior and use the two solutions interc
 
 \section{Classification Model}
 Classification is the process of predicting the class label of a given input data sample.
-To classify the EEG motor imagery data, we started from the literature review\todo{"started from the literature review" what does it mean -Nicola} and used a Long Short-Term Memory (LSTM) neural network based on the one presented in \cite{sharma_deep_2023}. 
-We also tried creating a network based on their Transformer one, but it was not possible to train such network with the available hardware resources.\todo{I don't like how sentence 94 is put, try to rephrase -Nicola}
+To classify the EEG motor imagery data, we took inspiration from the literature review and used a Long Short-Term Memory (LSTM) neural network based on the one presented in~\cite{sharma_deep_2023}.
+We also implemented a Transformer-based model from the same paper, but the hardware requirements were too high for the available resources.
 LSTM networks are a type of recurrent neural network (RNN) that are capable of learning long-term dependencies in the data.
 Along with the LSTM model, we trained as baseline methods, a set of Machine Learning models, that included Support Vector Machines (SVM) and Linear Discriminant Analysis (LDA), and a Convolutional Neural Network (CNN) (EEGNetV4 \cite{lawhern2018eegnet}).
 All the models were trained using the Physionet dataset. 
@@ -126,7 +131,7 @@ The second strategy was used to perform cross subject validation, and therefore 
 
 \section{Virtual Environment}
 Virtual environments are computer-generated simulations and scenarios that can be used to test and evaluate models in a controlled environment.
-Since one of the most important applications of the model is wheelchair\todo{? wheelchair -Nicola} (or more generically personal devices) control, to test the classification model, we developed a virtual environment using the Unity game engine where the user could control a virtual avatar using their motor imagery EEG signals.
+Since one of the most important applications of the model is personal devices control, to test the classification model, we developed a virtual environment using the Unity game engine where the user could control a virtual avatar using their motor imagery EEG signals.
 The avatar presented in the virtual environment was controlled by the classification model, which received the EEG signals from the headset or from the generators and classified them in real-time.
 The classification results were then used to move the avatar in the virtual environment.
 The virtual environment was designed as feedback for the user, to help them understand the classification results and improve their motor imagery skills.
