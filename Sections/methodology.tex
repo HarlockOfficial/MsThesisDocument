@@ -1,4 +1,4 @@
-\chapter{Methodology}\label{ch:methodology}
+\chapter{Implementation}\label{ch:methodology}
 % \cite{trafton2014blink} 13 ms necessary to recognise objects
 \todo{add technical details, 13ms human time to recognise objects, networks description, parameters, ...}
 This chapter will describe the methodology used to develop the system.
@@ -106,9 +106,11 @@ It is used to test the performance and usability of the machine learning model, 
 In this project, we developed two virtual environments: an infinite runner game where the user can jump over obstacles or move to left or right, and a maze where the user can freely move their character to collect coins.
 The virtual environments were developed using the Unity game engine and were designed to be simple and easy to use, and to provide a fun and engaging experience for the user.
 The virtual environments were also designed to be controller agnostic, requiring a WebSocket connection to receive the character input commands.
+\todo{add technical information, i.e. unity version, major packages used (maze generator), something about the code, and the solution for spawning obstacles in the runner}
 
 \section{The Framework}
-The framework was developed to integrate all the components of the system and to provide a user-friendly interface.
+The framework was developed to integrate all the system components and provide a user-friendly interface.
 It works as a pipeline that connects the data augmentation or collection from the headset, classification model, and virtual environment.
 The framework is plug-and-play, meaning that it can be easily extended to support new data augmentation or generation methods, classification models, virtual environments or real devices.
-The framework is also designed to be easy to use, only requiring the paths to the models files and the WebSocket address to send messages.
+The framework is also designed to be easy to use, only requiring the paths to the model files and the WebSocket address to send messages.
+
