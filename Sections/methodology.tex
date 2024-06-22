@@ -1,6 +1,4 @@
 \chapter{Implementation}\label{ch:methodology}
-% \cite{trafton2014blink} 13 ms necessary to recognise objects
-\todo{add technical details, 13ms human time to recognise objects, networks description, parameters, ...}
 This chapter will describe the methodology used to develop the system.
 The chapter is divided into five sections.
 The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, the fourth section will describe the virtual environment, and the fifth section will describe the evaluation pipeline.
@@ -94,19 +92,75 @@ The generator was trained after the discriminator, starting with 10 steps, and i
 The classification model is a machine learning or deep learning model used to classify the data points.
 It is used to predict the class or label to which the input data point belongs.
 In this project, we decided to train a set of machine learning and deep learning models to classify the data points.
-Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models, the proposed LSTM method has been used as the main model.
-We also tried developing an attention based model, but the hardware requirements were too high for the available resources.
+Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models, the proposed LSTM and Attention-based methods have been used as the main models.
 The models were trained using the available datasets, and validated using the test set.
 Also, the models where evaluated using the generated data points to test their generalization capabilities.
-\todo{add the parameters of the model and the figure}
+\subsection*{Parameters Used}
+The neural network models were trained using the following parameters:
+\begin{itemize}
+    \item \textbf{Loss Function}: Categorical Cross Entropy
+    \item \textbf{Optimizer}: Adam
+    \item \textbf{Learning Rate}: 0.01
+    \item \textbf{Train Epochs}: 1000 epochs
+    \item \textbf{Metrics}: Accuracy and Confusion Matrix
+\end{itemize}
+While the machine learning models only used the default parameters provided by the library and were trained for 1000 epochs.
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[c]{.45\textwidth}
+        \centering    
+        % \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_lstm}
+        \caption{Architecture of the LSTM model.}
+        \label{fig:lstm_model}
+    \end{minipage}
+    \begin{minipage}[c]{.45\textwidth}
+        \centering
+        % \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_attention}
+        \caption{Architecture of the Attention-based model.}
+        \label{fig:attention_model}
+    \end{minipage}
+\end{figure}
+\todo{add models figures, lstm and attention}
 
 \section{Virtual Environment}
 The virtual environment is a computer-generated environment that simulates the real world or a specific scenario.
 It is used to test the performance and usability of the machine learning model, and to evaluate the user experience.
 In this project, we developed two virtual environments: an infinite runner game where the user can jump over obstacles or move to left or right, and a maze where the user can freely move their character to collect coins.
-The virtual environments were developed using the Unity game engine and were designed to be simple and easy to use, and to provide a fun and engaging experience for the user.
+The virtual environments were developed using the Unity game engine, version 2022.3.20f1, and were designed to be simple and easy to use, and to provide a fun and engaging experience for the user.
 The virtual environments were also designed to be controller agnostic, requiring a WebSocket connection to receive the character input commands.
-\todo{add technical information, i.e. unity version, major packages used (maze generator), something about the code, and the solution for spawning obstacles in the runner}
+\subsection*{Unity Packages and Assets Used}
+The main packages used are:
+\begin{itemize}
+    \item TextMeshPro\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Manual/com.unity.textmeshpro.html}}: for the Main Menu and the in-game information.
+    \item Starter Assets \textemdash Third Person Controller\footnote{Removed from Unity Asset Store}: for the player avatar and main movement logic and animations.
+    \item Native Websocket\footnote{Open source package for Unity, available at the following link: \url{https://github.com/endel/NativeWebSocket}}: to receive the character control commands from the framework.
+    \item AI Navigation\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/index.html}}: to move the character in the Maze game.
+    \item Maze Generator\footnote{Asset available at the following link: \url{https://assetstore.unity.com/packages/tools/modeling/maze-generator-38689}}: to generate the maze in the Maze game.
+\end{itemize}
+\subsection*{Infinite Runner Game}
+The infinite runner game was developed to test the performance of the machine learning model in a fast-paced environment.
+The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
+The path and the obstacles are generated randomly and the game logic was implemented from scratch.
+The path is a modular prefab, only the first part is fixed, the rest is generated randomly.
+Techniques to delete the parts that are not visible and to generate new parts are used to keep the game running smoothly.
+Also, the obstacles are generated randomly, with a fixed probability of appearing.
+The code is modular, with the main logic separated from the Unity components.
+This allows for easy modification and extension of the game, for easy integration of new obstacles or changes in the path.
+\begin{figure}[!htbp]
+    \centering
+    % \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_infinite_runner_path_prefab}
+    \caption{Infinite Runner Game path prefab.}
+    \label{fig:infinite_runner_path}
+\end{figure}
+\todo{add infinite runner path prefab image}
+
+\subsection*{Maze Game}
+The maze game was developed to test the performance of the machine learning model in a more complex environment.
+The game is a simple 3D game where the player can move freely in a maze to collect coins.
+The maze is generated randomly using the Maze Generator package.
+The player character can freely move around thanks to the integration of the AI Navigation package.
+As the movement is autonomous, the role of the user is to provide the direction commands by thinking about the desired movement, left, right or forward.
+Upon collecting all games, the user proceeds to the next level, where the maze is regenerated and the coins are placed in different, randomly selected positions.
 
 \section{The Framework}
 The framework was developed to integrate all the system components and provide a user-friendly interface.
