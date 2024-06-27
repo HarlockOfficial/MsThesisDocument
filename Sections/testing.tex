@@ -56,7 +56,28 @@ The diagonal of the matrix represents the number of correctly classified data po
 From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, therefore, altrough the validation accuracy is low, in our opinion, in a real case scenario, the system would be able to correctly classify most of the data points and therefore be useful to the end user in controlling external devices.
 
 \subsection*{Generated Data Accuracy}
-\todo{compute values, the one i did were on the bad trained network.}
+The classification accuracy of the system on the generated data was 89.15\%.
+This result indicates that the system is able to correctly classify the generated data.
+The confusion matrix of the generated data is shown in Table~\ref{tab:gan_confusion_matrix}.
+From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, and that the system is able to distinguish between different classes of data.
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|}
+        \hline
+        & \textbf{Feet} & \textbf{Left Hand} & \textbf{Right Hand} & \textbf{Rest} \\
+        \hline
+        \hline
+        \textbf{Feet} & \textbf{824} & 104 & 38 & 34 \\
+        \hline
+        \textbf{Left Hand} & 16 & \textbf{961} & 1 & 22 \\
+        \hline
+        \textbf{Right Hand} & 28 & 51 & \textbf{789} & 132 \\
+        \hline
+        \textbf{Rest} & 1 & 6 & 1 & \textbf{992} \\
+        \hline
+    \end{tabular}
+    \caption{Confusion matrix of the GAN generated data.}\label{tab:gan_confusion_matrix}
+\end{table}
 
 
 \section{Latency}
