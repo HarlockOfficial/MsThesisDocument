@@ -53,24 +53,13 @@ After this, we randomly selected a data point from the reduced dataset and added
 The noise was generated using the ``numpy.random.normal'' function, with a mean of 0 and a standard deviation of 1.
 As parameter we also provided the shape of the data point, which was used to generate the noise in the correct format.
 \paragraph*{Generative Adversarial Networks}
-The GAN generator was composed of two networks: the generator (EEGFuseNet) and the discriminator(EFDiscriminator), both network were taken from the models provided by the library ``torcheeg''~\cite{zhang2024torcheeg}.
+The GAN generator was composed of two networks: the generator~(EEGFuseNet) and the discriminator~(EFDiscriminator), both network were taken from the models provided by the library ``torcheeg''~\cite{zhang2024torcheeg}.
 These models have been reimplemented in torcheeg following their description from~\cite{liang2021eegfusenet}
 \begin{figure}[!htbp]
     \centering
-    \begin{minipage}[b]{.45\textwidth}
-        \centering
-        \includegraphics[width=.2\textwidth]{Figures/Methodology/EEGFuseNet}
-        \caption{Architecture of the GAN generator.}\label{fig:gan_generator} 
-        \vfill   
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/Methodology/EFDiscriminator}
-        \caption{Architecture of the GAN discriminator.}\label{fig:gan_discriminator}
-    \end{minipage}
+    \includegraphics[width=\textwidth]{Figures/Methodology/GAN}
+    \caption{Architecture of the GAN model. Image from~\cite{liang2021eegfusenet}}\label{fig:gan_paper}
 \end{figure}
-\todo{fix the images, replace with simplified ones}
 
 
 As for the training parameters, we used the following:
@@ -107,20 +96,17 @@ The neural network models were trained using the following parameters:
 While the machine learning models only used the default parameters provided by the library and were trained for 1000 epochs.
 \begin{figure}[!htbp]
     \centering
-    \begin{minipage}[c]{.45\textwidth}
+    \begin{minipage}[c]{\textwidth}
         \centering    
-        % \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_lstm}
-        \caption{Architecture of the LSTM model.}
-        \label{fig:lstm_model}
+        \includegraphics[width=\textwidth]{Figures/Methodology/LSTM}
+        \caption{Architecture of the LSTM-based model. Image from~\cite{sharma_deep_2023}}\label{fig:lstm_model}
     \end{minipage}
-    \begin{minipage}[c]{.45\textwidth}
+    \begin{minipage}[c]{\textwidth}
         \centering
-        % \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_attention}
-        \caption{Architecture of the Attention-based model.}
-        \label{fig:attention_model}
+        \includegraphics[width=\textwidth]{Figures/Methodology/Attention}
+        \caption{Architecture of the Transformer-based model. Image from~\cite{sharma_deep_2023}}\label{fig:attention_model}
     \end{minipage}
 \end{figure}
-\todo{add models figures, lstm and attention}
 
 \section{Virtual Environment}
 The virtual environment is a computer-generated environment that simulates the real world or a specific scenario.
@@ -141,18 +127,18 @@ The main packages used are:
 The infinite runner game was developed to test the performance of the machine learning model in a fast-paced environment.
 The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
 The path and the obstacles are generated randomly and the game logic was implemented from scratch.
-The path is a modular prefab, only the first part is fixed, the rest is generated randomly.
+The path is a modular prefab~(Figure~\ref{fig:infinite_runner_path}), only the first two tiles are manually specified, the rest is generated randomly.
 Techniques to delete the parts that are not visible and to generate new parts are used to keep the game running smoothly.
 Also, the obstacles are generated randomly, with a fixed probability of appearing.
 The code is modular, with the main logic separated from the Unity components.
 This allows for easy modification and extension of the game, for easy integration of new obstacles or changes in the path.
 \begin{figure}[!htbp]
     \centering
-    % \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_infinite_runner_path_prefab}
+    \includegraphics[width=\textwidth]{Figures/Methodology/path_prefab}
     \caption{Infinite Runner Game path prefab.}
     \label{fig:infinite_runner_path}
 \end{figure}
-\todo{add infinite runner path prefab image}
+\todo{check the image, not sure this fits}
 
 \subsection*{Maze Game}
 The maze game was developed to test the performance of the machine learning model in a more complex environment.
