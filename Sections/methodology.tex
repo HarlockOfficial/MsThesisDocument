@@ -1,8 +1,16 @@
 \chapter{Implementation}\label{ch:methodology}
-This chapter will describe the methodology used to develop the system.
+Mirroring the previously presented approach (Chapter \ref{ch:approach}), we will describe the methodology used to develop the system.
 The chapter is divided into five sections.
-The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, the fourth section will describe the virtual environment, and the fifth section will describe the evaluation pipeline.
-The chapter will conclude with a summary of the methodology used in the development of the system.
+The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, the fourth section will describe the virtual environment.
+
+All these sections are part of a larger framework, that includes and merges all of them in a single pipeline that was developed as thesis project.
+
+The framework was developed to integrate all the system components and provide a user-friendly interface.
+It works as a pipeline that connects the data augmentation or collection from the headset, classification model, and virtual environment.
+The framework is plug-and-play, meaning that it can be easily extended to support new data augmentation or generation methods, classification models, virtual environments or real devices.
+The framework is also designed to be easy to use, only requiring the paths to the model files and the WebSocket address to send messages.
+\todo{fix content}
+
 
 \section{Data Collection}
 The data collection process is a crucial step in the development of a machine learning system.
@@ -19,7 +27,7 @@ To obtain the data, we used the python library MOABB, wich, via the Motor Imager
 The Motor Imagery paradigm, via its constructor, allows to specify the preprocessing steps.
 In this project, we used the following parameters:
 \begin{itemize}
-    \item \textbf{Channels}: The channels used to record the EEG signals.
+    \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure \ref{fig:eeg_channels}.
     \item \textbf{Events}: The events used to label the data points. In this project, we used the left and right hand, feet and rest motor imagery events.
     \item \textbf{Number of Output Classes}: The number of classes to which the data points belong. In this project, we used 4 classes.
     \item \textbf{Cutoff Frequency for the Bandpass Filter}: The cutoff frequency used to filter the EEG signals. In this project, we used a cutoff frequency of 0.5\textemdash40 Hz.
@@ -54,7 +62,7 @@ The noise was generated using the ``numpy.random.normal'' function, with a mean 
 As parameter we also provided the shape of the data point, which was used to generate the noise in the correct format.
 \paragraph*{Generative Adversarial Networks}
 The GAN generator was composed of two networks: the generator~(EEGFuseNet) and the discriminator~(EFDiscriminator), both network were taken from the models provided by the library ``torcheeg''~\cite{zhang2024torcheeg}.
-These models have been reimplemented in torcheeg following their description from~\cite{liang2021eegfusenet}
+These models have been reimplemented in torcheeg following their description from~\cite{liang2021eegfusenet} and their architecture is presented in Figure \ref{fig:gan_paper}.
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{Figures/Methodology/GAN}
@@ -96,16 +104,14 @@ The neural network models were trained using the following parameters:
 While the machine learning models only used the default parameters provided by the library and were trained for 1000 epochs.
 \begin{figure}[!htbp]
     \centering
-    \begin{minipage}[c]{\textwidth}
         \centering    
         \includegraphics[width=\textwidth]{Figures/Methodology/LSTM}
         \caption{Architecture of the LSTM-based model. Image from~\cite{sharma_deep_2023}}\label{fig:lstm_model}
-    \end{minipage}
-    \begin{minipage}[c]{\textwidth}
+\end{figure}
+\begin{figure}[!htbp]
         \centering
         \includegraphics[width=\textwidth]{Figures/Methodology/Attention}
         \caption{Architecture of the Transformer-based model. Image from~\cite{sharma_deep_2023}}\label{fig:attention_model}
-    \end{minipage}
 \end{figure}
 
 \section{Virtual Environment}
@@ -138,7 +144,7 @@ This allows for easy modification and extension of the game, for easy integratio
     \caption{Infinite Runner Game path prefab.}
     \label{fig:infinite_runner_path}
 \end{figure}
-\todo{check the image, not sure this fits}
+% \todo{check the image, not sure this fits}
 
 \subsection*{Maze Game}
 The maze game was developed to test the performance of the machine learning model in a more complex environment.
@@ -147,10 +153,3 @@ The maze is generated randomly using the Maze Generator package.
 The player character can freely move around thanks to the integration of the AI Navigation package.
 As the movement is autonomous, the role of the user is to provide the direction commands by thinking about the desired movement, left, right or forward.
 Upon collecting all games, the user proceeds to the next level, where the maze is regenerated and the coins are placed in different, randomly selected positions.
-
-\section{The Framework}
-The framework was developed to integrate all the system components and provide a user-friendly interface.
-It works as a pipeline that connects the data augmentation or collection from the headset, classification model, and virtual environment.
-The framework is plug-and-play, meaning that it can be easily extended to support new data augmentation or generation methods, classification models, virtual environments or real devices.
-The framework is also designed to be easy to use, only requiring the paths to the model files and the WebSocket address to send messages.
-

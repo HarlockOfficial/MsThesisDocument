@@ -10,6 +10,7 @@ The tests were designed to evaluate the performance of the system in terms of th
     \item Portability: how well the system performs on different platforms.
     \item Efficiency: how well the system performs in terms of resource usage.
 \end{itemize}
+\todo{change item list to a paragraph, like in chapter 4}
 
 \section{Classification Accuracy}
 % How good the system is at classifying the data.
@@ -200,9 +201,11 @@ During the tests, we evaluated the robustness of the system by testing the class
 Since the accuracy, as seen in the previous section, is not an extremely accurate metric, we computed the confusion matrix of the system on the noisy data.
 We run tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0 and e noticed that the system is able to correctly classify most of the data points for each class, in all the cases.
 In depth results are shown in Appendix~\ref{app:robustness}.
+\todo{add plot with accuracy (y axis), noise (x) axis, to show how accurate was the classification with increasing noise}
 
 \section{Portability}
 % How well the system performs on different platforms.
+\todo{add to ``other performance metrics'' with properties that I could not verify in this stage of the project}
 The portability is a measure of how well the system performs on different platforms.
 The portability is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to run on different hardware and software platforms.
 During the tests, we could not evaluate the portability due to the lack of different hardware and software platforms.
@@ -211,6 +214,7 @@ As we will discuss later, we evaluated the hardware requirements of the system, 
 
 \section{Efficiency}
 % How well the system performs in terms of resource usage.
+\todo{add to ``other performance metrics''}
 The efficiency is a measure of how well the system performs in terms of resource usage.
 The efficiency is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to use the available resources.
 During the tests, we evaluated the efficiency of the system by measuring the Floating Point Operations per Second (FLOPS), CPU memory and GPU (CUDA) memory usage of the system during the classification of the data.
@@ -234,6 +238,9 @@ During the tests, we evaluated the efficiency of the system by measuring the Flo
 The results summary of the tests are shown in Table~\ref{tab:efficiency}.
 As it is visible, the system requires a low amount of resources, $\le$~755~K-FLOPS, $\approx$~47~KB RAM and $\approx$~18~MB VRAM, and should be able to run on most modern hardware platforms.
 Detailed results are shown in Appendix~\ref{app:resource_usage}.
+
+\section{Other Performance Metrics}
+...
 
 \section{Performance Discussion}
 % Summary of the testing results.

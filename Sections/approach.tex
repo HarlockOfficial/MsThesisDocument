@@ -1,6 +1,6 @@
 \chapter{Approach}\label{ch:approach}
 % generic intro to chapter
-\todo{In the end, pass on the chapter and change model images with something more colorful}
+% \todo{In the end, pass on the chapter and change model images with something more colorful}
 In this chapter, we will discuss the approach we took to solve the problem of classifying the different types of motor imagery EEG signals.
 We will discuss the data collection process, the data augmentation techniques used, the classification model, and the virtual environment used to test the model. 
 Finally, we will discuss the developed framework for automating the process of data augmentation, signal classification and application in the virtual environment.
@@ -16,6 +16,8 @@ The recordings were then segmented into 0.5 seconds windows for each motor image
 Finally, we selected the highest quantity of EEG channels that were common between the two datasets, to ensure that the model could be trained on a consistent set of features.
 After some tests, we decided to continue working only with the Physionet dataset because it has a larger number of subjects.
 Moreover, the added value of the Weibo dataset was not significant enough in terms of network accuracy to justify the extra complexity and training time of working with two datasets.
+In Table \ref{tab:datasamples}, ...\todo{add explication of table.}
+\todo{explain how and why we reached 58 channels}
 \begin{table}[!htbp]
     \centering
     \scalebox{.8}[1]{
@@ -24,9 +26,11 @@ Moreover, the added value of the Weibo dataset was not significant enough in ter
         \textbf{Dataset Name} & \textbf{Number of Subjects} & \textbf{Number of Tasks} & \textbf{Number of Channels} & \textbf{Was Used}\\
         \hline
         \hline
-        Physionet & 109 & 4 & 64 & Yes\\
+        Physionet & 109 & 4 & 64 & No\\
         \hline
         Weibo & 10 & 6 & 60 & No\\
+        \hline
+        Our Sample & 109 & 4 & 58 & Yes \\
         \hline
     \end{tabular}
     }
@@ -34,14 +38,16 @@ Moreover, the added value of the Weibo dataset was not significant enough in ter
     \label{tab:datasamples}
 \end{table}
 
+
 \section{Data Augmentation}
 Data augmentation is a technique used to artificially increase the size of the training dataset by applying transformations to the original data.
 This is done to prevent overfitting and to improve the generalization of the model.
 In this project, we used data augmentation techniques such as stochastic noise injection and generative adversarial networks (GANs) to augment the EEG data.
-The stochastic noise injection technique randomly picks values from a Gaussian distribution and adds them to a impartially selected dataset sample, while the GANs technique generates new data samples by training a GAN model on the original data.
+The stochastic noise injection technique randomly picks values from a Gaussian distribution and adds them to a impartially selected dataset sample, while the GANs technique generates new data samples by training a GAN model (Figure~\ref{fig:gan}) on the original data.
 The GAN generator, using a tensor filled with random number taken from a uniform distribution, creates new data samples that are similar to the original data.
 For interoperability between the GAN model and the noise injection technique, we wrapped the noise injection functions in a callable Python class.
-This way we can mimick the GAN model's behavior and use the two solutions interchangeably.
+This way we can mimic the GAN model's behavior and use the two solutions interchangeably.
+
 \begin{figure}[!htbp]
     \centering
     \begin{tikzpicture}[
@@ -66,6 +72,7 @@ This way we can mimick the GAN model's behavior and use the two solutions interc
     \caption{GAN Model}
     \label{fig:gan}
 \end{figure}
+\todo{Explain the figure somewhere in the text}
 
 \begin{figure}[!htbp]
     \centering
@@ -92,11 +99,13 @@ This way we can mimick the GAN model's behavior and use the two solutions interc
     \caption{Noise Injection Model}
     \label{fig:noise_injection}
 \end{figure}
+\todo{Explain the figure somewhere in the text}
 
 \section{Classification Model}
 Classification is the process of predicting the class label of a given input data sample.
-To classify the EEG motor imagery data, we took inspiration from the literature review and used a Long Short-Term Memory (LSTM) neural network based on the one presented in~\cite{sharma_deep_2023}.
-We also implemented a Transformer-based model from the same paper, but the hardware requirements were too high for the available resources.
+To classify the EEG motor imagery data, we took inspiration from the literature review and used an LSTM neural network based on the one presented in~\cite{sharma_deep_2023}.
+We also implemented a Transformer-based model from the same paper, but the hardware requirements were too high for a real-time use case and the training results were not satisfying with respect to the LSMT solution.
+
 LSTM networks are a type of recurrent neural network (RNN) that are capable of learning long-term dependencies in the data.
 Along with the LSTM model, we trained as baseline methods, a set of Machine Learning models, that included Support Vector Machines (SVM) and Linear Discriminant Analysis (LDA), and a Convolutional Neural Network (CNN) (EEGNetV4 \cite{lawhern2018eegnet}).
 All the models were trained using the Physionet dataset. 
@@ -128,17 +137,25 @@ The second strategy was used to perform cross subject validation, and therefore 
     \caption{LSTM Model}
     \label{fig:lstm}
 \end{figure}
+\todo{Explain the figure somewhere in the text}
 
 \section{Virtual Environment}
 Virtual environments are computer-generated simulations and scenarios that can be used to test and evaluate models in a controlled environment.
 Since one of the most important applications of the model is personal devices control, to test the classification model, we developed a virtual environment using the Unity game engine where the user could control a virtual avatar using their motor imagery EEG signals.
-The avatar presented in the virtual environment was controlled by the classification model, which received the EEG signals from the headset or from the generators and classified them in real-time.
+
+The avatar presented in the virtual environment was controlled by the classification model, which received the EEG signals from the headset or from the generators and classified them in real time.
 The classification results were then used to move the avatar in the virtual environment.
+%
 The virtual environment was designed as feedback for the user, to help them understand the classification results and improve their motor imagery skills.
-It is important to notice, that for simplicity and interoperability, the virtual environment was developed using the Unity game engine, but the classification model was developed using Python and PyTorch, so a websocket was developed and used as communication bridge to allow the two environments to communicate.
-The websocket was developed using the FastAPI library, and it was used to send the classification results from the classification model to the virtual environment.
-We selected a websocket as communication method because it is fast and easy to implement, and it allows the two environments to communicate in real-time or with minimal latency, which is important for the user experience in controlling a device in the real world.
-Also, thanks to this solution, the virtual environment can be easily replaced with a real device, like a wheelchair, and the classification model can be used to control it in real-time.
+It is important to notice, that for simplicity and interoperability, the virtual environment was developed using the Unity game engine.
+In Figure.... we see the two envs....\todo{continue here}
+
+On the other hand, the classification model was developed using Python and PyTorch.
+Therefore, a WebSocket was developed and used as a communication bridge to allow the two environments to communicate.
+%
+The WebSocket was developed using the FastAPI library, and it was used to send the classification results from the classification model to the virtual environment.
+We selected a WebSocket as a communication method because it is fast and easy to implement, and it allows the two environments to communicate in real-time or with minimal latency, which is important for the user experience in controlling a device in the real world.
+Also, thanks to this solution, the virtual environment can be easily replaced with a real device, like a wheelchair, and the classification model can be used to control it in real time.
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Approach/infinite_runner}
@@ -182,3 +199,4 @@ Currently, it is possible to specify the paths to the data augmentation and clas
 \caption{High-level model of the framework}
 \label{fig:framework}
 \end{figure}
+\todo{Explain the figure somewhere in the text}

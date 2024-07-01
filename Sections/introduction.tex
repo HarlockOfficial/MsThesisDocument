@@ -31,7 +31,7 @@ EEG is a non-invasive method that records electrical activity of the brain throu
 It provides a relatively accessible and affordable means of capturing brain signals for BCI applications. 
 Several EEG-based BCI paradigms have been developed, including Steady-State Visual Evoked Potential (SSVEP), P300, and Motor Imagery (MI).
 
-Motor Imagery (MI) involves the mental simulation of movement without any actual physical execution, such as imagining moving a limb. 
+The latter involves the mental simulation of movement without any actual physical execution, such as imagining moving a limb. 
 MI-based BCIs leverage this mental process to generate distinct EEG patterns that can be used to control external devices. 
 MI is particularly appealing because it taps into the natural motor processes of the brain, making it intuitive and potentially more effective for users with motor impairments. 
 Additionally, MI does not require external stimuli like SSVEP or P300, which can be advantageous in various practical applications.
@@ -39,25 +39,28 @@ MI-based BCI systems have been applied in a range of areas, from assisting the u
 These applications not only enhance entertainment and engagement but also provide significant functional benefits, improving independence and QoL for users.
 Unfortunately, the translation of such systems to practical applications often involves challenges related to real-time processing and control.
 
-Given the potential of MI-based BCIs, a critical question arises: ``Is it possible to perform EEG-Motor Imagery classification in real-time?'' 
+Given the potential of MI-based BCIs, a critical question arises: ``\emph{Is it possible to perform EEG-Motor Imagery classification in real-time?}'' 
 This question addresses the feasibility of using MI-BCI systems in practical, real-world scenarios where timely and accurate response is crucial.
 
 The primary objectives of this research are to investigate the real-time classification of EEG signals during motor imagery tasks and to develop a robust system capable of controlling external devices based on these classifications. 
 
 The hypotheses guiding this research include:
 \begin{itemize}
-    \item[\textbf{H1:}] It is feasible to accurately classify motor imagery tasks in quasi-real-time using EEG signals.
-    \item[\textbf{H2:}] A quasi-real-time MI-BCI system can be effectively integrated with external devices for practical applications.
+    \item[\textbf{H1:}] \emph{It is feasible to accurately classify motor imagery tasks in quasi-real-time using EEG signals}.
+    \item[\textbf{H2:}] \emph{A quasi-real-time MI-BCI system can be effectively integrated with external devices for practical applications}.
 \end{itemize}
 
 The first hypothesis addresses the technical feasibility of real-time EEG signal processing for MI classification, whitout this assumption the second hypothesis would not be possible to verify.
 The second hypothesis focuses on the practical integration of the MI-BCI system with external devices, which is essential for real-world applications.
 
 This thesis proposes a quasi-real-time EEG-MI categorization system that can connect with a range of assistive devices.
-The approach attempts to use advanced signal processing and deep learning techniques to achieve high accuracy and low latency in EEG signal categorization; the specific implementation will be covered in following chapters.
-This thesis seeks to progress MI-based BCIs and, in the process, improve the quality of life (QoL) for people with physical limitations by answering the research issue and accomplishing the specified goals.
+The approach attempts to use advanced signal processing and deep learning techniques to achieve high accuracy and low latency in EEG signal categorisation. 
+We take advantage of techniques like models based on Long Short Term Memory~(LSTM), to classify the user's motor intention, and data augmentation techniques, in particular, Generative Adversarial Networks, to study the EEG signals and generate realistic samples.
+Moreover, we leverage WebSocket communications to interact with external devices and applications in real time or with a low delay between the signal classification and its application.
+In this way, we aim to progress MI-based BCIs and, in the process, improve the quality of life (QoL) for people with physical limitations by answering the research issue and accomplishing the specified goals.
 
 
+\todo{This part is not correct; since the chapters changed, the content has to be changed}
 The remainder of this thesis is organized as follows, in Chapter \ref{ch:related_works}, we discuss the background and related work in the fields of BCI, EEG signal processing, and MI-based applications.
 %In Chapter \ref{ch:preliminary_work}, we describe the methods used for EEG data acquisition, signal processing, and classification.
 %Maybe change chapters, the approach becomes technical setup, describes the pipeline and the data-related part and design idea for the game and the reason (also how I modelled the movement imagination into controls), methodology describes 
