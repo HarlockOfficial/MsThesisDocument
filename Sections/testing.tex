@@ -3,14 +3,10 @@
 % how good the training is and how good the system is before putting a human in the loop.
 Before testing the system on human subjects, we performed a series of tests to evaluate the performance of the system on generated data. 
 The tests were designed to evaluate the performance of the system in terms of the following:
-\begin{itemize}
-    \item Classification accuracy: how well the system is able to classify the data.
-    \item Latency: how fast the system is able to classify the data.
-    \item Robustness: how well the system performs in case of errors or noise in the data.
-    \item Portability: how well the system performs on different platforms.
-    \item Efficiency: how well the system performs in terms of resource usage.
-\end{itemize}
-\todo{change item list to a paragraph, like in chapter 4}
+The chapter is divided into four sections, we will discuss the classification accuracy, which is the capabilty of the system to correctly classify the input data, the latency, wich is the classification speed of the system, and the robustness of the system, which represents the tolerance to noise and errors in the input data, along with other performance metrics, such as efficiency and portability that we could not deeply verify in this stage of the project.
+The results of the tests indicate that the system is able to classify the generated data with high accuracy, in competitive time, and with low resource usage.
+The system is able to handle errors and noise in the data, and should be able to run on most modern hardware platforms.
+We will discuss the results of the human study in the next chapter (Chapter~\ref{ch:human_study}).
 
 \section{Classification Accuracy}
 % How good the system is at classifying the data.
@@ -57,8 +53,8 @@ The diagonal of the matrix represents the number of correctly classified data po
 From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, therefore, altrough the validation accuracy is low, in our opinion, in a real case scenario, the system would be able to correctly classify most of the data points and therefore be useful to the end user in controlling external devices.
 
 \subsection*{Generated Data Accuracy}
-The classification accuracy of the system on the generated data was 89.15\%.
-This result indicates that the system is able to correctly classify the generated data.
+Differently from the validation dataset, the classification accuracy of the system on the generated data was 89.15\%.
+This result indicates that the system is able to correctly classify the artificial data.
 The confusion matrix of the generated data is shown in Table~\ref{tab:gan_confusion_matrix}.
 From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, and that the system is able to distinguish between different classes of data.
 \begin{table}[!htbp]
@@ -99,7 +95,7 @@ The figure only shows the latency of the system, and does not include the time r
         % Horizontal line
         \draw[thick] (0,0) -- (7.6625,0);
         \draw[thick, dashed] (7.6625,0) -- (8.15,0);
-        \draw[thick, -Triangle] (8.15,0) -- (10,0);
+        \draw[thick, -Triangle] (8.15,0) -- (10,0) node[font=\scriptsize,below left=3pt and -8pt]{\textbf{ms}};
         % \draw[thick, dashed] (9,0) -- (9.5,0);
         % \draw[thick, -Triangle] (9,0) -- (10,0) node[font=\scriptsize,below left=3pt and -8pt]{\textbf{ms}};
 
@@ -200,21 +196,27 @@ The robustness is an important metric for evaluating the performance of the syst
 During the tests, we evaluated the robustness of the system by testing the classificator on data with different levels of Gaussian noise on dataset and GAN generated data.
 Since the accuracy, as seen in the previous section, is not an extremely accurate metric, we computed the confusion matrix of the system on the noisy data.
 We run tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0 and e noticed that the system is able to correctly classify most of the data points for each class, in all the cases.
-In depth results are shown in Appendix~\ref{app:robustness}.
-\todo{add plot with accuracy (y axis), noise (x) axis, to show how accurate was the classification with increasing noise}
+In depth results are shown in Appendix~\ref{app:robustness}, while in Figure~\ref{fig:robustness} we show the accuracy of the system on the noisy data.
+\begin{figure}
+    \centering
+    %\includegraphics[width=0.8\textwidth]{Figures/Methodology/robustness}
+    \caption{Robustness of the system in case of noise in the data.}\label{fig:robustness}
+\end{figure}
 
-\section{Portability}
+\section{Other Performance Metrics}
+In this section, we will discuss a set of other performance metrics that we consider important, but that we could not deeply verify in this stage of the project.
+These metrics include portability, which is a measure of how well the system performs on different platforms, efficiency, which is a measure of how well the system performs in terms of resource usage, and maintainability, which is a measure of how well the system performs in terms of code quality and documentation.
+
+\paragraph{Portability}
 % How well the system performs on different platforms.
-\todo{add to ``other performance metrics'' with properties that I could not verify in this stage of the project}
 The portability is a measure of how well the system performs on different platforms.
 The portability is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to run on different hardware and software platforms.
 During the tests, we could not evaluate the portability due to the lack of different hardware and software platforms.
-However, we believe that the system should be able to run on different platforms, as it is written in Python 3.10 and based on standard machine learning libraries and does not require any specialized hardware or software.
-As we will discuss later, we evaluated the hardware requirements of the system, and we believe that the system should be able to run flawlessly on most modern hardware platforms.
+However, we believe that the system should be able to run on different platforms, as it is written in Python 3.10 and based on standard machine learning libraries and does not require any specialized hardware or software, except for the EEG device and the CUDA-enabled GPU.
+As we will discuss in the next paragraph, we evaluated the hardware requirements of the system, and we believe that the system should be able to run flawlessly on most modern hardware platforms.
 
-\section{Efficiency}
+\paragraph{Efficiency}
 % How well the system performs in terms of resource usage.
-\todo{add to ``other performance metrics''}
 The efficiency is a measure of how well the system performs in terms of resource usage.
 The efficiency is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to use the available resources.
 During the tests, we evaluated the efficiency of the system by measuring the Floating Point Operations per Second (FLOPS), CPU memory and GPU (CUDA) memory usage of the system during the classification of the data.
@@ -239,13 +241,20 @@ The results summary of the tests are shown in Table~\ref{tab:efficiency}.
 As it is visible, the system requires a low amount of resources, $\le$~755~K-FLOPS, $\approx$~47~KB RAM and $\approx$~18~MB VRAM, and should be able to run on most modern hardware platforms.
 Detailed results are shown in Appendix~\ref{app:resource_usage}.
 
-\section{Other Performance Metrics}
-...
+\paragraph{Maintainability}
+% How well the system performs in terms of code quality and documentation.
+The maintainability is a measure of how well the system performs in terms of code quality and documentation.
+The maintainability is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to be maintained and extended.
+During the tests, we evaluated the maintainability of the system by measuring the code quality and documentation of the system.
+The code quality of the system was evaluated using the Pylint tool, which is a static code analysis tool for Python.
+The Pylint tool provides a score between 0 and 10, where 0 is the worst score and 10 is the best score.
+The code quality of the system was 6.55, which indicates that the system has a moderate code quality, and that there is room for improvement.
+Unfortunately, as of now, the system does not have any documentation, and we believe that the system should be documented to make it easier to maintain and extend.
 
 \section{Performance Discussion}
 % Summary of the testing results.
 In summary, before testing the system on human subjects, we performed a series of tests to evaluate the performance of the system on realistic data.
-The tests were designed to evaluate the performance of the system in terms of classification accuracy, latency, robustness, portability, and efficiency.
+The tests were designed to evaluate the performance of the system in terms of classification accuracy, latency and robustness, as well as other important performance indicators like portability, efficiency and maintainability.
 The results of the tests indicate that the system is able to classify the generated data with high accuracy.
 The classification is performed in competitive time, allowing for real-time applications with an acceptable delay and error.
 The system is able to handle errors and noise in the data, and should be able to run on most modern hardware platforms, with low resource usage.

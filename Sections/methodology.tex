@@ -1,15 +1,11 @@
 \chapter{Implementation}\label{ch:methodology}
-Mirroring the previously presented approach (Chapter \ref{ch:approach}), we will describe the methodology used to develop the system.
+Mirroring the previously presented approach (Chapter~\ref{ch:approach}), we will describe the methodology used to develop the system.
 The chapter is divided into five sections.
 The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, the fourth section will describe the virtual environment.
 
-All these sections are part of a larger framework, that includes and merges all of them in a single pipeline that was developed as thesis project.
-
-The framework was developed to integrate all the system components and provide a user-friendly interface.
-It works as a pipeline that connects the data augmentation or collection from the headset, classification model, and virtual environment.
+All these sections are included and merged in a single pipeline with a user friendly interface that connects the data augmentation or collection from the headset, classification model, and virtual environment.
 The framework is plug-and-play, meaning that it can be easily extended to support new data augmentation or generation methods, classification models, virtual environments or real devices.
-The framework is also designed to be easy to use, only requiring the paths to the model files and the WebSocket address to send messages.
-\todo{fix content}
+The framework is also designed to be easy to use, providing an easy user interface and only requiring the paths to the model files and the WebSocket address to send messages.
 
 
 \section{Data Collection}
@@ -27,7 +23,7 @@ To obtain the data, we used the python library MOABB, wich, via the Motor Imager
 The Motor Imagery paradigm, via its constructor, allows to specify the preprocessing steps.
 In this project, we used the following parameters:
 \begin{itemize}
-    \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure \ref{fig:eeg_channels}.
+    \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure~\ref{fig:eeg_channels}.
     \item \textbf{Events}: The events used to label the data points. In this project, we used the left and right hand, feet and rest motor imagery events.
     \item \textbf{Number of Output Classes}: The number of classes to which the data points belong. In this project, we used 4 classes.
     \item \textbf{Cutoff Frequency for the Bandpass Filter}: The cutoff frequency used to filter the EEG signals. In this project, we used a cutoff frequency of 0.5\textemdash40 Hz.
@@ -41,9 +37,6 @@ In this project, we used the following parameters:
     \caption{Position of the selected EEG Channels using the reference 10/20 system.}
     \label{fig:eeg_channels}
 \end{figure}
-
-
-
 
 \section{Data Augmentation}
 Data augmentation is a technique used to increase the size of the training dataset.
@@ -133,23 +126,28 @@ The main packages used are:
 The infinite runner game was developed to test the performance of the machine learning model in a fast-paced environment.
 The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
 The path and the obstacles are generated randomly and the game logic was implemented from scratch.
-The path is a modular prefab~(Figure~\ref{fig:infinite_runner_path}), only the first two tiles are manually specified, the rest is generated randomly.
+The path is a modular prefab, showed in the previous chapter (Chapter~\ref{ch:approach}), only the first two tiles are manually specified, the rest is generated randomly.
 Techniques to delete the parts that are not visible and to generate new parts are used to keep the game running smoothly.
 Also, the obstacles are generated randomly, with a fixed probability of appearing.
 The code is modular, with the main logic separated from the Unity components.
 This allows for easy modification and extension of the game, for easy integration of new obstacles or changes in the path.
+After some tests, we decided to esclude the Infinite Runner game from the final evaluation, as the game was too fast and while the user was able to provide the commands in time using the keyboard, the actual EEG signals required more time to be processed, resulting in a poor user experience. 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{Figures/Methodology/path_prefab}
-    \caption{Infinite Runner Game path prefab.}
-    \label{fig:infinite_runner_path}
+    \includegraphics[width=0.8\textwidth]{Figures/Methodology/infinite_runner}
+    \caption{Infinite Runner Virtual Environment}\label{fig:infinite_runner}
 \end{figure}
-% \todo{check the image, not sure this fits}
 
 \subsection*{Maze Game}
 The maze game was developed to test the performance of the machine learning model in a more complex environment.
-The game is a simple 3D game where the player can move freely in a maze to collect coins.
+The game is a 3D walking game where the player can move freely in a maze to collect coins.
 The maze is generated randomly using the Maze Generator package.
 The player character can freely move around thanks to the integration of the AI Navigation package.
 As the movement is autonomous, the role of the user is to provide the direction commands by thinking about the desired movement, left, right or forward.
-Upon collecting all games, the user proceeds to the next level, where the maze is regenerated and the coins are placed in different, randomly selected positions.
+Upon collecting all coins, the user proceeds to the next level, where the maze is regenerated and the coins are placed in different, randomly selected positions.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/Methodology/maze}
+    \caption{Maze Virtual Environment}\label{fig:maze}
+\end{figure}
