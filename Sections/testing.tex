@@ -198,10 +198,66 @@ Since the accuracy, as seen in the previous section, is not an extremely accurat
 We run tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0 and e noticed that the system is able to correctly classify most of the data points for each class, in all the cases.
 While in depth results are shown in Appendix~\ref{app:robustness}, in Figure~\ref{fig:robustness} we show the precision of the system on the noisy data.
 As it is visible, the precision on GAN generated data is higher than the one on the dataset data, and the precision decreases as the noise level increases, but the system is still able to correctly classify most of the data points for each class, even in the presence of high level of noise.
+The precision scores were computed using the confusion matrices.
+For each noise level $x$, we computed a confusion matrix $CM_x$ (Figure~\ref{tab:precision_reference}).
+Using the main diagonal of each confusion matrix, we computed the precision as the ratio between the value of that cell and the sum of the values in the row $P_{\_, row}$, and the ratio between the cell value and the related column $P_{\_, col}$, we then averaged the two values $P_{\_}$.
+Lastly, the average of all the diagonal averages was computed as final precision score $P_{CM_x}$ (Figure \ref{fig:precision_formula}).
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Testing/robustness_plot}
     \caption{Robustness of the system in case of noise in the data.}\label{fig:robustness}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|}
+        \hline
+        & \textbf{Feet} & \textbf{Left Hand} & \textbf{Right Hand} & \textbf{Rest} \\
+        \hline
+        \hline
+        \textbf{Feet} & $\alpha$ & $\beta$ & $\gamma$ & $\delta$ \\
+        \hline
+        \textbf{Left Hand} & $\epsilon$ & $\zeta$ & $\eta$ & $\theta$ \\
+        \hline
+        \textbf{Right Hand} & $\iota$ & $\kappa$ & $\lambda$ & $\mu$ \\
+        \hline
+        \textbf{Rest} & $\nu$ & $\xi$ & $\pi$ & $\rho$ \\
+        \hline
+    \end{tabular}
+    \caption{Reference Confision Matrix $CM_x$ for the precision computation.}\label{tab:precision_reference}
+    \[
+    P_{\alpha,row} = \frac{\alpha}{\alpha + \beta + \gamma + \delta} 
+    P_{\alpha,col} = \frac{\alpha}{\alpha + \epsilon + \iota + \nu}
+    \]
+    \[
+    P_{\alpha} = \frac{P_{\alpha,row} + P_{\alpha,col}}{2}
+    \]
+    \[
+    P_{\zeta,row} = \frac{\zeta}{\epsilon + \zeta + \eta + \theta}
+    P_{\zeta,col} = \frac{\zeta}{\beta + \zeta + \kappa + \xi}
+    \]
+    \[
+    P_{\zeta} = \frac{P_{\zeta,row} + P_{\zeta,col}}{2}
+    \]
+    \[
+    P_{\lambda,row} = \frac{\lambda}{\gamma + \eta + \lambda + \pi}
+    P_{\lambda,col} = \frac{\lambda}{\gamma + \eta + \lambda + \pi}
+    \]
+    \[
+    P_{\lambda} = \frac{P_{\lambda,row} + P_{\lambda,col}}{2}
+    \]
+    \[
+    P_{\rho,row} = \frac{\rho}{\delta + \theta + \mu + \rho}
+    P_{\rho,col} = \frac{\rho}{\delta + \theta + \mu + \rho}
+    \]
+    \[
+    P_{\rho} = \frac{P_{\rho,row} + P_{\rho,col}}{2}
+    \]
+    \[
+    P_{CM_x} = \frac{P_{\alpha} + P_{\zeta} + P_{\lambda} + P_{\rho}}{4}
+    \]
+    \caption{Formula to compute the precision of the system.}\label{fig:precision_formula}
 \end{figure}
 
 \section{Other Performance Metrics}
