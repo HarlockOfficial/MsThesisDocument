@@ -1,123 +1,132 @@
 \chapter{Vocabulary}\label{app:vocabulary}
-\todo{This is a placeholder for the vocabulary appendix.}
 In this appendix, we will present and explain some specific words and terms used in the thesis.
 
-\textbf{EEG} - Electroencephalography is a method to record electrical activity of the brain. It is a non-invasive method that uses electrodes placed on the scalp to detect electrical activity in the brain.
+\section*{A}
 
-\textbf{Motor Imagery} - Motor imagery is a mental process in which an individual imagines themselves performing a specific motor task without actually performing the task physically. It is used in brain-computer interfaces to control devices using brain signals.
-
-\textbf{Brain-Computer Interface (BCI)} - A brain-computer interface is a system that allows direct communication between the brain and an external device, such as a computer or a robotic arm. BCIs can be used to control devices using brain signals.
-
-\textbf{Machine Learning} - Machine learning is a field of artificial intelligence that uses statistical techniques to give computers the ability to learn from data without being explicitly programmed. Machine learning algorithms can be used to analyze and interpret brain signals in BCIs.
-
-\textbf{Deep Learning} - Deep learning is a subfield of machine learning that uses artificial neural networks to model and interpret complex patterns in data. Deep learning algorithms can be used to analyze and interpret brain signals in BCIs.
-
-\textbf{Convolutional Neural Network (CNN)} - A convolutional neural network is a type of deep learning algorithm that is commonly used for image recognition tasks. CNNs are composed of multiple layers of neurons that apply convolutional filters to input data to extract features.
-
-\textbf{Recurrent Neural Network (RNN)} - A recurrent neural network is a type of deep learning algorithm that is commonly used for sequence prediction tasks. RNNs have connections between neurons that form loops, allowing them to process sequences of data.
-
-\textbf{Long Short-Term Memory (LSTM)} - Long short-term memory is a type of recurrent neural network that is designed to capture long-term dependencies in sequential data. LSTMs have memory cells that can store information over long periods of time.
-
-\textbf{Electrode} - An electrode is a conductor that is used to make electrical contact with a non-metallic part of a circuit, such as the skin. In EEG, electrodes are placed on the scalp to detect electrical activity in the brain.
-
-\textbf{Feature Extraction} - Feature extraction is the process of transforming raw data into a set of features that can be used as input to a machine learning algorithm. In EEG signal processing, feature extraction is used to extract relevant information from brain signals.
-
-\textbf{Classification} - Classification is a machine learning task that involves assigning a label to an input data point based on its features. In BCIs, classification algorithms are used to predict the intended movement or action from brain signals.
-
-\textbf{Accuracy} - Accuracy is a measure of the performance of a classification algorithm that measures the proportion of correctly classified data points. It is calculated as the number of correct predictions divided by the total number of predictions.
-
-\textbf{Precision} - Precision is a measure of the performance of a classification algorithm that measures the proportion of correctly classified positive data points among all data points predicted as positive. It is calculated as the number of true positive predictions divided by the sum of true positive and false positive predictions.
-
-\textbf{Recall} - Recall is a measure of the performance of a classification algorithm that measures the proportion of correctly classified positive data points among all actual positive data points. It is calculated as the number of true positive predictions divided by the sum of true positive and false negative predictions.
-
-\textbf{F1 Score} - The F1 score is a measure of the performance of a classification algorithm that combines precision and recall into a single metric. It is calculated as the harmonic mean of precision and recall.
-
-\textbf{Cross-Validation} - Cross-validation is a technique used to evaluate the performance of a machine learning algorithm by splitting the data into multiple subsets, training the algorithm on one subset, and testing it on the remaining subsets. Cross-validation helps to assess the generalization performance of the algorithm.
-
-\textbf{Hyperparameter} - A hyperparameter is a parameter of a machine learning algorithm that is set before the training process begins. Hyperparameters control the behavior of the algorithm and can be tuned to optimize its performance.
-
-\textbf{Grid Search} - Grid search is a technique used to find the optimal hyperparameters of a machine learning algorithm by exhaustively searching through a specified set of hyperparameter values. Grid search evaluates the performance of the algorithm for each combination of hyperparameters and selects the best one.
-
-\textbf{Random Search} - Random search is a technique used to find the optimal hyperparameters of a machine learning algorithm by randomly sampling hyperparameter values from a specified distribution. Random search evaluates the performance of the algorithm for a random subset of hyperparameter values and selects the best one.
-
-\textbf{Transfer Learning} - Transfer learning is a machine learning technique that involves using knowledge gained from one task to improve the performance of another related task. In BCIs, transfer learning can be used to leverage pre-trained models on similar datasets to improve the performance of classification algorithms.
-
-\textbf{Fine-Tuning} - Fine-tuning is a transfer learning technique that involves retraining a pre-trained model on a new dataset to adapt it to a specific task. Fine-tuning allows the model to learn task-specific features while retaining the knowledge gained from the pre-training.
-
-\textbf{Data Augmentation} - Data augmentation is a technique used to increase the size of a dataset by applying transformations to the original data. In BCIs, data augmentation can be used to generate additional training samples from existing data to improve the performance of classification algorithms.
-
-\textbf{Regularization} - Regularization is a technique used to prevent overfitting in machine learning algorithms by adding a penalty term to the loss function. Regularization helps to reduce the complexity of the model and improve its generalization performance.
-
-\textbf{Dropout} - Dropout is a regularization technique used in deep learning algorithms to prevent overfitting by randomly setting a fraction of the neurons to zero during training. Dropout helps to reduce the interdependence between neurons and improve the generalization performance of the model.
-
-\textbf{Batch Normalization} - Batch normalization is a technique used in deep learning algorithms to improve the training speed and stability of the model. Batch normalization normalizes the input data to each layer of the network, reducing the internal covariate shift and improving the convergence of the model.
-
-\textbf{Loss Function} - A loss function is a function that measures the error between the predicted output of a machine learning algorithm and the true output. The loss function is used to optimize the parameters of the model during training.
-
-\textbf{Gradient Descent} - Gradient descent is an optimization algorithm used to minimize the loss function of a machine learning model by iteratively updating the parameters in the direction of the negative gradient. Gradient descent helps to find the optimal parameters of the model that minimize the error.
-
-\textbf{Backpropagation} - Backpropagation is an algorithm used to compute the gradients of the loss function with respect to the parameters of a neural network. Backpropagation is used in conjunction with gradient descent to update the parameters of the model during training.
-
-\textbf{Epoch} - An epoch is a single pass through the entire training dataset during the training of a machine learning algorithm. Training a model for multiple epochs allows it to learn the underlying patterns in the data and improve its performance.
-
-\textbf{Batch Size} - The batch size is the number of data points used to update the parameters of a machine learning model during training. Training the model in batches helps to reduce the memory requirements and speed up the training process.
-
-\textbf{Learning Rate} - The learning rate is a hyperparameter of a machine learning algorithm that controls the size of the step taken during optimization. A high learning rate can lead to faster convergence but may cause the model to overshoot the optimal solution, while a low learning rate can lead to slow convergence but may help the model to find a better solution.
+\-\ \-\ \-\ \textbf{Accuracy} - Accuracy is a measure of the performance of a classification algorithm that measures the proportion of correctly classified data points. It is calculated as the number of correct predictions divided by the total number of predictions.
 
 \textbf{Activation Function} - An activation function is a non-linear function that is applied to the output of a neuron in a neural network. Activation functions introduce non-linearity to the model, allowing it to learn complex patterns in the data.
 
-\textbf{Rectified Linear Unit (ReLU)} - The rectified linear unit is an activation function commonly used in deep learning algorithms. ReLU sets the output of a neuron to zero for negative inputs and passes positive inputs unchanged, introducing non-linearity to the model.
+\textbf{Adam Optimizer} - Adam is an optimization algorithm commonly used in deep learning algorithms to update the parameters of the model. Adam adapts the learning rate of each parameter based on the first and second moments of the gradients, allowing it to converge faster and more efficiently.
 
-\textbf{eLU} - The exponential linear unit is an activation function that is similar to ReLU but allows negative inputs to pass through with a small slope. eLU helps to prevent the dying ReLU problem and improve the convergence of the model.
+\textbf{Artifact Removal} - Artifact removal is the process of removing unwanted noise and interference from physiological signals, such as muscle activity, eye blinks, and environmental noise. Artifact removal techniques are used to clean the data and improve the accuracy of the analysis.
 
-\textbf{Softmax} - Softmax is an activation function commonly used in classification algorithms to convert the output of a neural network into a probability distribution over multiple classes. Softmax normalizes the output values to sum to one, allowing the model to make probabilistic predictions.
+\textbf{Assistive Devices} - Assistive devices are tools and technologies that are designed to help individuals with disabilities perform daily activities and tasks. Assistive devices can include wheelchairs, hearing aids, and communication devices.
 
-\textbf{Loss Function} - A loss function is a function that measures the error between the predicted output of a machine learning algorithm and the true output. The loss function is used to optimize the parameters of the model during training.
+\textbf{Augmented Reality (AR)} - Augmented reality is a technology that superimposes computer-generated images on the user's view of the real world. AR can be used to enhance the user's perception of the environment and provide additional information.
+
+\section*{B}
+
+\-\ \-\ \-\ \textbf{Batch Normalization (BN)} - Batch normalization is a technique used in deep learning algorithms to improve the training speed and stability of the model. Batch normalization normalizes the input data to each layer of the network, reducing the internal covariate shift and improving the convergence of the model.
+
+\textbf{Biofeedback} - Biofeedback is a technique that uses sensors to monitor physiological signals, such as heart rate, muscle tension, and brain activity, and provides real-time feedback to the user. Biofeedback can be used to help individuals learn to control their physiological responses and improve their health and well-being.
+
+\textbf{Brain-Computer Interface (BCI)} - A brain-computer interface is a system that allows direct communication between the brain and an external device, such as a computer or a robotic arm. BCIs can be used to control devices using brain signals.
+
+\section*{C}
+
+\-\ \-\ \-\ \textbf{Categorical Cross-Entropy Loss} - Categorical cross-entropy loss is a variant of cross-entropy loss that is used in multi-class classification tasks. Categorical cross-entropy loss calculates the loss for each class separately and sums them to get the total loss.
+
+\textbf{Classification} - Classification is a machine learning task that involves assigning a label to an input data point based on its features. In BCIs, classification algorithms are used to predict the intended movement or action from brain signals.
+
+\textbf{Classification Model} - A classification model is a type of machine learning model that is used to predict the class or category of an input data point based on its features. In BCIs, classification models are used to predict the intended movement or action from brain signals.
+
+\textbf{Convolutional Neural Network (CNN)} - A convolutional neural network is a type of deep learning algorithm that is commonly used for image recognition tasks. CNNs are composed of multiple layers of neurons that apply convolutional filters to input data to extract features.
 
 \textbf{Cross-Entropy Loss} - Cross-entropy loss is a loss function commonly used in classification algorithms to measure the difference between the predicted probability distribution and the true distribution of the data. Cross-entropy loss penalizes the model for making incorrect predictions and encourages it to make more confident predictions.
 
-\textbf{Mean Squared Error (MSE)} - Mean squared error is a loss function commonly used in regression algorithms to measure the average squared difference between the predicted output and the true output. MSE penalizes the model for large errors and encourages it to make accurate predictions.
+\section*{D}
 
-\textbf{Mean Absolute Error (MAE)} - Mean absolute error is a loss function commonly used in regression algorithms to measure the average absolute difference between the predicted output and the true output. MAE is less sensitive to outliers than MSE and provides a more robust measure of error.
+\-\ \-\ \-\ \textbf{Data Augmentation} - Data augmentation is a technique used to increase the size of a dataset by applying transformations to the original data. In BCIs, data augmentation can be used to generate additional training samples from existing data to improve the performance of classification algorithms.
 
-\textbf{Overfitting} - Overfitting is a common problem in machine learning algorithms that occurs when the model learns the noise in the training data rather than the underlying patterns. Overfitting leads to poor generalization performance and high error on unseen data.
+\textbf{Deep Learning} - Deep learning is a subfield of machine learning that uses artificial neural networks to model and interpret complex patterns in data. Deep learning algorithms can be used to analyze and interpret brain signals in BCIs.
 
-\textbf{Underfitting} - Underfitting is a common problem in machine learning algorithms that occurs when the model is too simple to capture the underlying patterns in the data. Underfitting leads to poor performance on both the training and test data.
+\textbf{Dropout} - Dropout is a regularization technique used in deep learning algorithms to prevent overfitting by randomly setting a fraction of the neurons to zero during training. Dropout helps to reduce the interdependence between neurons and improve the generalization performance of the model.
 
-\textbf{Bias} - Bias is a measure of the error introduced by approximating a real-world problem with a simplified model. Bias is the difference between the average prediction of the model and the true value of the data.
+\section*{E}
 
-\textbf{Variance} - Variance is a measure of the sensitivity of a model to the fluctuations in the training data. Variance is the variability of the model's predictions for a given data point.
+\-\ \-\ \-\ \textbf{Electroencephalography (EEG)} - Electroencephalography is a method to record electrical activity of the brain. It is a non-invasive method that uses electrodes placed on the scalp to detect electrical activity in the brain.
 
-\textbf{Bias-Variance Tradeoff} - The bias-variance tradeoff is a fundamental concept in machine learning that describes the relationship between the bias and variance of a model. Increasing the complexity of the model reduces bias but increases variance, while decreasing the complexity of the model reduces variance but increases bias.
+\textbf{Electrode} - An electrode is a conductor that is used to make electrical contact with a non-metallic part of a circuit, such as the skin. In EEG, electrodes are placed on the scalp to detect electrical activity in the brain.
 
-\textbf{Feature Selection} - Feature selection is the process of selecting a subset of relevant features from the original set of features to improve the performance of a machine learning algorithm. Feature selection helps to reduce the dimensionality of the data and remove irrelevant or redundant features.
+\textbf{eLU} - The exponential linear unit is an activation function that is similar to ReLU but allows negative inputs to pass through with a small slope. eLU helps to prevent the dying ReLU problem and improve the convergence of the model.
 
-\textbf{Principal Component Analysis (PCA)} - Principal component analysis is a dimensionality reduction technique that transforms the original features of the data into a new set of orthogonal features called principal components. PCA helps to reduce the dimensionality of the data while preserving the most important information.
+\textbf{Epoch} - An epoch is a single pass through the entire training dataset during the training of a machine learning algorithm. Training a model for multiple epochs allows it to learn the underlying patterns in the data and improve its performance.
 
-\textbf{Independent Component Analysis (ICA)} - Independent component analysis is a blind source separation technique that separates a multivariate signal into additive subcomponents that are statistically independent. ICA is commonly used in EEG signal processing to separate brain signals from noise.
+\textbf{Exergame} - An exergame is a video game that combines physical exercise with gameplay to promote physical activity and improve fitness. Exergames can be used in rehabilitation to provide interactive and engaging exercises for patients.
 
-\textbf{Support Vector Machine (SVM)} - A support vector machine is a supervised machine learning algorithm that is commonly used for classification tasks. SVM finds the optimal hyperplane that separates the data into different classes by maximizing the margin between the classes.
+\textbf{External Device} - An external device is a device that is connected to a computer or system to provide additional functionality or input. In BCIs, external devices can include robotic arms, virtual reality headsets, and exoskeletons.
 
-\textbf{Kernel Trick} - The kernel trick is a technique used in support vector machines to transform the input data into a higher-dimensional space to make it linearly separable. The kernel trick allows SVMs to learn complex patterns in the data without explicitly computing the transformed features.
+\section*{G}
 
-\textbf{K-Nearest Neighbors (KNN)} - K-nearest neighbors is a supervised machine learning algorithm that classifies data points based on the majority vote of their k nearest neighbors. KNN is a non-parametric algorithm that does not make any assumptions about the underlying distribution of the data.
+\-\ \-\ \-\ \textbf{Game Feel} - Game feel is the subjective experience of playing a video game, including the responsiveness, feedback, and immersion of the game. Game feel is an important factor in the player's enjoyment and engagement with the game.
 
-\textbf{Decision Tree} - A decision tree is a supervised machine learning algorithm that uses a tree-like structure to model the decision-making process. Decision trees split the data into subsets based on the value of the features and make predictions based on the majority class of the subsets.
+\textbf{Gamification} - Gamification is the application of game design elements and principles to non-game contexts to engage and motivate users. Gamification can be used to make rehabilitation exercises more enjoyable and increase patient compliance.
 
-\textbf{Random Forest} - A random forest is an ensemble learning algorithm that combines multiple decision trees to improve the performance of the model. Random forests train each tree on a random subset of the data and make predictions based on the majority vote of the trees.
+\textbf{Generative Adversarial Network (GAN)} - A generative adversarial network is a type of deep learning algorithm that consists of two neural networks, a generator and a discriminator, that are trained together in a competitive setting. GANs are used to generate realistic data samples.
 
-\textbf{Gradient Boosting} - Gradient boosting is an ensemble learning algorithm that combines multiple weak learners to create a strong learner. Gradient boosting trains each weak learner on the residual errors of the previous learners and makes predictions by summing the predictions of all learners.
+\section*{H}
 
-\textbf{AdaBoost} - AdaBoost is an ensemble learning algorithm that combines multiple weak learners to create a strong learner. AdaBoost assigns weights to each data point and trains each weak learner on the misclassified data points of the previous learners.
+\-\ \-\ \-\ \textbf{Hyperparameter} - A hyperparameter is a parameter of a machine learning algorithm that is set before the training process begins. Hyperparameters control the behavior of the algorithm and can be tuned to optimize its performance.
 
-\textbf{XGBoost} - XGBoost is an optimized implementation of gradient boosting that is designed for speed and performance. XGBoost uses a regularized objective function and parallel processing to improve the training speed and accuracy of the model.
+\textbf{Hypotesis} - A hypothesis is a proposed explanation for a phenomenon or observation that can be tested through experimentation. Hypotheses are used to make predictions and guide the research process.
 
-\textbf{LightGBM} - LightGBM is a gradient boosting framework that is designed for efficiency and scalability. LightGBM uses a histogram-based algorithm to split the data and reduce the memory usage and training time of the model.
+\section*{L}
 
-\textbf{CatBoost} - CatBoost is a gradient boosting library that is designed for categorical data. CatBoost uses an efficient algorithm to handle categorical features and improve the performance of the model.
+\-\ \-\ \-\ \textbf{Learning Rate} - The learning rate is a hyperparameter of a machine learning algorithm that controls the size of the step taken during optimization. A high learning rate can lead to faster convergence but may cause the model to overshoot the optimal solution, while a low learning rate can lead to slow convergence but may help the model to find a better solution.
 
-\textbf{Hyperparameter Tuning} - Hyperparameter tuning is the process of finding the optimal hyperparameters of a machine learning algorithm to improve its performance. Hyperparameter tuning involves searching through a specified set of hyperparameter values and selecting the best one based on a performance metric.
+\textbf{Long Short-Term Memory (LSTM)} - Long short-term memory is a type of recurrent neural network that is designed to capture long-term dependencies in sequential data. LSTMs have memory cells that can store information over long periods of time.
 
-\textbf{Adam Optimizer} - Adam is an optimization algorithm commonly used in deep learning algorithms to update the parameters of the model. Adam adapts the learning rate of each parameter based on the first and second moments of the gradients, allowing it to converge faster and more efficiently.
+\textbf{Loss Function} - A loss function is a function that measures the error between the predicted output of a machine learning algorithm and the true output. The loss function is used to optimize the parameters of the model during training.
 
-\textbf{Stochastic Gradient Descent (SGD)} - Stochastic gradient descent is an optimization algorithm commonly used in machine learning algorithms to update the parameters of the model. SGD updates the parameters based on the gradient of the loss function computed on a random subset of the data, allowing it to converge faster and more efficiently.
+\section*{M}
+
+\-\ \-\ \-\ \textbf{Machine Learning} - Machine learning is a field of artificial intelligence that uses statistical techniques to give computers the ability to learn from data without being explicitly programmed. Machine learning algorithms can be used to analyze and interpret brain signals in BCIs.
+
+\textbf{Mean} - The mean is a measure of central tendency that represents the average value of a set of data points. The mean is calculated by summing all the data points and dividing by the total number of data points.
+
+\textbf{Motor Imagery (MI)} - Motor imagery is a mental process in which an individual imagines themselves performing a specific motor task without actually performing the task physically. It is used in brain-computer interfaces to control devices using brain signals.
+
+\section*{P}
+
+\-\ \-\ \-\ \textbf{Precision} - Precision is a measure of the accuracy of a classification algorithm that measures the proportion of correctly predicted positive data points among all the data points predicted as positive. It is calculated as the number of true positive predictions divided by the total number of positive predictions.
+
+\section*{Q}
+
+\-\ \-\ \-\ \textbf{Quasi-Real-Time} - Quasi-real-time refers to a system or process that operates with a slight delay or latency compared to real-time. In BCIs, quasi-real-time processing is used to analyze brain signals and provide feedback to the user with minimal delay.
+
+\section*{R}
+
+\-\ \-\ \-\ \textbf{Rectified Linear Unit (ReLU)} - The rectified linear unit is an activation function commonly used in deep learning algorithms. ReLU sets the output of a neuron to zero for negative inputs and passes positive inputs unchanged, introducing non-linearity to the model.
+
+\textbf{Regularization} - Regularization is a technique used to prevent overfitting in machine learning algorithms by adding a penalty term to the loss function. Regularization helps to reduce the complexity of the model and improve its generalization performance.
+
+\textbf{Rehabilitation} - Rehabilitation is a process that aims to restore the physical, cognitive, and emotional functions of individuals who have experienced a disability or injury. Rehabilitation programs can include physical therapy, occupational therapy, and speech therapy.
+
+\textbf{Recurrent Neural Network (RNN)} - A recurrent neural network is a type of deep learning algorithm that is commonly used for sequence prediction tasks. RNNs have connections between neurons that form loops, allowing them to process sequences of data.
+
+\section*{S}
+
+\-\ \-\ \-\ \textbf{Serious Games} - Serious games are video games that are designed for a primary purpose other than entertainment, such as education, training, or therapy. Serious games can be used to simulate real-world scenarios and provide a safe environment for learning and practice.
+
+\textbf{Signal Processing} - Signal processing is the analysis and manipulation of signals to extract useful information from them. In BCIs, signal processing techniques are used to preprocess and analyze brain signals to detect patterns and features.
+
+\textbf{Softmax} - Softmax is an activation function commonly used in classification algorithms to convert the output of a neural network into a probability distribution over multiple classes. Softmax normalizes the output values to sum to one, allowing the model to make probabilistic predictions.
+
+\textbf{Stroke} - A stroke is a medical condition that occurs when the blood supply to part of the brain is interrupted or reduced, leading to damage to brain cells. Strokes can cause a range of physical and cognitive impairments, such as paralysis, speech difficulties, and memory loss.
+
+\section*{U}
+
+\-\ \-\ \-\ \textbf{Usability} - Usability is a measure of the ease of use and user satisfaction of a product or system. Usability testing is used to evaluate the user experience of a product and identify areas for improvement.
+
+\textbf{User Experience (UX)} - User experience is the overall experience of a person using a product or system, including the ease of use, satisfaction, and enjoyment. UX design focuses on creating products that are intuitive, engaging, and user-friendly.
+
+\section*{V}
+
+\-\ \-\ \-\ \textbf{Variance} - Variance is a measure of the sensitivity of a model to the fluctuations in the training data. Variance is the variability of the model's predictions for a given data point.
+
+\textbf{Virtual Reality (VR)} - Virtual reality is a technology that creates a simulated environment that the user can interact with. VR can be used to create immersive experiences and simulate real-world scenarios.
+
+\section*{W}
+
+\-\ \-\ \-\ \textbf{Werable Sensors} - Wearable sensors are devices that are worn on the body to collect physiological data, such as heart rate, temperature, and motion. Wearable sensors can be used to monitor the health and activity levels of individuals in real-time.

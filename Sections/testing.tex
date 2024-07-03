@@ -196,10 +196,11 @@ The robustness is an important metric for evaluating the performance of the syst
 During the tests, we evaluated the robustness of the system by testing the classificator on data with different levels of Gaussian noise on dataset and GAN generated data.
 Since the accuracy, as seen in the previous section, is not an extremely accurate metric, we computed the confusion matrix of the system on the noisy data.
 We run tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0 and e noticed that the system is able to correctly classify most of the data points for each class, in all the cases.
-In depth results are shown in Appendix~\ref{app:robustness}, while in Figure~\ref{fig:robustness} we show the accuracy of the system on the noisy data.
-\begin{figure}
+While in depth results are shown in Appendix~\ref{app:robustness}, in Figure~\ref{fig:robustness} we show the precision of the system on the noisy data.
+As it is visible, the precision on GAN generated data is higher than the one on the dataset data, and the precision decreases as the noise level increases, but the system is still able to correctly classify most of the data points for each class, even in the presence of high level of noise.
+\begin{figure}[!htbp]
     \centering
-    %\includegraphics[width=0.8\textwidth]{Figures/Methodology/robustness}
+    \includegraphics[width=0.8\textwidth]{Figures/Testing/robustness_plot}
     \caption{Robustness of the system in case of noise in the data.}\label{fig:robustness}
 \end{figure}
 
