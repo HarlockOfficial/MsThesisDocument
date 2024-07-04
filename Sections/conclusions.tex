@@ -1,5 +1,35 @@
 \chapter{Conclusions and Future Works}\label{ch:conclusions}
-review the contribution of this thesis
+% review the contribution of this thesis
+% new model/framework/some insights for bci in games
 
-new model/framework/some insights for bci in games
+This thesis has made significant contributions to the field of brain-computer interfaces (BCIs), particularly in the realm of real-time EEG-based motor imagery classification systems. 
+Our research primarily focused on addressing the critical time delay between the user's intent and the execution of control commands in BCI applications. 
+By developing a quasi-real-time EEG Motor Imagery classification system, we aimed to enhance the responsiveness and accuracy of BCI systems, making them more practical for real-world applications.
 
+Our research involved integrating the classification system into a seamless pipeline for controlling external devices or applications and implementing an innovative data augmentation system to facilitate rapid and efficient testing. 
+The virtual environment designed for testing this pipeline demonstrated the efficacy of our approach, providing a controlled setting where we could evaluate the system's performance under various conditions.
+
+One of the key achievements of this thesis is the development of a classification network that is both accurate and resource-efficient. 
+The network's performance in real-time scenarios was reliable, ensuring that the system could be used effectively in practical applications. 
+Additionally, the pipeline we developed exhibited an average delay of just 650 milliseconds between the user's movement intention and the corresponding action in the virtual environment. 
+This is a substantial improvement over existing systems, which typically require 4 to 8 seconds for processing.
+This reduction in latency is critical for making BCIs more user-friendly and responsive.
+
+The innovative data augmentation techniques we employed, such as stochastic noise addition and GAN-generated data points, played a crucial role in enhancing the robustness and generalizability of our classification models. 
+These techniques allowed us to create a more diverse and comprehensive dataset, improving the system's ability to handle variations in EEG signals across different users and sessions. 
+This advancement is particularly important for ensuring that the system can perform well in real-world settings where EEG signals can be highly variable.
+
+Despite these advancements, there are areas for future work. 
+Conducting more extensive studies with a larger and more diverse participant pool will be crucial to further validate and refine the system.
+Such studies will help us understand how the system performs across different populations and identify any potential limitations or areas for improvement. 
+Additionally, exploring user-tailored data training and fine-tuning the network for individual subjects could enhance the system's performance in real-world applications. 
+Personalizing the system to individual users' unique EEG patterns could significantly improve accuracy and responsiveness.
+
+Another area for future research is the integration of the BCI system with more complex and varied external devices or applications. 
+While our virtual environment provided a useful testing ground, real-world applications often involve interacting with a wide range of devices and systems. 
+Future work should explore how our classification and control pipeline can be adapted to different contexts and integrated with other technologies, such as robotics or smart home systems.
+
+In conclusion, this thesis has laid a solid foundation for real-time BCI systems, offering a promising pathway toward improving the autonomy and quality of life for individuals with reduced mobility or physical disabilities. 
+Our research has demonstrated the feasibility and potential of quasi-real-time EEG Motor Imagery classification systems, and the advancements we have made in reducing latency and enhancing accuracy are significant steps forward. 
+Future research and development efforts should focus on expanding the applicability and scalability of our system to ensure its practical deployment and widespread adoption. 
+By continuing to refine and improve upon our work, we can move closer to realizing the full potential of BCIs to transform the lives of those who rely on these technologies.
