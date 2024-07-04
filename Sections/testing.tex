@@ -196,9 +196,9 @@ The robustness is an important metric for evaluating the performance of the syst
 During the tests, we evaluated the robustness of the system by testing the classificator on data with different levels of Gaussian noise on dataset and GAN generated data.
 Since the accuracy, as seen in the previous section, is not an extremely accurate metric, we computed the confusion matrix of the system on the noisy data.
 We run tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0 and e noticed that the system is able to correctly classify most of the data points for each class, in all the cases.
-While in depth results are shown in Appendix~\ref{app:robustness}, in Figure~\ref{fig:robustness} we show the precision of the system on the noisy data.
+In Figure~\ref{fig:robustness} we show the precision of the system on the noisy data.
 As it is visible, the precision on GAN generated data is higher than the one on the dataset data, and the precision decreases as the noise level increases, but the system is still able to correctly classify most of the data points for each class, even in the presence of high level of noise.
-The precision scores were computed using the confusion matrices.
+The precision scores were computed using the confusion matrices, of which samples are presented in Tables~\ref{tab:confusion_matrix_gan_noise}~and~\ref{tab:confusion_matrix_dataset_noise}.
 For each noise level $x$, we computed a confusion matrix $CM_x$ (Figure~\ref{tab:precision_reference}).
 Using the main diagonal of each confusion matrix, we computed the precision as the ratio between the value of that cell and the sum of the values in the row $P_{\_, row}$, and the ratio between the cell value and the related column $P_{\_, col}$, we then averaged the two values $P_{\_}$.
 Lastly, the average of all the diagonal averages was computed as final precision score $P_{CM_x}$ (Figure \ref{fig:precision_formula}).
@@ -259,6 +259,151 @@ Lastly, the average of all the diagonal averages was computed as final precision
     \]
     \caption{Formula to compute the precision of the system.}\label{fig:precision_formula}
 \end{figure}
+
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|}
+        \hline
+		Noise: 0.5 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 286.0 & 64.0 & 650.0 & 0.0 \\
+        \hline
+        Left Hand & 59.0 & 941.0 & 0.0 & 0.0 \\
+        \hline
+        Right Hand & 0.0 & 9.0 & 991.0 & 0.0 \\
+        \hline
+        Rest & 6.0 & 504.0 & 351.0 & 139.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 1.0 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 258.0 & 88.0 & 654.0 & 0.0 \\
+        \hline
+        Left Hand & 62.0 & 938.0 & 0.0 & 0.0 \\
+        \hline
+        Right Hand & 2.0 & 9.0 & 980.0 & 9.0 \\
+        \hline
+        Rest & 12.0 & 377.0 & 429.0 & 182.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 2.0 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 172.0 & 113.0 & 715.0 & 0.0 \\
+        \hline
+        Left Hand & 87.0 & 910.0 & 3.0 & 0.0 \\
+        \hline
+        Right Hand & 10.0 & 18.0 & 966.0 & 6.0 \\
+        \hline
+        Rest & 12.0 & 312.0 & 439.0 & 237.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 5 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 129.0 & 116.0 & 755.0 & 0.0 \\
+        \hline
+        Left Hand & 124.0 & 874.0 & 2.0 & 0.0 \\
+        \hline
+        Right Hand & 21.0 & 27.0 & 948.0 & 4.0 \\
+        \hline
+        Rest & 4.0 & 220.0 & 475.0 & 301.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 9.5 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 109.0 & 132.0 & 758.0 & 1.0 \\
+        \hline
+        Left Hand & 126.0 & 871.0 & 3.0 & 0.0 \\
+        \hline
+        Right Hand & 18.0 & 17.0 & 964.0 & 1.0 \\
+        \hline
+        Rest & 2.0 & 194.0 & 461.0 & 343.0 \\
+        \hline
+    \end{tabular}
+    \caption{Confusion Matrix by Noise Levels with GAN as Input}\label{tab:confusion_matrix_gan_noise}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|}
+        \hline
+		Noise: 0.5 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 1275.0 & 421.0 & 377.0 & 382.0 \\
+        \hline
+        Left Hand & 216.0 & 1679.0 & 256.0 & 329.0 \\
+        \hline
+        Right Hand & 279.0 & 275.0 & 1535.0 & 349.0 \\
+        \hline
+        Rest & 1005.0 & 1586.0 & 1541.0 & 5706.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 1.0 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 1274.0 & 424.0 & 376.0 & 381.0 \\
+        \hline
+        Left Hand & 216.0 & 1677.0 & 255.0 & 332.0 \\
+        \hline
+        Right Hand & 275.0 & 268.0 & 1534.0 & 361.0 \\
+        \hline
+        Rest & 1005.0 & 1586.0 & 1553.0 & 5694.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 2.0 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 1262.0 & 428.0 & 380.0 & 385.0 \\
+        \hline
+        Left Hand & 208.0 & 1675.0 & 258.0 & 339.0 \\
+        \hline
+        Right Hand & 274.0 & 265.0 & 1529.0 & 370.0 \\
+        \hline
+        Rest & 989.0 & 1599.0 & 1509.0 & 5741.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 5.0 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 1153.0 & 437.0 & 413.0 & 452.0 \\
+        \hline
+        Left Hand & 197.0 & 1639.0 & 267.0 & 377.0 \\
+        \hline
+        Right Hand & 244.0 & 260.0 & 1522.0 & 412.0 \\
+        \hline
+        Rest & 925.0 & 1523.0 & 1524.0 & 5866.0 \\
+        \hline
+        \hline
+        \hline
+		Noise: 9.5 & Feet & Left Hand & Right Hand & Rest \\
+        \hline
+        \hline
+        Feet & 1007.0 & 422.0 & 421.0 & 605.0 \\
+        \hline
+        Left Hand & 186.0 & 1525.0 & 266.0 & 503.0 \\
+        \hline
+        Right Hand & 221.0 & 263.0 & 1375.0 & 579.0 \\
+        \hline
+        Rest & 818.0 & 1336.0 & 1424.0 & 6260.0 \\
+        \hline
+    \end{tabular}
+    \caption{Confusion Matrix by Noise Level with Dataset as Input}\label{tab:confusion_matrix_dataset_noise}
+\end{table}
+
+
 
 \section{Other Performance Metrics}
 In this section, we will discuss a set of other performance metrics that we consider important, but that we could not deeply verify in this stage of the project.
