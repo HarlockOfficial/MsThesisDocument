@@ -1,10 +1,10 @@
-\chapter{Pilot Human Study}\label{ch:human_study}
+\chapter{Plan for Human Study}\label{ch:human_study}
 % evaluation of the model in a realtime scenario with real people
 % I really wanted to ``close the loop'' of the evaluation by including the human in it, because I was interested in the interaction between human and the system.
 % Technical performances may pose some problems, but I want to get the whole picture.
 % later it is possible to iterate over everything to improve.
 % Study with eeg cap.
-After the testing phase, we wanted to close the loop by conducting a pilot human study to evaluate the system in a real-time scenario with real people.
+After the testing phase, we wanted to close the loop by conducting a human study to evaluate the system in a real-time scenario with real people.
 The goal of the study was to evaluate the interaction between the user and the system. 
 We wanted to understand how the user perceived the system and how the system performed in a real-world scenario. 
 Our idea was to conduct a pilot study with a small group of participants, and use the results to improve the system and to plan a larger study in the future.
@@ -52,14 +52,14 @@ The questions were designed to evaluate the system performance and the user expe
 And followed the System Usability Scale (SUS)~\cite{brooke1996sus} guidelines and included many questions from the Game Experience Questionnaire~\cite{ijsselsteijn2013game}.
 The survey was designed to be short and easy to fill out, to avoid any bias due to the complexity of the questions.
 
-\section{Pre-Pilot Study}
+\section{Pre-Pilot Testing of the Human Study}
 Before conducting the pilot study, we conducted a pre-pilot study with a single participant.
 The scope of the pre-pilot study was to verify wether the system was able to correctly work with an EEG cap and to run on a medium-grade computer.
 The participant was not asked to play the game for a fixed amount of time, or to fill out the survey.
 Instead, it was asked to test the classification pipeline, checking the quality of the EEG data received, the performances of the model, and the classification results.
 The pre-pilot study was conducted to identify any issues with the system and to improve the system before conducting the pilot study.
 We noticed immediately that the system was running flawlessly, the pipeline did not add significant delays, and the EEG data was correctly collected.
-The only failure point we discovered lied in the classification result, it was not working as expected and only predicted ``right hand'' movements for all the trials.
+The only failure point we discovered was in the classification result; it was not working as expected and only predicted ``right-hand'' movements for all the trials.
 We understood that, even if the off-line tests provided valid results and the system seemed to correctly understand and classify EEG data of different subjects, the features identified by the model were not discriminative enough for human inter-subject classification, and as done in the state of the art solutions, the system requires finetuning on the specific subject to work properly~\cite{jia2023excellent}.
 
 \section{Pilot Study Discussion}
