@@ -3,7 +3,13 @@
 % how good the training is and how good the system is before putting a human in the loop.
 Before testing the system on human subjects, we performed a series of tests to evaluate the performance of the system on generated data. 
 The tests were designed to evaluate the performance of the system in terms of the following:
-The chapter is divided into four sections, we will discuss the classification accuracy, which is the capabilty of the system to correctly classify the input data, the latency, wich is the classification speed of the system, and the robustness of the system, which represents the tolerance to noise and errors in the input data, along with other performance metrics, such as efficiency and portability that we could not deeply verify in this stage of the project.
+\begin{itemize}
+    \item Classification accuracy: the capability of the system to correctly classify the input data.
+    \item Latency: the classification speed of the system.
+    \item Robustness: the tolerance to noise and errors in the input data.
+    \item Other performance metrics: such as efficiency and portability that we could not deeply verify in this stage of the project.
+\end{itemize}
+%The chapter is divided into four sections, we will discuss the classification accuracy, which is the capabilty of the system to correctly classify the input data, the latency, wich is the classification speed of the system, and the robustness of the system, which represents the tolerance to noise and errors in the input data, along with other performance metrics, such as efficiency and portability that we could not deeply verify in this stage of the project.
 The results of the tests indicate that the system is able to classify the generated data with high accuracy, in competitive time, and with low resource usage.
 The system is able to handle errors and noise in the data, and should be able to run on most modern hardware platforms.
 We will discuss the results of the human study in the next chapter (Chapter~\ref{ch:human_study}).
@@ -20,7 +26,7 @@ We will compare these results with the classification accuracy of the system on 
 \subsection*{Train and Validation Accuracy}
 The train accuracy is the percentage of correctly classified data points over the total number of data points in the train dataset.
 During our training, the train accuracy of the system was 71.37\%.
-This result indicates that the system is able to correctly classify the training data.
+This result indicates that, in most of the cases, the system is able to correctly classify the training data.
 
 The validation accuracy is the percentage of correctly classified data points over the total number of data points in the validation dataset.
 During our training, the validation accuracy of the system was 47.23\%.
@@ -54,7 +60,7 @@ From the confusion matrix, it is possible to see that the system is able to corr
 
 \subsection*{Generated Data Accuracy}
 Differently from the validation dataset, the classification accuracy of the system on the generated data was 89.15\%.
-This result indicates that the system is able to correctly classify the artificial data.
+This result indicates that, in most caases, the system is able to classify the artificial data even better than the ones provided by the dataset.
 The confusion matrix of the generated data is shown in Table~\ref{tab:gan_confusion_matrix}.
 From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, and that the system is able to distinguish between different classes of data.
 \begin{table}[!htbp]
@@ -430,11 +436,11 @@ During the tests, we evaluated the efficiency of the system by measuring the Flo
         \textbf{Resource} & \textbf{Minimum Usage} & \textbf{Average Usage} & \textbf{Maximum Usage} \\
         \hline
         \hline
-        FLOPS & 754400 & 754400 & 754400\\
+        K-FLOPS & 754 & 754 & 754\\
         \hline
-        CPU Memory & 30176 B & 47000 B & 90512 B \\
+        CPU Memory & 30 KB & 47 KB & 90 KB \\
         \hline
-        GPU CUDA Memory & 277504 B & 17765330 B  & 41378304 B \\
+        GPU CUDA Memory & 277 KB & 17.7 MB  & 41.3 MB \\
         \hline
     \end{tabular}
     \caption{Efficiency of the system in terms of resource usage.}\label{tab:efficiency}
@@ -450,7 +456,7 @@ During the tests, we evaluated the maintainability of the system by measuring th
 The code quality of the system was evaluated using the Pylint tool, which is a static code analysis tool for Python.
 The Pylint tool provides a score between 0 and 10, where 0 is the worst score and 10 is the best score.
 The code quality of the system was 6.55, which indicates that the system has a moderate code quality, and that there is room for improvement.
-Unfortunately, as of now, the system does not have any documentation, and we believe that the system should be documented to make it easier to maintain and extend.
+% Unfortunately, as of now, the system does not have any documentation, and we believe that the system should be documented to make it easier to maintain and extend.
 
 \section{Performance Discussion}
 % Summary of the testing results.

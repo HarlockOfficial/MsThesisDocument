@@ -8,7 +8,9 @@ After the testing phase, we wanted to close the loop by conducting a pilot human
 The goal of the study was to evaluate the interaction between the user and the system. 
 We wanted to understand how the user perceived the system and how the system performed in a real-world scenario. 
 Our idea was to conduct a pilot study with a small group of participants, and use the results to improve the system and to plan a larger study in the future.
-Unfortunately, due to time constraints, we were not able to conduct the pilot study.
+Unfortunately, due to time constraints and the complexity involved in arranging remote access and assistance with a high grade EEG cap, we were not able to conduct the pilot study.
+Instead, the following sections, describe the planned pilot study by detailing the study design, the participants selection, the procedure we meant to follow, the game design, the data collection process, the user experience survey we prepared, and discuss the planned pilot study.
+
 
 \section{Study Design}
 The study was designed to evaluate the system in a real-time scenario with real people.
@@ -43,17 +45,27 @@ The collected EEG data was necessary to evaluate the system performance, and the
 The data had then to be analyzed to identify issues with the system and improve the system before conducting more in depth studies.
 
 \section{User Experience Survey}
-We prepared a survey wich laverages a Likert Scale~\cite{likert1932technique} to evaluate the user experience.
+We prepared a survey wich leverages a Likert Scale~\cite{likert1932technique} to evaluate the user experience.
 The participants were asked to rate their experience with the system on a scale from 1 to 10, where 1 was very bad and 10 was very good.
 The participants were also asked to provide feedback on the system and to suggest improvements.
 The questions were designed to evaluate the system performance and the user experience.
 And followed the System Usability Scale (SUS)~\cite{brooke1996sus} guidelines and included many questions from the Game Experience Questionnaire~\cite{ijsselsteijn2013game}.
 The survey was designed to be short and easy to fill out, to avoid any bias due to the complexity of the questions.
 
+\section{Pre-Pilot Study}
+Before conducting the pilot study, we conducted a pre-pilot study with a single participant.
+The scope of the pre-pilot study was to verify wether the system was able to correctly work with an EEG cap and to run on a medium-grade computer.
+The participant was not asked to play the game for a fixed amount of time, or to fill out the survey.
+Instead, it was asked to test the classification pipeline, checking the quality of the EEG data received, the performances of the model, and the classification results.
+The pre-pilot study was conducted to identify any issues with the system and to improve the system before conducting the pilot study.
+We noticed immediately that the system was running flawlessly, the pipeline did not add significant delays, and the EEG data was correctly collected.
+The only failure point we discovered lied in the classification result, it was not working as expected and only predicted ``right hand'' movements for all the trials.
+We understood that, even if the off-line tests provided valid results and the system seemed to correctly understand and classify EEG data of different subjects, the features identified by the model were not discriminative enough for human inter-subject classification, and as done in the state of the art solutions, the system requires finetuning on the specific subject to work properly~\cite{jia2023excellent}.
+
 \section{Pilot Study Discussion}
 As part of the project, we planned and designed a pilot human study to evaluate the system in a real-time scenario with real people.
 The study was designed to evaluate the interaction between the user and the system, and to understand how the user perceived the system and how the system performed in a real-world scenario.
 We were not able to conduct the pilot study due to time constraints, but we believe that the study would have provided valuable insights into the system and the user experience, and would have helped us to improve the system before conducting more in depth studies in the future.
 We were able to complete an initial test, with only one subject, to run the system and collect some data.
-The results of the test were not promising, because, as discussed in~\cite{jia2023excellent}, the feature identified by the model were not discriminative enough for inter-subject classification and the system requires finetuning on the specific subject to work properly.
+The results of the test were not promising, because the feature identified by the model were not discriminative enough and the system requires finetuning on the specific subject to work properly.
 We believe that with more time and resources, we could have trained the network on user-tailored data, conducted the pilot study and obtained valuable insights of the system and the user experience, and we plan to conduct the study in the future to improve the system and to plan more in depth studies.

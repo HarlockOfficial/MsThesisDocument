@@ -1,6 +1,6 @@
 \chapter{Implementation}\label{ch:methodology}
 Mirroring the previously presented approach (Chapter~\ref{ch:approach}), we will describe the methodology used to develop the system.
-The chapter is divided into five sections.
+The chapter is divided into four sections.
 The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, the fourth section will describe the virtual environment.
 
 All these sections are included and merged in a single pipeline with a user friendly interface that connects the data augmentation or collection from the headset, classification model, and virtual environment.
@@ -13,9 +13,9 @@ The data collection process is a crucial step in the development of a machine le
 It is used to gather the data necessary to train the machine learning model and is divided into two steps: the data collection and the data preprocessing.
 The data collection step is used to gather the data necessary to train the machine learning model.
 The data preprocessing step is used to clean the data and prepare it for training.
-For the first step, we used publicly available EEG motor imagery datasets, such as the BCI Competition IV dataset 2a and the PhysioNet EEG Motor Movement/Imagery Dataset.
+For the first step, we used publicly available EEG motor imagery datasets, such as the BCI Competition IV dataset 2a~\cite{tangermann2012review}, the Weibo~\cite{yi2014evaluation} and the PhysioNet EEG Motor Movement/Imagery Dataset~\cite{goldberger2000physiobank, schalk2004bci2000}.
 These datasets contain EEG recordings of subjects performing motor imagery tasks, such as imagining moving their left or right hand, or their feet.
-The datasets contains the preprocessed 64-channel EEG recordings of the subjects, as well as the corresponding labels indicating the class to which the data point belongs.
+The datasets contains the preprocessed EEG recordings of the subjects, as well as the corresponding labels indicating the class to which the data point belongs.
 It is important to notice that we perform some ulterior preprocessing steps, such as filtering and windowing, to clean, split and prepare the data for the training phase.
 Also, due to the nature of the dataset recordings, the label distribution is highly unbalanced towards the resting state, so we decided to balance the dataset by undersampling all the data points to the same amount of samples, which was decided to be the lowest class count.
 \subsection*{Parameters Used}
@@ -55,11 +55,13 @@ The noise was generated using the ``numpy.random.normal'' function, with a mean 
 As parameter we also provided the shape of the data point, which was used to generate the noise in the correct format.
 \paragraph*{Generative Adversarial Networks}
 The GAN generator was composed of two networks: the generator~(EEGFuseNet) and the discriminator~(EFDiscriminator), both network were taken from the models provided by the library ``torcheeg''~\cite{zhang2024torcheeg}.
-These models have been reimplemented in torcheeg following their description from~\cite{liang2021eegfusenet} and their architecture is presented in Figure \ref{fig:gan_paper}.
+These models have been reimplemented in torcheeg following their description from~\cite{liang2021eegfusenet} and their architecture is presented in Figure~\ref{fig:gan_paper}.
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{Figures/Methodology/GAN}
-    \caption{Architecture of the GAN model. Image from~\cite{liang2021eegfusenet}}\label{fig:gan_paper}
+    \caption{Architecture of the GAN model. 
+    We can notice the architecture of the Generator that studies the EEG input, extracts features from it, and then uses these information to generate new datapoints. 
+    The Figure also presents the architecture of the Discriminator that receives an EEG signal, and has to decide if it is real or fake. Image from~\cite{liang2021eegfusenet}}\label{fig:gan_paper}
 \end{figure}
 
 
@@ -82,9 +84,12 @@ The generator was trained after the discriminator, starting with 10 steps, and i
 The classification model is a machine learning or deep learning model used to classify the data points.
 It is used to predict the class or label to which the input data point belongs.
 In this project, we decided to train a set of machine learning and deep learning models to classify the data points.
-Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models, the proposed LSTM and Attention-based methods have been used as the main models.
+Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models, the proposed LSTM (Figure~\ref{fig:lstm_model}) and Attention-based (Figure~\ref{fig:attention_model}) methods have been used as the main models.
 The models were trained using the available datasets, and validated using the test set.
 Also, the models where evaluated using the generated data points to test their generalization capabilities.
+It is important to notice, that the main difference in the models, a part from the architecture, and the number of parameters, is the difference in how they understand the temporal dependencies of the EEG signal.
+The LSTM model uses the recurrent layers to understand how each timepoint in the signal is related to the others, while the Attention model uses the attention mechanism to understand the signal in a more global way.
+
 \subsection*{Parameters Used}
 The neural network models were trained using the following parameters:
 \begin{itemize}
@@ -99,12 +104,16 @@ While the machine learning models only used the default parameters provided by t
     \centering
         \centering    
         \includegraphics[width=\textwidth]{Figures/Methodology/LSTM}
-        \caption{Architecture of the LSTM-based model. Image from~\cite{sharma_deep_2023}}\label{fig:lstm_model}
+        \caption{Architecture of the LSTM-based model.
+        The EEG Signal passes by the LSTM layers, that are able to understand the temporal dependencies of the signal, and then the output is passed to the Dense layer that classifies it in one of the provided classes.
+        Image from~\cite{sharma_deep_2023}}\label{fig:lstm_model}
 \end{figure}
 \begin{figure}[!htbp]
         \centering
         \includegraphics[width=\textwidth]{Figures/Methodology/Attention}
-        \caption{Architecture of the Transformer-based model. Image from~\cite{sharma_deep_2023}}\label{fig:attention_model}
+        \caption{Architecture of the Transformer-based model. 
+        The EEG Signal is positional encoded and then passed to four consecutive Attention layers, that are understand the temporal dependencies of the signal, and then the output is passed to the Dense layer that classifies it in one of the provided classes.
+        Image from~\cite{sharma_deep_2023}}\label{fig:attention_model}
 \end{figure}
 
 \section{Virtual Environment}
@@ -123,23 +132,25 @@ The main packages used are:
     \item Maze Generator\footnote{Asset available at the following link: \url{https://assetstore.unity.com/packages/tools/modeling/maze-generator-38689}}: to generate the maze in the Maze game.
 \end{itemize}
 \subsection*{Infinite Runner Game}
-The infinite runner game was developed to test the performance of the machine learning model in a fast-paced environment.
+The infinite runner game (Figure~\ref{fig:infinite_runner}) was developed to test the performance of the machine learning model in a fast-paced environment.
 The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
+The player character moves forward automatically and the speed is controlled by a sigmoid-like curve.
+The user can provide the direction commands by thinking about the desired movement.
 The path and the obstacles are generated randomly and the game logic was implemented from scratch.
 The path is a modular prefab, showed in the previous chapter (Chapter~\ref{ch:approach}), only the first two tiles are manually specified, the rest is generated randomly.
 Techniques to delete the parts that are not visible and to generate new parts are used to keep the game running smoothly.
 Also, the obstacles are generated randomly, with a fixed probability of appearing.
 The code is modular, with the main logic separated from the Unity components.
 This allows for easy modification and extension of the game, for easy integration of new obstacles or changes in the path.
-After some tests, we decided to esclude the Infinite Runner game from the final evaluation, as the game was too fast and while the user was able to provide the commands in time using the keyboard, the actual EEG signals required more time to be processed, resulting in a poor user experience. 
+After some tests, we decided to exclude the Infinite Runner game from the final evaluation, as the game was too fast and while the user was able to provide the commands in time using the keyboard, the actual EEG signals required more time to be processed, resulting in a poor user experience. 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Methodology/infinite_runner}
-    \caption{Infinite Runner Virtual Environment}\label{fig:infinite_runner}
+    \caption{Infinite Runner Virtual Environment. We can notice the player automatically moving forward, an obstacle on its left and the crossroad in front of it.}\label{fig:infinite_runner}
 \end{figure}
 
 \subsection*{Maze Game}
-The maze game was developed to test the performance of the machine learning model in a more complex environment.
+The Maze Walker~\ref{fig:maze} game was developed to test the performance of the machine learning model in a more complex environment.
 The game is a 3D walking game where the player can move freely in a maze to collect coins.
 The maze is generated randomly using the Maze Generator package.
 The player character can freely move around thanks to the integration of the AI Navigation package.
@@ -149,5 +160,5 @@ Upon collecting all coins, the user proceeds to the next level, where the maze i
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Methodology/maze}
-    \caption{Maze Virtual Environment}\label{fig:maze}
+    \caption{Maze Virtual Environment. We can notice the player in the maze, with the minimap on the bottom right corner, and the coins to collect, also, the arrows on top of the avatar are used to indicate the available movement directions.}\label{fig:maze}
 \end{figure}

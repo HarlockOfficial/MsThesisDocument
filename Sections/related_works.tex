@@ -34,29 +34,30 @@ The review~\cite{alfieri_gamification_2022} shows that gamification provides imp
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=0.5\textwidth]{Figures/Related/brain_signal_recording_techniques}
-    \caption{Brain Signal Recording Techniques - A list of the most common brain signal recording techniques. Image from~\cite{altaheri2023deep}}
+    \caption{Brain Signal Recording Techniques - A list of the most common brain signal recording techniques. Image from~\cite{altaheri2023deep}}\label{fig:brain_signal_recording_techniques}
 \end{figure}
 \section{Brain-Computer Interfaces (BCI)}
 Brain Computer Interfaces are links between the brain and electronic devices, such as computers, smartphones, and robots.
 These interfaces allow the control of devices and applications using only the brain signals.
 In~\cite{robinson2021emerging}, the authors review the current state of the art for BCI technologies used to control robots and for motor rehabilitation.
-In their work, they present the main types of BCI, such as invasive, and non-invasive, and the most common non-invasive signal acquisition methods, such as Electroencephalography (EEG)~\cite{niedermeyer2005electroencephalography} and Magnetoencephalography (MEG)~\cite{singh2014magnetoencephalography}.
-In~\cite{altaheri_deep_2023}, Altaheri et al. present the EEG Motor Imagery as one of the ``most common BCI paradigms that have been used extensively in smart healthcare applications such as poststroke rehabilitation and mobile assistive robots''.
-In this work, the authors also review existing applications, like~\cite{tang2020motor} that presents an EEG MI system used to control a wheelchair, publicly available datasets for EEG Motor Imagery, such as the ones from the BCI Competition IV and the ones provided by PhysioNet~\cite{goldberger2000physiobank, schalk2004bci2000}, and present the most common deep learning algorithms used for EEG Motor Imagery classification, such as Convolutional Neural Networks (CNN)~\cite{lawhern2018eegnet}, Long Short-Term Memory (LSTM) and Transformer Based solutions~\cite{sharma_deep_2023}.
+In their work, they present the main types of BCI, such as invasive, and non-invasive, and the most common non-invasive signal acquisition methods, such as Electroencephalography (EEG)~\cite{niedermeyer2005electroencephalography} and Magnetoencephalography (MEG)~\cite{singh2014magnetoencephalography}, a comprehensive list of the most common brain signal recording techniques can be found in Figure~\ref{fig:brain_signal_recording_techniques}.
+In~\cite{altaheri_deep_2023}, Altaheri et al.\ present the EEG Motor Imagery as one of the ``most common BCI paradigms that have been used extensively in smart healthcare applications such as poststroke rehabilitation and mobile assistive robots''.
+In this work, the authors also review existing applications, like~\cite{tang2020motor} that presents an EEG MI system used to control a wheelchair, publicly available datasets for EEG Motor Imagery, such as the ones from the BCI Competition IV~\cite{tangermann2012review}, the one from the Yi, Weibo et al.~\cite{yi2014evaluation} and the ones provided by PhysioNet~\cite{goldberger2000physiobank, schalk2004bci2000}, and present the most common deep learning algorithms used for EEG Motor Imagery classification, such as Convolutional Neural Networks (CNN)~\cite{lawhern2018eegnet}, Long Short-Term Memory (LSTM) and Transformer Based solutions~\cite{sharma_deep_2023}.
 In the filed of controlling devices using EEG, also other works were identified, such as~\cite{10471624}, where the author present a werable device that is used to control a wheelchair, and~\cite{10453986}, where the author presents a system that uses electromyography (EMG)~\cite{mills2005basics} to control artificial limbs.
 We also found relevant for this project, the work~\cite{ahn2013gamma} where the authors explore the effect of gamma band in MI to improve BCI performances.
 Also, we will consider, as in~\cite{mammone2023few}, the possibility of applying few-shot learning to tailor the EEG MI classification networks to the user's brain signals.
-Lastly, altrough not directly related to the development of the EEG MI system for this thesis, we found relevant the work from~\cite{10123901, lee2022individual}, where the authors explore the possibility of detecting individual finger movements and hand gestures using ultra high density EEG, and the work from~\cite{penfield1950cerebral, jasper1958ten}, where the authors present the motor homunculus and the International 10-20 System for EEG electrode placement.
+Lastly, altrough not directly related to the development of the EEG MI system for this thesis, we found relevant the work from~\cite{10123901, lee2022individual}, where the authors explore the possibility of detecting individual finger movements and hand gestures using ultra high density EEG, and the work from~\cite{penfield1950cerebral, jasper1958ten}, where the authors present the motor homunculus and the International 10-20 System (Figure~\ref{fig:international_10_20_system}) for EEG electrode placement.
+Also, Figure~\ref{fig:brain_lobes} is provided as reference to understand wich area of the brain is recorded by the EEG electrodes.
 
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=0.45\textwidth]{Figures/Related/brain_lobes}
-    \caption{Brain Lobes. Image from~\cite{Harrison2015}}
+    \caption{Brain Lobes. Image from~\cite{Harrison2015}}\label{fig:brain_lobes}
 \end{figure}
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=0.45\textwidth]{Figures/Related/international_10_20_system}
-    \caption{International 10-20 System. Image from~\cite{luis2012brain}}
+    \caption{International 10-20 System. Image from~\cite{luis2012brain}}\label{fig:international_10_20_system}
 \end{figure}
 \section{Usability and Game Feel}
 Usability is a key factor in the development of applications, as it can influence the user's experience and satisfaction.

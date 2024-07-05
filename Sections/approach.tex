@@ -17,25 +17,25 @@ In Table~\ref{tab:datasamples}, we show the datasets used during the project and
 Since in the early stages of the project we started working with the two datasets, Physionet and Weibo, we started by discovering the channels that were common between the two datasets and reached the number of 58 channels, so that the model could be trained on a consistent set of features.
 After some tests, we decided to continue working only with the Physionet dataset because it has a larger number of subjects.
 Moreover, the added value of the Weibo dataset was not significant enough in terms of network accuracy to justify the extra complexity and training time of working with two datasets.
-After deciding to continue the project with the Physionet dataset, we did not revert the number of channels to 64, as many literature works have shown that lowering the number of channels can improve the network's performance and reduce the computational load, also, the training results were satisfying and the network was able to classify the data correctly, meaning that the leftover channels were not significant for the specific classification tasks.
+After deciding to continue the project with the Physionet dataset, we did not revert the number of channels to 64, as many literature works have shown that lowering the number of channels can improve the network's performance and reduce the computational load~\cite{faye2022eeg}, also, the training results were satisfying and the network was able to classify the data correctly, meaning that the leftover channels were not significant for the specific classification tasks.
 \begin{table}[!htbp]
     \centering
     \scalebox{.8}[1]{
-    \begin{tabular}{|c|c|c|c||c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Dataset Name} & \textbf{Number of Subjects} & \textbf{Number of Tasks} & \textbf{Number of Channels} & \textbf{Was Used}\\
+        \textbf{Dataset Name} & \textbf{Number of Subjects} & \textbf{Number of Tasks} & \textbf{Number of Channels}\\
         \hline
         \hline
-        Physionet & 109 & 4 & 64 & No\\
+        Physionet & 109 & 4 & 64\\
         \hline
-        Weibo & 10 & 6 & 60 & No\\
+        Weibo & 10 & 6 & 60\\
         \hline
-        Our Sample & 109 & 4 & 58 & Yes \\
+        \hline
+        Reduced Physionet & 109 & 4 & 58\\
         \hline
     \end{tabular}
     }
-    \caption{Datasets used during the project}
-    \label{tab:datasamples}
+    \caption{Base datasets used during the project and the ``Reduced'' final one}\label{tab:datasamples}
 \end{table}
 
 
@@ -51,32 +51,6 @@ For interoperability between the GAN model and the noise injection technique, we
 This way we can mimic the GAN model's behavior and use the two solutions interchangeably.
 
 In this project, as we will discuss in the next chapter (Chapter~\ref{ch:methodology}), we used the noise injection technique and the GAN model to validate the classification model, as the GANs was able to generate new data samples that were similar to the original data.
-
-\begin{figure}[!htbp]
-    \centering
-    \begin{tikzpicture}[
-        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
-        ]
-        \node[squarednode] (noise) {Noise};
-        \node[squarednode] (generator) [right=of noise] {Generator};
-        \node[squarednode] (fake_data) [right=of generator] {Fake Data};
-        \node (none) [above=of fake_data] {~};
-        \node[squarednode] (real_data) [above=of none] {Real Data};
-        \node[squarednode] (discriminator) [right=of none] {Discriminator};
-        \node[squarednode, dashed] (loss) [right=of discriminator] {Loss};
-
-        \draw[->] (noise) -- (generator);
-        \draw[->] (generator) -- (fake_data);
-        \draw[->] (real_data) -- (discriminator);
-        \draw[->] (fake_data) -- (discriminator);
-        \draw[dashed, ->] (discriminator) -- (loss);
-        \draw[dashed, ->] (loss) to[out=-90, in=-90] (generator);
-        \draw[dashed, ->] (loss) to[out=90, in=90] (discriminator);
-    \end{tikzpicture}
-    \caption{GAN Model}
-    \label{fig:gan}
-\end{figure}
-Figure~\ref{fig:gan} shows an high level overview of the GAN model, divided in ``Generator'' and ``Discriminator'' and listing the models input and output data.
 
 \begin{figure}[!htbp]
     \centering
@@ -100,11 +74,34 @@ Figure~\ref{fig:gan} shows an high level overview of the GAN model, divided in `
         \draw[->] (noise) -- (plus) ;
         \draw[->] (plus) -- (output) ;
     \end{tikzpicture}
-    \caption{Noise Injection Model}
-    \label{fig:noise_injection}
+    \caption{High level overview of the Noise Injection pipeline.
+    The model takes a dataset as input, extracts a sample, generates noise and adds it to the sample, and finally outputs the augmented sample.}\label{fig:noise_injection}
 \end{figure}
-Figure~\ref{fig:noise_injection} shows an high level overview of the noise injection pipeline.
-The model takes a dataset as input, extracts a sample, generates noise and adds it to the sample, and finally outputs the augmented sample.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{tikzpicture}[
+        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
+        ]
+        \node[squarednode] (noise) {Noise};
+        \node[squarednode] (generator) [right=of noise] {Generator};
+        \node[squarednode] (fake_data) [right=of generator] {Fake Data};
+        \node (none) [above=of fake_data] {~};
+        \node[squarednode] (real_data) [above=of none] {Real Data};
+        \node[squarednode] (discriminator) [right=of none] {Discriminator};
+        \node[squarednode, dashed] (loss) [right=of discriminator] {Loss};
+
+        \draw[->] (noise) -- (generator);
+        \draw[->] (generator) -- (fake_data);
+        \draw[->] (real_data) -- (discriminator);
+        \draw[->] (fake_data) -- (discriminator);
+        \draw[dashed, ->] (discriminator) -- (loss);
+        \draw[dashed, ->] (loss) to[out=-90, in=-90] (generator);
+        \draw[dashed, ->] (loss) to[out=90, in=90] (discriminator);
+    \end{tikzpicture}
+    \caption{High level overview of the GAN model, divided in ``Generator'' and ``Discriminator'' including the models input and output data.}\label{fig:gan}
+\end{figure}
+
 
 \section{Classification Model}
 Classification is the process of predicting the class label of a given input data sample.
@@ -113,7 +110,7 @@ We also implemented a Transformer-based model from the same paper, but the hardw
 
 LSTM networks are a type of recurrent neural network (RNN) that are capable of learning long-term dependencies in the data.
 Along with the LSTM model (Figure \ref{fig:lstm}), we trained as baseline methods, a set of Machine Learning models, that included Support Vector Machines (SVM) and Linear Discriminant Analysis (LDA), and a Convolutional Neural Network (CNN) (EEGNetV4~\cite{lawhern2018eegnet}).
-All the models were trained using the Physionet dataset. 
+All the models were trained using the ``Reduced'' Physionet dataset. 
 Two different training strategies were used, one where the model was trained on the original dataset, divided by label, and another where the model was trained on the dataset divided by label and subject.
 The second strategy was used to perform cross subject validation, and therefore to test the model's generalization capabilities.
 
@@ -140,12 +137,9 @@ The second strategy was used to perform cross subject validation, and therefore 
         \draw[->] (output) -- (softmax);
 
     \end{tikzpicture}
-    \caption{LSTM Model}
-    \label{fig:lstm}
+    \caption{High level overview of the LSTM model.
+    The model takes the input data, rearranges it, passes it through the input layer, the LSTM layers, and finally the output and softmax layers, to produce the classification output.}\label{fig:lstm}
 \end{figure}
-
-Figure~\ref{fig:lstm} shows an high level overview of the LSTM model.
-The model takes the input data, rearranges it, passes it through the input layer, the LSTM layers, and finally the output and softmax layers, to produce the classification output.
 
 \section{Virtual Environment}
 Virtual environments are computer-generated simulations and scenarios that can be used to test and evaluate models in a controlled environment~\cite{ellis1994virtual}.
@@ -165,12 +159,11 @@ Also, thanks to this solution, the virtual environment can be easily replaced wi
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Approach/path_prefab}
-    \caption{Path Prefab in Unity}
-    \label{fig:path_prefab}
+    \caption{Infinite runner modular path prefab, used to randomly generate the infinite path in the virtual environment, the walls at the end of the path tile are removable and have separate colliders to detect the collision of the avatar and trigger the generation of new tiles.}\label{fig:path_prefab}
 \end{figure}
 
 \section{The Framework}
-To automate the process of data augmentation, model classification and game testing, we developed a framework that could be used to streamline the testing process.
+To automate the process of data augmentation, model classification and game testing, we developed a framework that could be used to streamline the testing process (Figure~\ref{fig:framework}).
 The framework was designed to either generate new data or receive data from the EEG headset, classify the data, and then send the classification results to the virtual environment for testing.
 The virtual environment would then provide feedback to the user by moving the virtual avatar based on the classification results.
 The framework was developed using Python and PyTorch, and it was designed to be modular and extensible, so that new data augmentation techniques, classification models, and virtual environments could be easily added.
@@ -195,10 +188,10 @@ Currently, it is possible to specify the paths to the data augmentation and clas
         \draw[dashed, ->] (classification) -- (websocket);
         \draw[dashed, ->] (websocket) -- (virtual_environment);
     \end{tikzpicture}
-\caption{High-level model of the framework}
+\caption{High-level model of the framework.
+The framework uses the data augmentation module to generate new data samples, the classification module to classify the data samples, and the communication module to send the classification results to the virtual environment.}
 \label{fig:framework}
 \end{figure}
 
-Figure~\ref{fig:framework} shows a high-level model of the framework.
-The framework uses the data augmentation module to generate new data samples, the classification module to classify the data samples, and the communication module to send the classification results to the virtual environment.
-Moreover, the keyboard input is used to trigger the dataset augmentation and simulate the EEG headset input, while the virtual environment is used to provide feedback to the user.
+Since the researchers may not have access to an EEG headset or their work may require extensive testing which cannot be always performed in controlled environments, the framework was designed to be used also with the keyboard input: by mapping a key to a signal generator it is possible to simulate the EEG headset input.
+Therefore, in Figure~\ref{fig:framework}, the ``Keyboard Input'' is used to trigger the dataset augmentation and simulate the EEG headset input, while the virtual environment is used to provide feedback to the user and close the testing loop.
