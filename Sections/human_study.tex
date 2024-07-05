@@ -61,6 +61,8 @@ The pre-pilot study was conducted to identify any issues with the system and to 
 We noticed immediately that the system was running flawlessly, the pipeline did not add significant delays, and the EEG data was correctly collected.
 The only failure point we discovered was in the classification result; it was not working as expected and only predicted ``right-hand'' movements for all the trials.
 We understood that, even if the off-line tests provided valid results and the system seemed to correctly understand and classify EEG data of different subjects, the features identified by the model were not discriminative enough for human inter-subject classification, and as done in the state of the art solutions, the system requires finetuning on the specific subject to work properly~\cite{jia2023excellent}.
+Thanks to this pre-pilot study experience, we understood that the system was ready to be tested with a larger group of participants, but it required a more in-depth training phase to work properly.
+We look forward to conducting the pilot study in the future after the system has been improved and the model has been finetuned on the specific subjects.
 
 \section{Pilot Study Discussion}
 As part of the project, we planned and designed a pilot human study to evaluate the system in a real-time scenario with real people.
