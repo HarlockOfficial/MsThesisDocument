@@ -21,17 +21,20 @@ Also, due to the nature of the dataset recordings, the label distribution is hig
 \subsection*{Parameters Used}
 To obtain the data, we used the python library MOABB, wich, via the Motor Imagery paradigm, provides simplified access the datasets.
 The Motor Imagery paradigm, via its constructor, allows to specify the preprocessing steps.
-In this project, we used the following parameters:
-\todo{change bullet list to paragraph}
-\begin{itemize}
-    \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure~\ref{fig:eeg_channels}.
-    \item \textbf{Events}: The events used to label the data points. In this project, we used the left and right hand, feet and rest motor imagery events.
-    \item \textbf{Number of Output Classes}: The number of classes to which the data points belong. In this project, we used 4 classes.
-    \item \textbf{Cutoff Frequency for the Bandpass Filter}: The cutoff frequency used to filter the EEG signals. In this project, we used a cutoff frequency of 0.5\textemdash40 Hz.
-    \item \textbf{Epoch Start Time}: The time at which the epoch starts. In this project, we used a start time of 0 seconds.
-    \item \textbf{Epoch End Time}: The time at which the epoch ends. In this project, we used an end time of 0.5
-    \item \textbf{Resampling Frequency}: The frequency at which the data points are resampled. In this project, we used a resampling frequency of 128 Hz.
-\end{itemize}
+% In this project, we used the following parameters:
+% \begin{itemize}
+%     \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure~\ref{fig:eeg_channels}.
+%     \item \textbf{Events}: The events used to label the data points. In this project, we used the left and right hand, feet and rest motor imagery events.
+%     \item \textbf{Number of Output Classes}: The number of classes to which the data points belong. In this project, we used 4 classes.
+%     \item \textbf{Cutoff Frequency for the Bandpass Filter}: The cutoff frequency used to filter the EEG signals. In this project, we used a cutoff frequency of 0.5\textemdash40 Hz.
+%     \item \textbf{Epoch Start Time}: The time at which the epoch starts. In this project, we used a start time of 0 seconds.
+%     \item \textbf{Epoch End Time}: The time at which the epoch ends. In this project, we used an end time of 0.5
+%     \item \textbf{Resampling Frequency}: The frequency at which the data points are resampled. In this project, we used a resampling frequency of 128 Hz.
+% \end{itemize}
+% change bullet list to paragraph
+Among the provided parameters, we provided the 58 channels used to record the EEG signals presented in Figure~\ref{fig:eeg_channels}, the ``left hand'', ``right hand'', ``feet'' and ``rest'' event labels to select the data points, 4 as the number of output classes, between 0.5 and 40 Hz as the cutoff frequency for the bandpass filter, the epoch start and end time, respectively 0 and 0.5 seconds, and the resampling frequency of 128 Hz.
+
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{Figures/Methodology/thesis_eeg_cap}
@@ -124,17 +127,19 @@ In this project, we developed two virtual environments: an infinite runner game 
 The virtual environments were developed using the Unity game engine, version 2022.3.20f1, and were designed to be simple and easy to use, and to provide a fun and engaging experience for the user.
 The virtual environments were also designed to be controller agnostic, requiring a WebSocket connection to receive the character input commands.
 \subsection*{Unity Packages and Assets Used}
-The main packages used are:
-\todo{make text instead of bullet list}
-\begin{itemize}
-    \item TextMeshPro\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Manual/com.unity.textmeshpro.html}}: for the Main Menu and the in-game information.
-    \item Starter Assets \textemdash Third Person Controller\footnote{Removed from Unity Asset Store}: for the player avatar and main movement logic and animations.
-    \item Native Websocket\footnote{Open source package for Unity, available at the following link: \url{https://github.com/endel/NativeWebSocket}}: to receive the character control commands from the framework.
-    \item AI Navigation\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/index.html}}: to move the character in the Maze game.
-    \item Maze Generator\footnote{Asset available at the following link: \url{https://assetstore.unity.com/packages/tools/modeling/maze-generator-38689}}: to generate the maze in the Maze game.
-\end{itemize}
+% The main packages used are:
+% \begin{itemize}
+%     \item TextMeshPro\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Manual/com.unity.textmeshpro.html}}: for the Main Menu and the in-game information.
+%     \item Starter Assets \textemdash Third Person Controller\footnote{Removed from Unity Asset Store}: for the player avatar and main movement logic and animations.
+%     \item Native Websocket\footnote{Open source package for Unity, available at the following link: \url{https://github.com/endel/NativeWebSocket}}: to receive the character control commands from the framework.
+%     \item AI Navigation\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/index.html}}: to move the character in the Maze game.
+%     \item Maze Generator\footnote{Asset available at the following link: \url{https://assetstore.unity.com/packages/tools/modeling/maze-generator-38689}}: to generate the maze in the Maze game.
+% \end{itemize}
+% \todo{make text instead of bullet list}
+The main packages used are TextMeshPro\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Manual/com.unity.textmeshpro.html}}, for the Main Menu and the in-game information, Starter Assets \textemdash Third Person Controller, for the player avatar and main movement logic and animations, Native Websocket\footnote{Open source package for Unity, available at the following link: \url{https://github.com/endel/NativeWebSocket}}, to receive the character control commands from the framework, AI Navigation\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Packages/com.unity.ai.navigation@2.0/manual/index.html}}, to move the character in the Maze game, and Maze Generator\footnote{Asset available at the following link: \url{https://assetstore.unity.com/packages/tools/modeling/maze-generator-38689}}, to generate the maze in the Maze game.
+
+
 \subsection*{Infinite Runner Game}
-\todo{add code listing of path generation}
 The infinite runner game (Figure~\ref{fig:infinite_runner}) was developed to test the performance of the machine learning model in a fast-paced environment.
 The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
 The player character moves forward automatically and the speed is controlled by a sigmoid-like curve.
@@ -146,10 +151,85 @@ Also, the obstacles are generated randomly, with a fixed probability of appearin
 The code is modular, with the main logic separated from the Unity components.
 This allows for easy modification and extension of the game, for easy integration of new obstacles or changes in the path.
 After some tests, we decided to exclude the Infinite Runner game from the final evaluation, as the game was too fast and while the user was able to provide the commands in time using the keyboard, the actual EEG signals required more time to be processed, resulting in a poor user experience. 
+
+In Figure~\ref{fig:infinite_runner_path_generation} we can see the algorithm used to generate the path in the Infinite Runner game.
+The actual algorithm is event based, therefore providing a code snippet is not simple and will not make the logic easy to understand.
+The algorithm is divided into multiple steps, as the player autonomously moves, the path is generated in front of it.
+At the end of each path tile, the user automatically crosses a collider that triggers the generation of the next tile.
+If the player crosses a collider that is part of a crossroad, the player is rotated along with the camera to face the new direction.
+After this eventual rotation, the not visible tiles are deleted, and the algorithm starts generating the new tiles.
+The algorithm randomly decides if the new tile has a left, right and/or forward tile at the end.
+To avoid the game from automatically ending, there will always be at least one tile.
+For each of the possible tiles, up to three, that has to be generated, the algorithm randomly decides if the tile has an obstacle, and in case, generates it.
+After generating the new tiles, the algorithm removes the walls to allow continuous movement between the tiles and completes its execution.
+In the diagram it loops back to the first step, as the player keeps moving forward during this whole process and the algorithm has to generate the next tiles.
+In figure we can notice the ``Generate New Tiles'' step is dashed, this is because it has to be considered as a comment, describing the next steps, and not as a real step in the algorithm.
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Methodology/infinite_runner}
     \caption{Infinite Runner Virtual Environment. We can notice the player automatically moving forward, an obstacle on its left and the crossroad in front of it.}\label{fig:infinite_runner}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    % Flowchart representing code logic:
+    % 1. Player walks in the path
+    % 2. Delete not visible tiles
+    % 3. Start generate new tiles
+    % 3.a Has this tile a left tile at the end
+    % 3.b Has this tile a right tile at the end
+    % 3.c Has this tile a forward tile at the end
+    % 4. Foreach next tile at the end
+    % 4.a Has next tile a obstacle
+    % 4.a.yes Generate obstacle for tile
+    % 4.a.no Continue
+    % 4.b Delete wall correspondig to next tile
+    % 5. Tile generated
+    % Loop back to 1
+    \scalebox{0.4}{
+    \begin{tikzpicture}[
+        squarednode/.style={rectangle, draw=black, very thick, minimum size=5mm},
+        diamondnode/.style={diamond, draw=black, very thick},
+        ]
+        %Nodes
+        \node[squarednode] (player) {Player Walks};
+        \node[squarednode, below=of player] (rotate) {Eventually Rotate Player and Camera};
+        \node[squarednode, below=of rotate] (delete) {Delete Not Visible Tiles};
+        \node[squarednode, below=of delete, dashed] (generate) {Generate New Tiles};
+        \node[diamondnode, below=of generate] (hasleft) {Has Left Tile};
+        \node[squarednode, below right=of hasleft] (generateleft) {Generate Left Tile};
+        \node[diamondnode, below=of hasleft] (hasright) {Has Right Tile};
+        \node[squarednode, below right=of hasright] (generateright) {Generate Right Tile};
+        \node[diamondnode, below=of hasright] (hasforward) {Has Forward Tile};
+        \node[squarednode, below right=of hasforward] (generateforward) {Generate Forward Tile};
+        \node[squarednode, below=of hasforward] (foreach) {Foreach Next Tile};
+        \node[diamondnode, below=of foreach] (hasobstacle) {Has Obstacle};
+        \node[squarednode, below right=of hasobstacle] (generateobstacle) {Generate Obstacle};
+        \node[squarednode, below=of hasobstacle] (deletewall) {Delete Wall};
+        \node[squarednode, below=of deletewall] (tilegenerated) {Tile Generated};
+        %Lines
+        \draw[->] (player) -- node[right] {Cross end of path collider} (rotate);
+        \draw[->] (rotate) -- (delete);
+        \draw[->] (delete) -- (generate);
+        \draw[->] (generate) -- (hasleft);
+        \draw[->] (hasleft) -- node[right] {No} (hasright);
+        \draw[->] (hasleft) -- node[right] {Yes} (generateleft);
+        \draw[->] (generateleft) -- (hasright);
+        \draw[->] (hasright) -- node[right] {No} (hasforward);
+        \draw[->] (hasright) -- node[right] {Yes} (generateright);
+        \draw[->] (generateright) -- (hasforward);
+        \draw[->] (hasforward) -- node[right] {No} (foreach);
+        \draw[->] (hasforward) -- node[right] {Yes} (generateforward);
+        \draw[->] (generateforward) -- (foreach);
+        \draw[->] (foreach) -- (hasobstacle);
+        \draw[->] (hasobstacle) -- node[right] {Yes} (generateobstacle);
+        \draw[->] (hasobstacle) -- node[right] {No} (deletewall);
+        \draw[->] (deletewall) -- (tilegenerated);
+        \draw[->] (generateobstacle) -- (deletewall);
+        \draw[->] (tilegenerated) to[out=180, in=180] (foreach);
+    \end{tikzpicture}
+    }
+    \caption{Infinite Runner Path Generation Algorithm}\label{fig:infinite_runner_path_generation}
 \end{figure}
 
 \subsection*{Maze Game}

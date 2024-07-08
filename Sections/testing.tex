@@ -1,5 +1,4 @@
 \chapter{Technical Performance}\label{ch:testing}
-\todo{check figures and tables cited in content}
 % Generated data test outcomes.
 % how good the training is and how good the system is before putting a human in the loop.
 Before testing the system on human subjects, we performed a series of tests to evaluate the performance of the system on generated data. 
@@ -208,7 +207,7 @@ As it is visible, the precision on GAN generated data is higher than the one on 
 The precision scores were computed using the confusion matrices, of which samples are presented in Tables~\ref{tab:confusion_matrix_gan_noise}~and~\ref{tab:confusion_matrix_dataset_noise}.
 For each noise level $x$, we computed a confusion matrix $CM_x$ (Figure~\ref{tab:precision_reference}).
 Using the main diagonal of each confusion matrix, we computed the precision as the ratio between the value of that cell and the sum of the values in the row $P_{\_, row}$, and the ratio between the cell value and the related column $P_{\_, col}$, we then averaged the two values $P_{\_}$.
-Lastly, the average of all the diagonal averages was computed as final precision score $P_{CM_x}$ (Figure \ref{fig:precision_formula}).
+Lastly, the average of all the diagonal averages was computed as final precision score $P_{CM_x}$ (Figure~\ref{fig:precision_formula}).
 
 \begin{figure}[!htbp]
     \centering
