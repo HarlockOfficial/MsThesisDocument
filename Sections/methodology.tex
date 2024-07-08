@@ -22,6 +22,7 @@ Also, due to the nature of the dataset recordings, the label distribution is hig
 To obtain the data, we used the python library MOABB, wich, via the Motor Imagery paradigm, provides simplified access the datasets.
 The Motor Imagery paradigm, via its constructor, allows to specify the preprocessing steps.
 In this project, we used the following parameters:
+\todo{change bullet list to paragraph}
 \begin{itemize}
     \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure~\ref{fig:eeg_channels}.
     \item \textbf{Events}: The events used to label the data points. In this project, we used the left and right hand, feet and rest motor imagery events.
@@ -73,12 +74,12 @@ As for the training parameters, we used the following:
     \item \textbf{Train Epochs}: 100 epochs, each epoch changing the number of steps for generator and discriminator.
 \end{itemize}
 \paragraph*{Train Epochs}
-The training of the GAN was divided into two parts, the generator and the discriminator.
+As visible in Listing \ref{code:gan_train_snippet}, the training of the GAN was divided into two parts, the generator and the discriminator.
 The full training lasted 100 epochs.
 During each epoch, we trained the generator and the discriminator for a different number of steps.
 The discriminator was trained first, starting with 1000 steps, and decreasing each epoch until 10 steps.
 The generator was trained after the discriminator, starting with 10 steps, and increasing each epoch until 1000 steps.
-
+\lstinputlisting[language=python, caption={GAN Train Loop Snippet}, label={code:gan_train_snippet}, captionpos=b]{Code/train_gan.py}
 
 \section{Classification Model}
 The classification model is a machine learning or deep learning model used to classify the data points.
@@ -124,6 +125,7 @@ The virtual environments were developed using the Unity game engine, version 202
 The virtual environments were also designed to be controller agnostic, requiring a WebSocket connection to receive the character input commands.
 \subsection*{Unity Packages and Assets Used}
 The main packages used are:
+\todo{make text instead of bullet list}
 \begin{itemize}
     \item TextMeshPro\footnote{Documentation available at the following link: \url{https://docs.unity3d.com/Manual/com.unity.textmeshpro.html}}: for the Main Menu and the in-game information.
     \item Starter Assets \textemdash Third Person Controller\footnote{Removed from Unity Asset Store}: for the player avatar and main movement logic and animations.
@@ -132,6 +134,7 @@ The main packages used are:
     \item Maze Generator\footnote{Asset available at the following link: \url{https://assetstore.unity.com/packages/tools/modeling/maze-generator-38689}}: to generate the maze in the Maze game.
 \end{itemize}
 \subsection*{Infinite Runner Game}
+\todo{add code listing of path generation}
 The infinite runner game (Figure~\ref{fig:infinite_runner}) was developed to test the performance of the machine learning model in a fast-paced environment.
 The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
 The player character moves forward automatically and the speed is controlled by a sigmoid-like curve.

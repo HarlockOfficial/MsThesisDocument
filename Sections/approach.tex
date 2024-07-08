@@ -18,6 +18,7 @@ Since in the early stages of the project we started working with the two dataset
 After some tests, we decided to continue working only with the Physionet dataset because it has a larger number of subjects.
 Moreover, the added value of the Weibo dataset was not significant enough in terms of network accuracy to justify the extra complexity and training time of working with two datasets.
 After deciding to continue the project with the Physionet dataset, we did not revert the number of channels to 64, as many literature works have shown that lowering the number of channels can improve the network's performance and reduce the computational load~\cite{faye2022eeg}, also, the training results were satisfying and the network was able to classify the data correctly, meaning that the leftover channels were not significant for the specific classification tasks.
+
 \begin{table}[!htbp]
     \centering
     \scalebox{.8}[1]{
