@@ -7,7 +7,7 @@
 % $\xrightarrow{\text{introduce}}$ EEG-based BCI techniques, such as SSVEP, P300, and MI\\
 % $\xrightarrow{\text{focus on}}$ MI (explaining why)\\
 % $\xrightarrow{\text{introduce}}$ MI-based BCI applications and eventually videogames\\
-% $\xrightarrow{\text{introduce}}$ MI-based BCI applications in real-world devices (e.g. robotic wheelchairs or prosthesis).\\
+% $\xrightarrow{\text{introduce}}$ MI-based BCI applications in real-world devices (e.g. robotic wheelchairs or prostheses).\\
 
 % Now introduce the problem and the research question: ``Is it possible to perform EEG-Motor Imagery classification in real-time?''\\
 
@@ -15,19 +15,19 @@
 % $\xrightarrow{\text{introduce}}$ solution (not detailed!)\\
 
 % $\xrightarrow{\text{introduce}}$ the structure of the thesis
-Even if nowadays there are rapid changes in the technological landscape, enhancing the quality of life (QoL) for individuals with reduced mobility or physical disabilities remains a critical challenge. 
+Even if there are rapid changes in the technological landscape nowadays, enhancing the quality of life (QoL) for individuals with reduced mobility or physical disabilities remains a critical challenge. 
 People with physical impairments often face significant barriers in performing everyday tasks that many take for granted. 
 Controlling devices autonomously can be particularly important for these individuals, allowing them to reduce the need for caregivers and assistive technologies.
 The quest to empower these individuals through innovative solutions has led to significant research in Human-Computer Interaction (HCI).
 HCI focuses on creating effective interfaces between users and computers, aiming to enhance the usability and accessibility of digital devices. 
 Various HCI applications have demonstrated considerable promise in aiding individuals with disabilities. 
-For example, speech recognition systems assist elderly people in everyday tasks~\cite{10444265}, while eye-tracking technologies enable assistive devices control through eye movements~\cite{10560196}. 
+For example, speech recognition systems assist elderly people in everyday tasks~\cite{10444265}, while eye-tracking technologies enable assistive devices to control through eye movements~\cite{10560196}. 
 However, these methods often have limitations, such as requiring specific environmental conditions~\cite{khazaleh2024investigation} or extensive training periods or datasets~\cite{ke2024using}, and may not be suitable for all users.
 
 While HCI technologies continue to evolve, the field has seen a growing interest in Brain-Computer Interfaces (BCIs)~\cite{yadav2020comprehensive}, which offer a direct communication pathway between the brain and external devices. 
 BCIs have the potential to change the way individuals with severe disabilities interact with their environment by bypassing traditional physical limitations and using brain signals to control devices.
-Among the various BCI techniques, Electroencephalography (EEG)-based BCIs are particularly promising. 
-EEG is a non-invasive method that records electrical activity of the brain through electrodes placed on the scalp. 
+Electroencephalography (EEG)-based BCIs are particularly promising among the various BCI techniques. 
+EEG is a non-invasive method that records the brain's electrical activity through electrodes placed on the scalp. 
 It provides a relatively accessible and affordable means of capturing brain signals for BCI applications. 
 Several EEG-based BCI paradigms have been developed, including Steady-State Visual Evoked Potential (SSVEP)~\cite{BCI_SSVEP_P300}, P300~\cite{BCI_SSVEP_P300}, and Motor Imagery (MI).
 
@@ -36,8 +36,8 @@ MI-based BCIs leverage this mental process to generate distinct EEG patterns tha
 MI is particularly appealing because it taps into the natural motor processes of the brain, making it intuitive and potentially more effective for users with motor impairments. 
 Additionally, MI does not require external stimuli like SSVEP or P300, which can be advantageous in various practical applications.
 MI-based BCI systems have been applied in a range of areas, from assisting the users in playing simple video games~\cite{10174453} to operating real-world devices like robotic wheelchairs~\cite{palumbo2021motor} and prosthetic limbs~\cite{10453986}.
-These applications not only enhance entertainment and engagement but also provide significant functional benefits, improving independence and QoL for users.
-Unfortunately, the translation of such systems to practical applications often involves challenges related to real-time processing and control.
+These applications enhance entertainment and engagement and provide significant functional benefits, improving users' independence and QoL.
+Unfortunately, translating such systems to practical applications often involves challenges related to real-time processing and control.
 
 Given the potential of MI-based BCIs, a critical question arises: ``\emph{Is it possible to perform EEG-Motor Imagery classification in real-time?}'' 
 This question addresses the feasibility of using MI-BCI systems in practical, real-world scenarios where timely and accurate response is crucial.
@@ -50,26 +50,26 @@ The hypotheses guiding this research include:
     \item[\textbf{H2:}] \emph{A quasi-real-time MI-BCI system can be effectively integrated with external devices for practical applications}.
 \end{itemize}
 
-The first hypothesis addresses the technical feasibility of real-time EEG signal processing for MI classification, whitout this assumption the second hypothesis would not be possible to verify.
+The first hypothesis addresses the technical feasibility of real-time EEG signal processing for MI classification, without this assumption, the second hypothesis would not be possible to verify.
 The second hypothesis focuses on the practical integration of the MI-BCI system with external devices, which is essential for real-world applications.
 
-This thesis proposes a quasi-real-time EEG-MI categorization system that can connect with a range of assistive devices.
-The approach attempts to use advanced signal processing and deep learning techniques to achieve high accuracy and low latency in EEG signal categorisation. 
+This thesis proposes a quasi-real-time EEG-MI categorisation system that can connect with various assistive devices.
+The approach uses advanced signal processing and deep learning techniques to achieve high accuracy and low latency in EEG signal categorisation. 
 We take advantage of techniques like models based on Long Short Term Memory~(LSTM)~\cite{hochreiter1997long}, to classify the user's motor intention, and data augmentation techniques, in particular, Generative Adversarial Networks~\cite{goodfellow2014generative}, to study the EEG signals and generate realistic samples.
-Moreover, we leverage WebSocket~\cite{fette2011rfc} communications to interact with external devices and applications in real time or with a low delay between the signal classification and its application.
+Moreover, we leverage WebSocket~\cite{fette2011rfc} communications to interact with external devices and applications in real-time or with a low delay between the signal classification and its application.
 In this way, we aim to progress MI-based BCIs and, in the process, improve the quality of life (QoL) for people with physical limitations by answering the research issue and accomplishing the specified goals.
 
 
-The remainder of this thesis is organized as follows, in Chapter~\ref{ch:related_works}, we discuss the background and related work in the fields of BCI, EEG signal processing, and MI-based applications.
+The remainder of this thesis is organised as follows: in Chapter~\ref{ch:related_works}, we discuss the background and related work in the fields of BCI, EEG signal processing, and MI-based applications.
 %In Chapter \ref{ch:preliminary_work}, we describe the methods used for EEG data acquisition, signal processing, and classification.
 %Maybe change chapters, the approach becomes technical setup, describes the pipeline and the data-related part and design idea for the game and the reason (also how I modelled the movement imagination into controls), methodology describes 
-In Chapter~\ref{ch:approach}, we discuss the approach taken to solve the problem of classifying different types of motor imagery EEG signals in real time, including data collection, data augmentation, classification model, and virtual environment development.
+In Chapter~\ref{ch:approach}, we discuss the approach taken to solve the problem of classifying different types of motor imagery EEG signals in real-time, including data collection, data augmentation, classification model, and virtual environment development.
 In Chapter~\ref{ch:methodology}, we detail the development of the real-time MI-BCI system. % TODO split chapter in 4 (data preprocessing, network development, sample data validation, real data validation)
 % In Chapter \ref{ch:results}, we present the experimental setup, results, and analysis of the system's performance.
 % TODO maybe merge discussion and conclusion
-In Chapter~\ref{ch:testing}, we discuss the results of the system's performance evaluation and the implications for real-world applications.
+In Chapter~\ref{ch:testing}, we discuss the system's performance evaluation results and the implications for real-world applications.
 In Chapter~\ref{ch:human_study}, we present our idea of a pilot human study we wanted to conduct to evaluate the system's usability and user experience.
-% In Chapter \ref{ch:schedule}, we outline the timeline for the completion of the research and the remaining tasks.
-In Chapter~\ref{ch:conclusions}, we summarize the contributions of the thesis and outline directions for future research.
+% In Chapter \ref{ch:schedule}, we outline the timeline for completing the research and the remaining tasks.
+In Chapter~\ref{ch:conclusions}, we summarise the contributions of the thesis and outline directions for future research.
 
-Apart from the main chapters, we provide and appendix with additional information on the used vocabulary (Appendix~\ref{app:vocabulary}).
+Apart from the main chapters, we provide an appendix with additional information on the used vocabulary (Appendix~\ref{app:vocabulary}).

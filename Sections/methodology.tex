@@ -1,38 +1,38 @@
 \chapter{Implementation}\label{ch:methodology}
 Mirroring the previously presented approach (Chapter~\ref{ch:approach}), we will describe the methodology used to develop the system.
 The chapter is divided into four sections.
-The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, the fourth section will describe the virtual environment.
+The first section will describe the data collection process, the second section will describe the data augmentation, the third section will describe the classification model, and the fourth section will describe the virtual environment.
 
-All these sections are included and merged in a single pipeline with a user friendly interface that connects the data augmentation or collection from the headset, classification model, and virtual environment.
-The framework is plug-and-play, meaning that it can be easily extended to support new data augmentation or generation methods, classification models, virtual environments or real devices.
-The framework is also designed to be easy to use, providing an easy user interface and only requiring the paths to the model files and the WebSocket address to send messages.
+All these sections are included and merged in a single pipeline with a user-friendly interface that connects the data augmentation or collection from the headset, classification model, and virtual environment.
+The framework is plug-and-play and can be easily extended to support new data augmentation or generation methods, classification models, virtual environments, or real devices.
+The framework is also designed to be easy to use. It provides an easy user interface and only requires the paths to the model files and the WebSocket address to send messages.
 
 
 \section{Data Collection}
-The data collection process is a crucial step in the development of a machine learning system.
-It is used to gather the data necessary to train the machine learning model and is divided into two steps: the data collection and the data preprocessing.
+The data collection is a crucial step in developing a machine learning system.
+It gathers the data necessary to train the machine learning model and is divided into two steps: data collection and data preprocessing.
 The data collection step is used to gather the data necessary to train the machine learning model.
-The data preprocessing step is used to clean the data and prepare it for training.
+The data preprocessing step is used to clean and prepare the data for training.
 For the first step, we used publicly available EEG motor imagery datasets, such as the BCI Competition IV dataset 2a~\cite{tangermann2012review}, the Weibo~\cite{yi2014evaluation} and the PhysioNet EEG Motor Movement/Imagery Dataset~\cite{goldberger2000physiobank, schalk2004bci2000}.
-These datasets contain EEG recordings of subjects performing motor imagery tasks, such as imagining moving their left or right hand, or their feet.
-The datasets contains the preprocessed EEG recordings of the subjects, as well as the corresponding labels indicating the class to which the data point belongs.
-It is important to notice that we perform some ulterior preprocessing steps, such as filtering and windowing, to clean, split and prepare the data for the training phase.
-Also, due to the nature of the dataset recordings, the label distribution is highly unbalanced towards the resting state, so we decided to balance the dataset by undersampling all the data points to the same amount of samples, which was decided to be the lowest class count.
+These datasets contain EEG recordings of subjects performing motor imagery tasks, such as imagining moving their left or right hand or their feet.
+The datasets contain the subjects' preprocessed EEG recordings and the corresponding labels indicating the class to which the data point belongs.
+It is important to notice that we perform ulterior preprocessing steps, such as filtering and windowing, to clean, split and prepare the data for the training phase.
+Also, due to the nature of the dataset recordings, the label distribution is highly unbalanced towards the resting state, so we decided to balance the dataset by undersampling all the data points to the same amount of samples, which was agreed to be the lowest class count.
 \subsection*{Parameters Used}
-To obtain the data, we used the python library MOABB, wich, via the Motor Imagery paradigm, provides simplified access the datasets.
-The Motor Imagery paradigm, via its constructor, allows to specify the preprocessing steps.
+To obtain the data, we used the Python library MOABB, which, via the Motor Imagery paradigm, provides simplified access to the datasets.
+The Motor Imagery paradigm, via its constructor, allows the specification of the preprocessing steps.
 % In this project, we used the following parameters:
 % \begin{itemize}
 %     \item \textbf{Channels}: The channels used to record the EEG signals. In this project, we used the 58 channels presented in Figure~\ref{fig:eeg_channels}.
 %     \item \textbf{Events}: The events used to label the data points. In this project, we used the left and right hand, feet and rest motor imagery events.
-%     \item \textbf{Number of Output Classes}: The number of classes to which the data points belong. In this project, we used 4 classes.
-%     \item \textbf{Cutoff Frequency for the Bandpass Filter}: The cutoff frequency used to filter the EEG signals. In this project, we used a cutoff frequency of 0.5\textemdash40 Hz.
+%     \item \textbf{Number of Output Classes}: The number of classes to which the data points belong. In this project, we used four classes.
+%     \item \textbf{Cutoff Frequency for the Bandpass Filter}: The cutoff frequency filters the EEG signals. In this project, we used a cutoff frequency of 0.5\textemdash40 Hz.
 %     \item \textbf{Epoch Start Time}: The time at which the epoch starts. In this project, we used a start time of 0 seconds.
 %     \item \textbf{Epoch End Time}: The time at which the epoch ends. In this project, we used an end time of 0.5
 %     \item \textbf{Resampling Frequency}: The frequency at which the data points are resampled. In this project, we used a resampling frequency of 128 Hz.
 % \end{itemize}
 % change bullet list to paragraph
-Among the provided parameters, we provided the 58 channels used to record the EEG signals presented in Figure~\ref{fig:eeg_channels}, the ``left hand'', ``right hand'', ``feet'' and ``rest'' event labels to select the data points, 4 as the number of output classes, between 0.5 and 40 Hz as the cutoff frequency for the bandpass filter, the epoch start and end time, respectively 0 and 0.5 seconds, and the resampling frequency of 128 Hz.
+Among the provided parameters, we provided the 58 channels used to record the EEG signals presented in Figure~\ref{fig:eeg_channels}, the ``left hand'', ``right hand'', ``feet'' and ``rest'' event labels to select the data points, four as the number of output classes, between 0.5 and 40 Hz as the cutoff frequency for the bandpass filter, the epoch start and end time, respectively 0 and 0.5 seconds, and the resampling frequency of 128 Hz.
 
 
 \begin{figure}[!htbp]
@@ -44,28 +44,29 @@ Among the provided parameters, we provided the 58 channels used to record the EE
 
 \section{Data Augmentation}
 Data augmentation is a technique used to increase the size of the training dataset.
-It is used to improve the performance of the machine learning model and to generate new data points by applying transformations to the existing ones.
-Data augmentation is used to test the generalization of the machine learning model, thus reduce overfitting.
+It is used to improve the machine learning model's performance and generate new data points by applying transformations to the existing ones.
+Data augmentation is used to test the machine learning model's generalisation, thus reducing overfitting.
 In this project, we applied multiple data augmentation techniques, such as random sampling of the data points, stochastic noise addition, and generation of new data points using GANs.
-After testing the quality of the generated data, we found out that the best results were obtained by the noise addition technique and the GAN.
+After testing the quality of the generated data, we found out that the noise addition technique and the GAN obtained the best results.
 
 \subsection*{Parameters Used}
-For each class, we created a separate genereator, which was used to generate the data points.
-Since we are using 4 classes, we created 4 generators using the noise injection and 4 generators using the GAN.
+For each class, we created a separate generator, which was used to generate the data points.
+Since we are using four classes, we created four generators using noise injection and four generators using GAN.
 \paragraph*{Stochastic Noise Injection}
-The noise injection generator was created by taking the third and fourth quartile of the data points to reduce the size.
-After this, we randomly selected a data point from the reduced dataset and added a Gausian noise to it.
+The noise injection generator was created by taking the third and fourth quartiles of the data points to reduce the size.
+After this, we randomly selected a data point from the reduced dataset and added a Gaussian noise.
 The noise was generated using the ``numpy.random.normal'' function, with a mean of 0 and a standard deviation of 1.
-As parameter we also provided the shape of the data point, which was used to generate the noise in the correct format.
+As a parameter, we also provided the shape of the data point, which was used to generate the noise in the correct format.
 \paragraph*{Generative Adversarial Networks}
-The GAN generator was composed of two networks: the generator~(EEGFuseNet) and the discriminator~(EFDiscriminator), both network were taken from the models provided by the library ``torcheeg''~\cite{zhang2024torcheeg}.
+The GAN generator was composed of two networks: the Generator~(EEGFuseNet) and the discriminator~(EFDiscriminator); both networks were taken from the models provided by the library ``torcheeg''~\cite{zhang2024torcheeg}.
+
 These models have been reimplemented in torcheeg following their description from~\cite{liang2021eegfusenet} and their architecture is presented in Figure~\ref{fig:gan_paper}.
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{Figures/Methodology/GAN}
     \caption{Architecture of the GAN model. 
-    We can notice the architecture of the Generator that studies the EEG input, extracts features from it, and then uses these information to generate new datapoints. 
-    The Figure also presents the architecture of the Discriminator that receives an EEG signal, and has to decide if it is real or fake. Image from~\cite{liang2021eegfusenet}}\label{fig:gan_paper}
+    We can notice the generator's architecture. It studies the EEG input, extracts features from it, and then uses this information to generate new data points. 
+    The Figure also presents the architecture of the discriminator, who receives an EEG signal and has to decide if it is real or fake. Image from~\cite{liang2021eegfusenet}}\label{fig:gan_paper}
 \end{figure}
 
 
@@ -74,14 +75,14 @@ As for the training parameters, we used the following:
     \item \textbf{Loss Function}: Binary Cross Entropy
     \item \textbf{Optimizer}: Adam
     \item \textbf{Learning Rate}: 0.0002
-    \item \textbf{Train Epochs}: 100 epochs, each epoch changing the number of steps for generator and discriminator.
+    \item \textbf{Train Epochs}: 100 epochs, each epoch changing the number of steps for the Generator and discriminator.
 \end{itemize}
 \paragraph*{Train Epochs}
-As visible in Listing \ref{code:gan_train_snippet}, the training of the GAN was divided into two parts, the generator and the discriminator.
-The full training lasted 100 epochs.
-During each epoch, we trained the generator and the discriminator for a different number of steps.
-The discriminator was trained first, starting with 1000 steps, and decreasing each epoch until 10 steps.
-The generator was trained after the discriminator, starting with 10 steps, and increasing each epoch until 1000 steps.
+As visible in Listing \ref{code:gan_train_snippet}, the training of the GAN was divided into two parts: the Generator and the discriminator.
+The complete training lasted 100 epochs.
+During each epoch, we trained the Generator and the discriminator in a number of different steps.
+The discriminator was trained first, starting with 1000 steps and decreasing each epoch until ten steps.
+The Generator was trained after the discriminator, starting with ten steps and increasing each epoch until 1000 steps.
 \lstinputlisting[language=python, caption={GAN Train Loop Snippet}, label={code:gan_train_snippet}, captionpos=b]{Code/train_gan.py}
 
 \section{Classification Model}
@@ -89,10 +90,10 @@ The classification model is a machine learning or deep learning model used to cl
 It is used to predict the class or label to which the input data point belongs.
 In this project, we decided to train a set of machine learning and deep learning models to classify the data points.
 Some of these methods, including support vector machines, linear discriminant analysis and convolutional neural networks, have been used as baseline models, the proposed LSTM (Figure~\ref{fig:lstm_model}) and Attention-based (Figure~\ref{fig:attention_model}) methods have been used as the main models.
-The models were trained using the available datasets, and validated using the test set.
-Also, the models where evaluated using the generated data points to test their generalization capabilities.
-It is important to notice, that the main difference in the models, a part from the architecture, and the number of parameters, is the difference in how they understand the temporal dependencies of the EEG signal.
-The LSTM model uses the recurrent layers to understand how each timepoint in the signal is related to the others, while the Attention model uses the attention mechanism to understand the signal in a more global way.
+The models were trained using the available datasets and validated using the test set.
+Also, the models were evaluated using the generated data points to test their generalisation capabilities.
+It is important to notice that the main difference between the models, apart from the architecture and the number of parameters, is the difference in how they understand the temporal dependencies of the EEG signal.
+The LSTM model uses the recurrent layers to understand how each timepoint in the signal is related to the others. In contrast, the Attention model uses the attention mechanism to understand the signal more globally.
 
 \subsection*{Parameters Used}
 The neural network models were trained using the following parameters:
@@ -103,28 +104,28 @@ The neural network models were trained using the following parameters:
     \item \textbf{Train Epochs}: 1000 epochs
     \item \textbf{Metrics}: Accuracy and Confusion Matrix
 \end{itemize}
-While the machine learning models only used the default parameters provided by the library and were trained for 1000 epochs.
+Meanwhile, the machine learning models only used the default parameters provided by the library and were trained for 1000 epochs.
 \begin{figure}[!htbp]
     \centering
         \centering    
         \includegraphics[width=\textwidth]{Figures/Methodology/LSTM}
         \caption{Architecture of the LSTM-based model.
-        The EEG Signal passes by the LSTM layers, that are able to understand the temporal dependencies of the signal, and then the output is passed to the Dense layer that classifies it in one of the provided classes.
+        The EEG Signal passes through the LSTM layers, which can understand its temporal dependencies. The output is then passed to the dense layer, which classifies it in one of the provided classes.
         Image from~\cite{sharma_deep_2023}}\label{fig:lstm_model}
 \end{figure}
 \begin{figure}[!htbp]
         \centering
         \includegraphics[width=\textwidth]{Figures/Methodology/Attention}
         \caption{Architecture of the Transformer-based model. 
-        The EEG Signal is positional encoded and then passed to four consecutive Attention layers, that are understand the temporal dependencies of the signal, and then the output is passed to the Dense layer that classifies it in one of the provided classes.
+        The EEG Signal is positional encoded and then passed to four consecutive Attention layers that understand the temporal dependencies of the signal. Then the output is passed to the Dense layer, which classifies it into one of the provided classes.
         Image from~\cite{sharma_deep_2023}}\label{fig:attention_model}
 \end{figure}
 
 \section{Virtual Environment}
-The virtual environment is a computer-generated environment that simulates the real world or a specific scenario.
-It is used to test the performance and usability of the machine learning model, and to evaluate the user experience.
-In this project, we developed two virtual environments: an infinite runner game where the user can jump over obstacles or move to left or right, and a maze where the user can freely move their character to collect coins.
-The virtual environments were developed using the Unity game engine, version 2022.3.20f1, and were designed to be simple and easy to use, and to provide a fun and engaging experience for the user.
+The virtual environment is computer-generated and simulates the real world or a specific scenario.
+It is used to test the machine learning model's performance and usability and evaluate the user experience.
+In this project, we developed two virtual environments: an infinite runner game in which the user can jump over obstacles or move to the left or right, and a maze in which the user can freely move their character to collect coins.
+The virtual environments were developed using the Unity game engine, version 2022.3.20f1. They were designed to be simple and easy to use, providing a fun and engaging experience for the user.
 The virtual environments were also designed to be controller agnostic, requiring a WebSocket connection to receive the character input commands.
 \subsection*{Unity Packages and Assets Used}
 % The main packages used are:
@@ -140,30 +141,30 @@ The main packages used are TextMeshPro\footnote{Documentation available at the f
 
 
 \subsection*{Infinite Runner Game}
-The infinite runner game (Figure~\ref{fig:infinite_runner}) was developed to test the performance of the machine learning model in a fast-paced environment.
-The game is a simple 3D game where the player can jump over obstacles or move to turn to the left or right on crossroads.
-The player character moves forward automatically and the speed is controlled by a sigmoid-like curve.
+The infinite runner game (Figure~\ref{fig:infinite_runner}) was developed to test the machine learning model's performance in a fast-paced environment.
+The game is a simple 3D platformer in which the player can jump over obstacles or move to turn left or right at a crossroads.
+The player character moves forward automatically, and a sigmoid-like curve controls the speed.
 The user can provide the direction commands by thinking about the desired movement.
-The path and the obstacles are generated randomly and the game logic was implemented from scratch.
-The path is a modular prefab, showed in the previous chapter (Chapter~\ref{ch:approach}), only the first two tiles are manually specified, the rest is generated randomly.
+The path and the obstacles are generated randomly, and the game logic was implemented from scratch.
+The path is a modular prefab, shown in the previous chapter (Chapter~\ref{ch:approach}); only the first two tiles are manually specified, and the rest is generated randomly.
 Techniques to delete the parts that are not visible and to generate new parts are used to keep the game running smoothly.
 Also, the obstacles are generated randomly, with a fixed probability of appearing.
 The code is modular, with the main logic separated from the Unity components.
-This allows for easy modification and extension of the game, for easy integration of new obstacles or changes in the path.
-After some tests, we decided to exclude the Infinite Runner game from the final evaluation, as the game was too fast and while the user was able to provide the commands in time using the keyboard, the actual EEG signals required more time to be processed, resulting in a poor user experience. 
+This allows for easy modification and extension of the game, as well as easy integration of new obstacles or changes in the path.
+After some tests, we decided to exclude the Infinite Runner game from the final evaluation, as the game was too fast, and while the user was able to provide the commands in time using the keyboard, the actual EEG signals required more time to be processed, resulting in a poor user experience. 
 
-In Figure~\ref{fig:infinite_runner_path_generation} we can see the algorithm used to generate the path in the Infinite Runner game.
-The actual algorithm is event based, therefore providing a code snippet is not simple and will not make the logic easy to understand.
-The algorithm is divided into multiple steps, as the player autonomously moves, the path is generated in front of it.
+Figure~\ref{fig:infinite_runner_path_generation} shows the algorithm used to generate the path in the Infinite Runner game.
+The actual algorithm is event-based; therefore, providing a code snippet is not simple and will not make the logic easy to understand.
+The algorithm is divided into multiple steps. As the player autonomously moves, a path is generated in front of it.
 At the end of each path tile, the user automatically crosses a collider that triggers the generation of the next tile.
-If the player crosses a collider that is part of a crossroad, the player is rotated along with the camera to face the new direction.
-After this eventual rotation, the not visible tiles are deleted, and the algorithm starts generating the new tiles.
-The algorithm randomly decides if the new tile has a left, right and/or forward tile at the end.
-To avoid the game from automatically ending, there will always be at least one tile.
-For each of the possible tiles, up to three, that has to be generated, the algorithm randomly decides if the tile has an obstacle, and in case, generates it.
-After generating the new tiles, the algorithm removes the walls to allow continuous movement between the tiles and completes its execution.
-In the diagram it loops back to the first step, as the player keeps moving forward during this whole process and the algorithm has to generate the next tiles.
-In figure we can notice the ``Generate New Tiles'' step is dashed, this is because it has to be considered as a comment, describing the next steps, and not as a real step in the algorithm.
+If the player crosses a collider part of a crossroad, the player is rotated along with the camera to face the new direction.
+After this eventual rotation, the not-visible tiles are deleted, and the algorithm starts generating new tiles.
+The algorithm randomly decides if the new tile has a left, right and forward tile at the end.
+There will always be at least one tile to prevent the game from automatically ending.
+For each of the possible tiles, up to three, that has to be generated, the algorithm randomly decides if the tile has an obstacle and, in case, generates it.
+After generating the new tiles, the algorithm removes the walls to allow continuous movement between them and completes its execution.
+The diagram loops back to the first step, as the player keeps moving forward during this whole process, and the algorithm has to generate the next tiles.
+In Figure we can notice the ``Generate New Tiles'' step is dashed, this is because it has to be considered as a comment, describing the next steps, and not as a real step in the algorithm.
 
 \begin{figure}[!htbp]
     \centering
@@ -173,13 +174,13 @@ In figure we can notice the ``Generate New Tiles'' step is dashed, this is becau
 \begin{figure}[!htbp]
     \centering
     % Flowchart representing code logic:
-    % 1. Player walks in the path
+    % 1. The player walks in the path
     % 2. Delete not visible tiles
     % 3. Start generate new tiles
     % 3.a Has this tile a left tile at the end
     % 3.b Has this tile a right tile at the end
     % 3.c Has this tile a forward tile at the end
-    % 4. Foreach next tile at the end
+    % 4. For each next tile at the end
     % 4.a Has next tile a obstacle
     % 4.a.yes Generate obstacle for tile
     % 4.a.no Continue
@@ -233,15 +234,15 @@ In figure we can notice the ``Generate New Tiles'' step is dashed, this is becau
 \end{figure}
 
 \subsection*{Maze Game}
-The Maze Walker~\ref{fig:maze} game was developed to test the performance of the machine learning model in a more complex environment.
-The game is a 3D walking game where the player can move freely in a maze to collect coins.
+The Maze Walker~\ref{fig:maze} game was developed to test the machine learning model's performance in a more complex environment.
+The game is a 3D walking game where players can move freely in a maze to collect coins.
 The maze is generated randomly using the Maze Generator package.
 The player character can freely move around thanks to the integration of the AI Navigation package.
-As the movement is autonomous, the role of the user is to provide the direction commands by thinking about the desired movement, left, right or forward.
-Upon collecting all coins, the user proceeds to the next level, where the maze is regenerated and the coins are placed in different, randomly selected positions.
+As the movement is autonomous, the user's role is to provide the direction commands by thinking about the desired movement: left, right or forward.
+Upon collecting all coins, the user proceeds to the next level, where the maze is regenerated, and the coins are placed in different, randomly selected positions.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Methodology/maze}
-    \caption{Maze Virtual Environment. We can notice the player in the maze, with the minimap on the bottom right corner, and the coins to collect, also, the arrows on top of the avatar are used to indicate the available movement directions.}\label{fig:maze}
+    \caption{Maze Virtual Environment. We can notice the player in the maze, with the minimap on the bottom right corner, and the coins to collect; also, the arrows on top of the avatar indicate the available movement directions.}\label{fig:maze}
 \end{figure}

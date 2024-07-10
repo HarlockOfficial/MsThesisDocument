@@ -1,38 +1,38 @@
 \chapter{Technical Performance}\label{ch:testing}
 % Generated data test outcomes.
-% how good the training is and how good the system is before putting a human in the loop.
+% how good the training and system are before putting a human in the loop.
 Before testing the system on human subjects, we performed a series of tests to evaluate the performance of the system on generated data. 
 The tests were designed to evaluate the performance of the system in terms of the following:
 \begin{itemize}
     \item Classification accuracy: the capability of the system to correctly classify the input data.
     \item Latency: the classification speed of the system.
     \item Robustness: the tolerance to noise and errors in the input data.
-    \item Other performance metrics: such as efficiency and portability that we could not deeply verify in this stage of the project.
+    \item Other performance metrics, such as efficiency and portability, that we could not deeply verify at this project stage.
 \end{itemize}
 %The chapter is divided into four sections, we will discuss the classification accuracy, which is the capabilty of the system to correctly classify the input data, the latency, wich is the classification speed of the system, and the robustness of the system, which represents the tolerance to noise and errors in the input data, along with other performance metrics, such as efficiency and portability that we could not deeply verify in this stage of the project.
-The results of the tests indicate that the system is able to classify the generated data with high accuracy, in competitive time, and with low resource usage.
-The system is able to handle errors and noise in the data, and should be able to run on most modern hardware platforms.
+The results of the tests indicate that the system can classify the generated data with high accuracy, at a competitive time, and with low resource usage.
+The system can handle errors and noise in the data and should be able to run on most modern hardware platforms.
 We will discuss the results of the human study in the next chapter (Chapter~\ref{ch:human_study}).
 
 \section{Classification Accuracy}
 % How good the system is at classifying the data.
-The classification accuracy is a measure of how well the system is able to correctly classify the data.
+Classification accuracy measures how well the system can classify the data correctly.
 The classification accuracy is calculated as the percentage of correctly classified data points over the total number of data points.
-The classification accuracy is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to distinguish between different classes of data.
-During the training we computed the training and validation accuracy of the system, the first metric on the train dataset, to verify wether the network was actually learning, and the second metric on a part of the dataset that was not used for training.
-During the tests, we evaluated the classification accuracy of the system on generated data.
+Classification accuracy is an essential metric for evaluating the performance of the system, as it provides an indication of how well the system is able to distinguish between different classes of data.
+During the training we computed the training and validation accuracy of the system, the first metric on the train dataset, to verify wether the network was learning, and the second metric on a part of the dataset that was not used for training.
+We evaluated the system's classification accuracy with the generated data.
 We will compare these results with the classification accuracy of the system on human subjects in the next chapter.
 
 \subsection*{Train and Validation Accuracy}
-The train accuracy is the percentage of correctly classified data points over the total number of data points in the train dataset.
-During our training, the train accuracy of the system was 71.37\%.
-This result indicates that, in most of the cases, the system is able to correctly classify the training data.
+The training accuracy is the percentage of correctly classified data points over the total number of data points in the training dataset.
+During our training, the training accuracy of the system was 71.37\%.
+This result indicates that, in most cases, the system can correctly classify the training data.
 
 The validation accuracy is the percentage of correctly classified data points over the total number of data points in the validation dataset.
 During our training, the validation accuracy of the system was 47.23\%.
-This score is significantly lower than the train accuracy, which indicates that the system is overfitting the training data.
-This means that the system is not able to generalize well to new data.
-This is a common problem in machine learning, and can be addressed by using techniques such as regularization, dropout, and data augmentation.
+This score is significantly lower than the training accuracy, indicating the system overfitting the training data.
+This means that the system cannot generalize well to new data.
+This is a common problem in machine learning, and techniques such as regularization, dropout, and data augmentation can address it.
 
 \begin{table}[!htbp]
     \centering
@@ -55,14 +55,14 @@ This is a common problem in machine learning, and can be addressed by using tech
 
 Apart from the accuracy metric, we also computed the confusion matrix of the validation dataset, which is shown in Table~\ref{tab:confusion_matrix}.
 In this table, it is possible to see the number of data points that were classified as each class.
-The diagonal of the matrix represents the number of correctly classified data points, while the off-diagonal elements represent the number of incorrectly classified data points.
-From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, therefore, altrough the validation accuracy is low, in our opinion, in a real case scenario, the system would be able to correctly classify most of the data points and therefore be useful to the end user in controlling external devices.
+The matrix diagonal represents the number of correctly classified data points, while the off-diagonal elements represent the number of incorrectly classified data points.
+From the confusion matrix, it is possible to see that the system can correctly classify most of the data points for each class. Therefore, although the validation accuracy is low, in our opinion, in a real-world scenario, the system would be able to correctly classify most of the data points and, therefore, be useful to the end user in controlling external devices.
 
 \subsection*{Generated Data Accuracy}
 Differently from the validation dataset, the classification accuracy of the system on the generated data was 89.15\%.
-This result indicates that, in most caases, the system is able to classify the artificial data even better than the ones provided by the dataset.
+This result indicates that, in most cases, the system can classify the artificial data even better than the ones provided by the dataset.
 The confusion matrix of the generated data is shown in Table~\ref{tab:gan_confusion_matrix}.
-From the confusion matrix, it is possible to see that the system is able to correctly classify most of the data points for each class, and that the system is able to distinguish between different classes of data.
+From the confusion matrix, it is possible to see that the system can correctly classify most of the data points for each class and that the system can distinguish between different classes of data.
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{|c||c|c|c|c|}
@@ -85,16 +85,16 @@ From the confusion matrix, it is possible to see that the system is able to corr
 
 \section{Latency}
 % How fast the system is at classifying the data.
-The latency is a measure of how fast the system is able to classify the data.
-The latency is calculated as the time taken by the system to classify a data point.
-The latency is an important metric for evaluating the performance of the system, as it provides an indication of how fast the system is able to respond to new data and to the user input.
-Since the classification time does not depend on the type of datapoint received, we tested the latency of the system on dataset data.
-The average latency of the system was 5.70 millseconds, with the minimum latency being 1.10 milliseconds and the maximum latency being 24.67 milliseconds.
+The latency measures how fast the system can classify the data.
+The latency is calculated as the system's time to classify a data point.
+Latency is an important metric for evaluating the system's performance, as it indicates how fast the system can respond to new data and user input.
+Since the classification time does not depend on the type of data point received, we tested the system's latency using dataset data.
+The system's average latency was 5.70 milliseconds, with a minimum latency of 1.10 milliseconds and a maximum latency of 24.67 milliseconds.
 
-It is important to note that the system used 500 milliseconds EEG recordings, and, as discussed in~\cite{trafton2014blink} the average human brain image processing time is between 13 and 80 milliseconds, after that, it will take between 100 and 140 milliseconds to elaborate a motor response.
-Therefore we estimate that, the system will require between 600 and 750 milliseconds to process the data and provide a response, which is fairly close to the 500 milliseconds of the EEG recording and in our opinion is an acceptable delay for EEG controlled real-time applications and devices.
-Figure~\ref{fig:latency} summarizes the latency results in a real case scenario.
-The figure only shows the latency of the system, and does not include the time required to communicate the classification outcome to the device and the time required by the device to respond to the classification outcome.
+It is important to note that the system used 500 milliseconds of EEG recordings, and, as discussed in~\cite{trafton2014blink}, the average human brain image processing time is between 13 and 80 milliseconds; after that, it will take between 100 and 140 milliseconds to elaborate a motor response.
+Therefore, we estimate that the system will require between 600 and 750 milliseconds to process the data and provide a response. This is fairly close to the 500 milliseconds of the EEG recording and, in our opinion, is an acceptable delay for EEG-controlled real-time applications and devices.
+Figure~\ref{fig:latency} summarizes the latency results in a real-case scenario.
+The figure only shows the system's latency. It does not include the time required to communicate the classification outcome to the device and the time required by the device to respond to the classification outcome.
 \begin{figure}[!htbp]
     \scalebox{1.2}[1.2]{
     \begin{tikzpicture}
@@ -197,13 +197,13 @@ The figure only shows the latency of the system, and does not include the time r
 
 \section{Robustness}
 % How well the system performs in case of errors or noise in the data.
-The robustness is a measure of how well the system performs in case of errors or noise in the data.
-The robustness is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to handle errors and noise in the data.
-During the tests, we evaluated the robustness of the system by testing the classificator on data with different levels of Gaussian noise on dataset and GAN generated data.
+The robustness measures how well the system performs in case of errors or noise in the data.
+The robustness is an important metric for evaluating the system's performance, as it indicates how well the system can handle errors and noise in the data.
+During the tests, we evaluated the system's robustness by testing the classification of data with different levels of Gaussian noise on the dataset and GAN-generated data.
 Since the accuracy, as seen in the previous section, is not an extremely accurate metric, we computed the confusion matrix of the system on the noisy data.
-We run tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0 and e noticed that the system is able to correctly classify most of the data points for each class, in all the cases.
-In Figure~\ref{fig:robustness} we show the precision of the system on the noisy data.
-As it is visible, the precision on GAN generated data is higher than the one on the dataset data, and the precision decreases as the noise level increases, but the system is still able to correctly classify most of the data points for each class, even in the presence of high level of noise.
+We ran tests with increasing levels of Gaussian noise, with a standard deviation going from 0.0 to 9.9 in steps of 0.1 and a mean of 0.0, and we noticed that the system correctly classifies most of the data points for each class in all cases.
+In Figure~\ref{fig:robustness} we show the system's precision on the noisy data.
+As it is visible, the precision on GAN-generated data is higher than the one on the dataset data, and the precision decreases as the noise level increases. However, the system can still correctly classify most of the data points for each class, even with a high noise level.
 The precision scores were computed using the confusion matrices, of which samples are presented in Tables~\ref{tab:confusion_matrix_gan_noise}~and~\ref{tab:confusion_matrix_dataset_noise}.
 For each noise level $x$, we computed a confusion matrix $CM_x$ (Figure~\ref{tab:precision_reference}).
 Using the main diagonal of each confusion matrix, we computed the precision as the ratio between the value of that cell and the sum of the values in the row $P_{\_, row}$, and the ratio between the cell value and the related column $P_{\_, col}$, we then averaged the two values $P_{\_}$.
@@ -412,22 +412,22 @@ Lastly, the average of all the diagonal averages was computed as final precision
 
 
 \section{Other Performance Metrics}
-In this section, we will discuss a set of other performance metrics that we consider important, but that we could not deeply verify in this stage of the project.
+In this section, we will discuss a set of other performance metrics that we consider essential but could not be deeply verified at this project stage.
 These metrics include portability, which is a measure of how well the system performs on different platforms, efficiency, which is a measure of how well the system performs in terms of resource usage, and maintainability, which is a measure of how well the system performs in terms of code quality and documentation.
 
 \paragraph{Portability}
 % How well the system performs on different platforms.
 The portability is a measure of how well the system performs on different platforms.
-The portability is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to run on different hardware and software platforms.
-During the tests, we could not evaluate the portability due to the lack of different hardware and software platforms.
-However, we believe that the system should be able to run on different platforms, as it is written in Python 3.10 and based on standard machine learning libraries and does not require any specialized hardware or software, except for the EEG device and the CUDA-enabled GPU.
-As we will discuss in the next paragraph, we evaluated the hardware requirements of the system, and we believe that the system should be able to run flawlessly on most modern hardware platforms.
+Portability is an important metric for evaluating the system's performance, as it indicates how well the system can run on different hardware and software platforms.
+We could not evaluate the portability during the tests due to the lack of different hardware and software platforms.
+However, we believe that the system should be able to run on different platforms. It is written in Python 3.10, based on standard machine learning libraries, and does not require any specialized hardware or software except for the EEG device and the CUDA-enabled GPU.
+As we will discuss in the next paragraph, we evaluated the system's hardware requirements, and we believe that the system should be able to run flawlessly on most modern hardware platforms.
 
 \paragraph{Efficiency}
 % How well the system performs in terms of resource usage.
-The efficiency is a measure of how well the system performs in terms of resource usage.
-The efficiency is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to use the available resources.
-During the tests, we evaluated the efficiency of the system by measuring the Floating Point Operations per Second (FLOPS), CPU memory and GPU (CUDA) memory usage of the system during the classification of the data.
+Efficiency measures how well the system performs in terms of resource usage.
+Efficiency is an important metric for evaluating the system's performance, as it indicates how well the system can use the available resources.
+During the tests, we evaluated the system's efficiency by measuring the Floating Point Operations per Second (FLOPS), CPU memory, and GPU (CUDA) memory usage during data classification.
 
 \begin{table}[!htbp]
     \centering
@@ -443,27 +443,27 @@ During the tests, we evaluated the efficiency of the system by measuring the Flo
         GPU CUDA Memory & 277 KB & 17.7 MB  & 41.3 MB \\
         \hline
     \end{tabular}
-    \caption{Efficiency of the system in terms of resource usage.}\label{tab:efficiency}
+    \caption{efficiency of the system in terms of resource usage.}\label{tab:efficiency}
 \end{table}
-The results summary of the tests are shown in Table~\ref{tab:efficiency}.
+Table~\ref{tab:efficiency} shows the results summary of the tests.
 As it is visible, the system requires a low amount of resources, $\le$~755~K-FLOPS, $\approx$~47~KB RAM and $\approx$~18~MB VRAM, and should be able to run on most modern hardware platforms.
 
 \paragraph{Maintainability}
 % How well the system performs in terms of code quality and documentation.
-The maintainability is a measure of how well the system performs in terms of code quality and documentation.
-The maintainability is an important metric for evaluating the performance of the system, as it provides an indication of how well the system is able to be maintained and extended.
-During the tests, we evaluated the maintainability of the system by measuring the code quality and documentation of the system.
-The code quality of the system was evaluated using the Pylint tool, which is a static code analysis tool for Python.
-The Pylint tool provides a score between 0 and 10, where 0 is the worst score and 10 is the best score.
-The code quality of the system was 6.55, which indicates that the system has a moderate code quality, and that there is room for improvement.
-% Unfortunately, as of now, the system does not have any documentation, and we believe that the system should be documented to make it easier to maintain and extend.
+Maintainability measures how well the system performs in terms of code quality and documentation.
+Maintainability is an important metric for evaluating the system's performance, as it indicates how well the system can be maintained and extended.
+We evaluated the system's maintainability during the tests by measuring its code quality and documentation.
+The system's code quality was evaluated using the Pylint tool, a static code analysis tool for Python.
+The Pylint tool provides a score between 0 and 10, where 0 is the worst and ten is the best.
+The code quality of the system was 6.55, which indicates that the system has a moderate code quality and that there is room for improvement.
+% Unfortunately, as of now, the system does not have any documentation, and we believe it should be documented to make it easier to maintain and extend.
 
 \section{Performance Discussion}
 % Summary of the testing results.
-In summary, before testing the system on human subjects, we performed a series of tests to evaluate the performance of the system on realistic data.
-The tests were designed to evaluate the performance of the system in terms of classification accuracy, latency and robustness, as well as other important performance indicators like portability, efficiency and maintainability.
-The results of the tests indicate that the system is able to classify the generated data with high accuracy.
-The classification is performed in competitive time, allowing for real-time applications with an acceptable delay and error.
-The system is able to handle errors and noise in the data, and should be able to run on most modern hardware platforms, with low resource usage.
-Of course, as of now, the system has only been tested on generated data, and further testing is required to evaluate the performance of the system on human subjects.
+In summary, before testing the system on human subjects, we performed a series of tests to evaluate the system's performance on realistic data.
+The tests were designed to evaluate the system's classification accuracy, latency and robustness performance, as well as other important performance indicators like portability, efficiency and maintainability.
+The results of the tests indicate that the system can classify the generated data with high accuracy.
+The classification is performed competitively, allowing real-time applications with an acceptable delay and error.
+The system can handle errors and noise in the data and should be able to run on most modern hardware platforms with low resource usage.
+Of course, the system has only been tested on generated data as of now, and further testing is required to evaluate its performance on human subjects.
 We will discuss the results of the human study in the next chapter.

@@ -1,23 +1,27 @@
 \chapter{Approach}\label{ch:approach}
-% generic intro to chapter
-% \todo{In the end, pass on the chapter and change model images with something more colorful}
-In this chapter, we will discuss the approach we took to solve the problem of classifying the different types of motor imagery EEG signals.
+% generic intro to Chapter
+% \todo{In the end, pass on the Chapter and change model images with something more colourful}
+In this Chapter, we will discuss the approach we took to solve the problem of classifying the different types of motor imagery EEG signals.
 We will discuss the data collection process, the data augmentation techniques used, the classification model, and the virtual environment used to test the model. 
-Finally, we will discuss the developed framework for automating the process of data augmentation, signal classification and application in the virtual environment.
+Finally, we will discuss the framework that has been developed for automating the process of data augmentation, signal classification, and application in the virtual environment.
 
 \section{Data Collection}
-To develop a classification model, we need a set of labelled EEG motor imagery data.
-Initially, we used the Physionet EEG Motor Imagery dataset~\cite{goldberger2000physiobank}, which contains EEG data from 109 subjects performing 4 motor imagery tasks, and the Weibo Motor Imagery~\cite{yi2014evaluation} dataset, which contains EEG data from 10 subjects performing 6 motor imagery tasks.
+We need labelled EEG motor imagery data to develop a classification model.
+Initially, we used the Physionet EEG Motor Imagery dataset~\cite{goldberger2000physiobank}, which contains EEG data from 109 subjects performing four motor imagery tasks, and the Weibo Motor Imagery~\cite{yi2014evaluation} dataset, which contains EEG data from 10 subjects performing six motor imagery tasks.
 Using the MOABB library~\cite{Aristimunha_Mother_of_all_2023, chevallier2024largest, jayaram2018moabb}, we extracted the EEG data from the datasets and preprocessed them to remove noise and artefacts.
+
 To complete the preprocessing step, the data underwent a series of transformations.
-First, the data was resampled to 128Hz, to allow for easier processing and to reduce the computational load.
-Next, the data was filtered using a band-pass filter between 0.5Hz and 40Hz, to remove noise and artefacts.
-The recordings were then segmented into 0.5 seconds windows for each motor imagery subject and task.
+First, the data was resampled to 128Hz to facilitate processing and reduce the computational load.
+Next, the data was filtered using a band-pass filter between 0.5Hz and 40Hz to remove noise and artefacts.
+The recordings were then segmented into 0.5-second windows for each motor imagery subject and task.
 In Table~\ref{tab:datasamples}, we show the datasets used during the project and the number of subjects, tasks, and channels in each dataset.
-Since in the early stages of the project we started working with the two datasets, Physionet and Weibo, we started by discovering the channels that were common between the two datasets and reached the number of 58 channels, so that the model could be trained on a consistent set of features.
-After some tests, we decided to continue working only with the Physionet dataset because it has a larger number of subjects.
-Moreover, the added value of the Weibo dataset was not significant enough in terms of network accuracy to justify the extra complexity and training time of working with two datasets.
-After deciding to continue the project with the Physionet dataset, we did not revert the number of channels to 64, as many literature works have shown that lowering the number of channels can improve the network's performance and reduce the computational load~\cite{faye2022eeg}, also, the training results were satisfying and the network was able to classify the data correctly, meaning that the leftover channels were not significant for the specific classification tasks.
+
+In the early stages of the project, we started working with the two datasets, Physionet and Weibo. We started by discovering the common channels between the two datasets and reached 58 channels so that the model could be trained on a consistent set of features.
+
+After some tests, we decided to continue working only with the Physionet dataset because it has more subjects.
+Moreover, the added value of the Weibo dataset was not significant enough regarding network accuracy to justify the extra complexity and training time required to work with two datasets.
+
+After deciding to continue the project with the Physionet dataset, we did not revert the number of channels to 64, as many literature works have shown that lowering the number of channels can improve the network's performance and reduce the computational load~\cite{faye2022eeg}. Also, the training results were satisfying, and the network could classify the data correctly, meaning that the leftover channels were not significant for the specific classification tasks.
 
 \begin{table}[!htbp]
     \centering
@@ -41,17 +45,17 @@ After deciding to continue the project with the Physionet dataset, we did not re
 
 
 \section{Data Augmentation}
-Data augmentation is a technique used to artificially increase the size of the training dataset by applying transformations to the original data.
+Data augmentation is a technique for artificially increasing the size of the training dataset by applying transformations to the original data.
 This is done to prevent overfitting and to improve the generalization of the model~\cite{wen2020time}.
 In this project, we used data augmentation techniques such as stochastic noise injection and generative adversarial networks (GANs) to augment the EEG data.
 
-The stochastic noise injection technique randomly picks values from a Gaussian distribution and adds them to a impartially selected dataset sample (Figure~\ref{fig:noise_injection}), while the GANs technique generates new data samples by training a GAN model (Figure~\ref{fig:gan}) on the original data.
+The stochastic noise injection technique randomly picks values from a Gaussian distribution. It adds them to an impartially selected dataset sample (Figure~\ref{fig:noise_injection}), while the GANs technique generates new data samples by training a GAN model (Figure~\ref{fig:gan}) on the original data.
 
-The GAN generator, using a tensor filled with random number taken from a uniform distribution, creates new data samples that are similar to the original data.
-For interoperability between the GAN model and the noise injection technique, we wrapped the noise injection functions in a callable Python class.
-This way we can mimic the GAN model's behavior and use the two solutions interchangeably.
+Using a tensor filled with random numbers taken from a uniform distribution, the GAN generator creates new data samples that are similar to the original data.
+We wrapped the noise injection functions in a callable Python class for interoperability between the GAN model and the noise injection technique.
+This way, we can mimic the GAN model's behaviour and use the two solutions interchangeably.
 
-In this project, as we will discuss in the next chapter (Chapter~\ref{ch:methodology}), we used the noise injection technique and the GAN model to validate the classification model, as the GANs was able to generate new data samples that were similar to the original data.
+In this project, as we will discuss in the next Chapter (Chapter~\ref{ch:methodology}), we used the noise injection technique and the GAN model to validate the classification model, as the GANs were able to generate new data samples that were similar to the original data.
 
 \begin{figure}[!htbp]
     \centering
@@ -75,8 +79,8 @@ In this project, as we will discuss in the next chapter (Chapter~\ref{ch:methodo
         \draw[->] (noise) -- (plus) ;
         \draw[->] (plus) -- (output) ;
     \end{tikzpicture}
-    \caption{High level overview of the Noise Injection pipeline.
-    The model takes a dataset as input, extracts a sample, generates noise and adds it to the sample, and finally outputs the augmented sample.}\label{fig:noise_injection}
+    \caption{High-level overview of the Noise Injection pipeline.
+    The model takes a dataset as input, extracts a sample, generates noise, adds it to the sample, and finally outputs the augmented sample.}\label{fig:noise_injection}
 \end{figure}
 
 \begin{figure}[!htbp]
@@ -106,14 +110,14 @@ In this project, as we will discuss in the next chapter (Chapter~\ref{ch:methodo
 
 \section{Classification Model}
 Classification is the process of predicting the class label of a given input data sample.
-To classify the EEG motor imagery data, we took inspiration from the literature review and used an LSTM neural network based on the one presented in~\cite{sharma_deep_2023}.
-We also implemented a Transformer-based model from the same paper, but the hardware requirements were too high for a real-time use case and the training results were not satisfying with respect to the LSMT solution.
+We took inspiration from the literature review to classify the EEG motor imagery data and used an LSTM neural network based on the one presented in~\cite{sharma_deep_2023}.
+We also implemented a Transformer-based model from the same paper, but the hardware requirements were too high for a real-time use case, and the training results did not satisfy the LSMT solution.
 
-LSTM networks are a type of recurrent neural network (RNN) that are capable of learning long-term dependencies in the data.
-Along with the LSTM model (Figure \ref{fig:lstm}), we trained as baseline methods, a set of Machine Learning models, that included Support Vector Machines (SVM) and Linear Discriminant Analysis (LDA), and a Convolutional Neural Network (CNN) (EEGNetV4~\cite{lawhern2018eegnet}).
+LSTM networks are a type of recurrent neural network (RNN) capable of learning long-term dependencies in the data.
+Along with the LSTM model (Figure \ref{fig:lstm}), we trained as baseline methods a set of Machine Learning models that included Support Vector Machines (SVM) Linear Discriminant Analysis (LDA) and a Convolutional Neural Network (CNN) (EEGNetV4~\cite{lawhern2018eegnet}).
 All the models were trained using the ``Reduced'' Physionet dataset. 
-Two different training strategies were used, one where the model was trained on the original dataset, divided by label, and another where the model was trained on the dataset divided by label and subject.
-The second strategy was used to perform cross subject validation, and therefore to test the model's generalization capabilities.
+Two different training strategies were used: one in which the model was trained on the original dataset divided by label and another in which the model was trained on the dataset divided by label and subject.
+The second strategy was used to perform cross-subject validation and, therefore, to test the model's generalization capabilities.
 
 \begin{figure}[!htbp]
     \centering
@@ -138,40 +142,40 @@ The second strategy was used to perform cross subject validation, and therefore 
         \draw[->] (output) -- (softmax);
 
     \end{tikzpicture}
-    \caption{High level overview of the LSTM model.
-    The model takes the input data, rearranges it, passes it through the input layer, the LSTM layers, and finally the output and softmax layers, to produce the classification output.}\label{fig:lstm}
+    \caption{High-level overview of the LSTM model.
+    The model takes the input data, rearranges it, and passes it through the input layer, the LSTM layers, and finally, the output and softmax layers to produce the classification output.}\label{fig:lstm}
 \end{figure}
 
 \section{Virtual Environment}
 Virtual environments are computer-generated simulations and scenarios that can be used to test and evaluate models in a controlled environment~\cite{ellis1994virtual}.
-Since one of the most important applications of the model is personal devices control, to test the classification model, we developed a virtual environment using the Unity game engine where the user could control a virtual avatar using their motor imagery EEG signals.
+Since one of the model's most important applications is controlling personal devices to test the classification model, we developed a virtual environment using the Unity game engine. In this environment, the user could control a virtual avatar using their motor imagery EEG signals.
 
-The avatar presented in the virtual environment was controlled by the classification model, which received the EEG signals from the headset or from the generators and classified them in real time.
+The classification model controls the avatar in the virtual environment. It receives the EEG signals from the headset or the generators and classifies them in real-time.
 The classification results were then used to move the avatar in the virtual environment.
-The virtual environment was designed as feedback for the user, to help them understand the classification results and improve their motor imagery skills.
-It is important to notice, that for simplicity and interoperability, the virtual environment was developed using the Unity game engine~\cite{haas2014history}.
-And the code was written to be as modular as possible, so that it could be easily adapted and maintained, and used the Unity prefabs, as shown in Figure~\ref{fig:path_prefab}, to create the environment.
+The virtual environment was designed to provide feedback to the user, helping them understand the classification results and improve their motor imagery skills.
+It is crucial to notice that for simplicity and interoperability, the virtual environment was developed using the Unity game engine~\cite{haas2014history}.
+The code was written to be as modular as possible to be easily adapted and maintained, and the Unity prefabs, as shown in Figure~\ref{fig:path_prefab}, were used to create the environment.
 
 On the other hand, the classification model was developed using Python and PyTorch.
 Therefore, a WebSocket was developed and used as a communication bridge to allow the two environments to communicate.
 The WebSocket was developed using the FastAPI library~\cite{noauthor_tiangolofastapi_nodate}, and it was used to send the classification results from the classification model to the virtual environment.
-We selected a WebSocket as a communication method because it is fast and easy to implement, and it allows the two environments to communicate in real-time or with minimal latency, which is important for the user experience in controlling a device in the real world.
-Also, thanks to this solution, the virtual environment can be easily replaced with a real device, like a wheelchair, and the classification model can be used to control it in real time.
+We selected a WebSocket as a communication method because it is fast and easy to implement. It allows the two environments to communicate in real time or with minimal latency, essential for the user experience when controlling a device in the real world.
+Also, thanks to this solution, the virtual environment can be easily replaced with a real device, like a wheelchair, and the classification model can be used to control it in real-time.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/Approach/path_prefab}
-    \caption{Infinite runner modular path prefab, used to randomly generate the infinite path in the virtual environment, the walls at the end of the path tile are removable and have separate colliders to detect the collision of the avatar and trigger the generation of new tiles.}\label{fig:path_prefab}
+    \caption{Infinite runner modular path prefab, used to generate the infinite path in the virtual environment randomly, the walls at the end of the path tile are removable and have separate colliders to detect the collision of the avatar and trigger the generation of new tiles.}\label{fig:path_prefab}
 \end{figure}
 
 \section{The Framework}
 To automate the process of data augmentation, model classification and game testing, we developed a framework that could be used to streamline the testing process (Figure~\ref{fig:framework}).
-The framework was designed to either generate new data or receive data from the EEG headset, classify the data, and then send the classification results to the virtual environment for testing.
+The framework was designed to generate new data or receive data from the EEG headset, classify the data, and then send the classification results to the virtual environment for testing.
 The virtual environment would then provide feedback to the user by moving the virtual avatar based on the classification results.
-The framework was developed using Python and PyTorch, and it was designed to be modular and extensible, so that new data augmentation techniques, classification models, and virtual environments could be easily added.
-The framework was also designed to be easy to use, so that researchers and developers could quickly test new ideas and models without having to worry about the underlying implementation details.
+The framework was developed using Python and PyTorch. It was designed to be modular and extensible so that new data augmentation techniques, classification models, and virtual environments could be easily added.
+The framework was also designed to be easy to use so researchers and developers could quickly test new ideas and models without worrying about the underlying implementation details.
 The framework consists of three main components: the data augmentation module, the classification module, and the communication module.
-The data augmentation module is responsible for generating new data samples using the data augmentation techniques, the classification module is responsible for classifying the data samples using the classification model, and the communication module is responsible for sending the classification results to other devices.
-Currently, it is possible to specify the paths to the data augmentation and classification models, and the websocket address, in this way the framework can be easily adapted to different models and environments.
+The data augmentation module generates new data samples using data augmentation techniques, the classification module classifies the data samples using the classification model, and the communication module ends the classification results to other devices.
+Currently, the paths to the data augmentation and classification models and the WebSocket address can be specified. This allows the framework to be easily adapted to different models and environments.
 
 \begin{figure}[!htbp]
     \centering
@@ -194,5 +198,5 @@ The framework uses the data augmentation module to generate new data samples, th
 \label{fig:framework}
 \end{figure}
 
-Since the researchers may not have access to an EEG headset or their work may require extensive testing which cannot be always performed in controlled environments, the framework was designed to be used also with the keyboard input: by mapping a key to a signal generator it is possible to simulate the EEG headset input.
-Therefore, in Figure~\ref{fig:framework}, the ``Keyboard Input'' is used to trigger the dataset augmentation and simulate the EEG headset input, while the virtual environment is used to provide feedback to the user and close the testing loop.
+Since the researchers may not have access to an EEG headset or their work may require extensive testing that cannot always be performed in controlled environments, the framework was designed to be used also with keyboard input: by mapping a key to a signal generator, it is possible to simulate the EEG headset input.
+Therefore, in Figure~\ref{fig:framework}, the ``Keyboard Input'' triggers the dataset augmentation and simulates the EEG headset input. In contrast, the virtual environment provides feedback to the user and closes the testing loop.
